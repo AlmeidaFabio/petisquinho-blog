@@ -11,6 +11,8 @@ imageAlt: "Celular com notificações desligadas apoiado sobre uma mesa"
 sources:
   - label: "CDC - hábitos que podem ajudar a dormir melhor"
     url: "https://www.cdc.gov/sleep/about/index.html"
+  - label: "Secretaria de Estado de Saúde do Rio de Janeiro - E se eu tiver insônia?"
+    url: "https://www.saude.rj.gov.br/viver-melhor/noticias/2018/01/e-se-eu-tiver-insonia-saiba-como-enfrentar-o-problema"
 ---
 
 Passar um dia sem celular pode ser inviável para quem depende dele para trabalhar, estudar, se locomover ou cuidar de alguém. Em vez de propor uma regra para todo mundo, experimente uma pausa combinada: por exemplo, deixar o aparelho fora da mesa durante uma refeição ou desligar notificações não essenciais por algumas horas.

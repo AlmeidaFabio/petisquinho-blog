@@ -163,7 +163,7 @@ for (const arquivo of arquivos) {
       }))
     : [];
 
-  posts.push({ slug: arquivo.replace(/\.md$/, ''), fontes });
+  posts.push({ slug: arquivo.replace(/\.md$/, ''), fontes, opiniao: /^opiniao:\s*true\s*$/m.test(frontmatter) });
 }
 
 const urlsUnicas = [...new Set(posts.flatMap((p) => p.fontes.map((f) => f.url)))];
@@ -213,11 +213,17 @@ function avaliarFonte(url) {
 const problemas = [];
 const avisos = [];
 
+const informativos = [];
+
 for (const post of posts) {
   if (post.fontes.length < MINIMO_DE_FONTES) {
-    problemas.push(
-      `${post.slug}: ${post.fontes.length} fonte(s), o PRD pede pelo menos ${MINIMO_DE_FONTES}`
-    );
+    const texto = `${post.slug}: ${post.fontes.length} fonte(s), o PRD pede pelo menos ${MINIMO_DE_FONTES}`;
+
+    // Texto de opinião não faz afirmação factual: onde não há fato, exigir
+    // fonte produziria citação decorativa, que é o que a direção editorial
+    // veta. Continua aparecendo no relatório, mas como informação.
+    if (post.opiniao) informativos.push(`${texto} — marcado como opiniao, a regra nao se aplica`);
+    else problemas.push(texto);
   }
 
   for (const fonte of post.fontes) {
@@ -261,6 +267,11 @@ if (problemas.length) {
 if (avisos.length) {
   console.log(`\nAVISOS (${avisos.length})`);
   for (const a of avisos) console.log(`  - ${a}`);
+}
+
+if (informativos.length) {
+  console.log(`\nINFORMATIVO (${informativos.length})`);
+  for (const i of informativos) console.log(`  - ${i}`);
 }
 
 if (!problemas.length) {

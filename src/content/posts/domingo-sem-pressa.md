@@ -6,8 +6,12 @@ category: "a-saideira"
 date: 2026-10-06
 tags: ["reflexão", "domingo", "cotidiano"]
 featured: false
+opiniao: true
 image: "/images/posts/domingo-sem-pressa.svg"
 imageAlt: "Poltrona confortável perto de uma janela iluminada pelo sol da manhã"
+sources:
+  - label: "SciELO / Revista Latino-Americana de Enfermagem (USP) - Lazer, a vida além do trabalho"
+    url: "https://www.scielo.br/j/rlae/a/CGKR3SqT3sKTwX9xMTmgWkk/?format=html&lang=pt"
 ---
 
 Domingo costuma carregar duas expectativas que nem sempre combinam: descansar e deixar a semana inteira organizada. Quando a lista de tarefas ocupa o dia todo, até o tempo livre pode começar a parecer uma obrigação.

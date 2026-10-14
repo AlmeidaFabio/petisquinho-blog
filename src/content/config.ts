@@ -25,7 +25,14 @@ const postsCollection = defineCollection({
     image: z.string().optional(),
     imageAlt: z.string().optional(),
     sources: z.array(sourceSchema).default([]),
-    draft: z.boolean().default(false)
+    draft: z.boolean().default(false),
+    // Marca texto de opinião, crônica ou reflexão, que não faz afirmação
+    // factual. O PRD pede "checagem em pelo menos duas fontes para fatos e
+    // ciência"; onde não há fato, exigir fonte produziria citação decorativa,
+    // que é justamente o que a direção editorial veta. O verificador
+    // (npm run checar-fontes) continua mostrando esses posts, mas como
+    // informação, não como problema.
+    opiniao: z.boolean().default(false)
   })
 });
 
