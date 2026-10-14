@@ -69,9 +69,15 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # Capas em JPEG substituídas por WebP: 4,0 MB de arquivos mortos.
-  # 410 (Gone) em vez de 404 diz ao Google que a imagem foi removida de vez.
-  RewriteRule ^images/posts/(ceu-azul|cheiro-de-terra-molhada)\.jpg$ - [G,L]
+  # Capas que saíram do repositório e que o deploy não apagou no servidor:
+  #   - os dois JPEG substituídos por WebP (4,0 MB de arquivos mortos)
+  #   - o ceu-azul.svg, que nenhum post referenciava (o post do céu usa o .webp)
+  #
+  # 410 (Gone) em vez de 404 diz ao Google que o arquivo foi removido de vez.
+  # Sem esta regra o SVG continuava respondendo 200 em produção, porque o
+  # deploy envia a build mas não remove o que deixou de existir localmente.
+  RewriteRule ^images/posts/ceu-azul\.(jpg|svg)$ - [G,L]
+  RewriteRule ^images/posts/cheiro-de-terra-molhada\.jpg$ - [G,L]
 </IfModule>
 
 <IfModule mod_alias.c>
