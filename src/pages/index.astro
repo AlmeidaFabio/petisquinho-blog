@@ -195,11 +195,11 @@ const recentPosts = posts
     </div>
   )}
 
-  <div class="mb-8 flex flex-wrap gap-3">
-    {siteConfig.categories.map((category) => (
-      <a href={`/categoria/${category.slug}/`} class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-marine transition hover:border-terracotta hover:text-[#A8432F]">{category.shortLabel}</a>
-    ))}
-  </div>
+  {/* Os chips de categoria saíram daqui. Eles repetiam as quatro seções que o
+      menu do topo já lista — e o cabeçalho é sticky, então essas mesmas quatro
+      ficam fixas na tela o tempo todo. No celular eram a terceira apresentação
+      das mesmas seções na mesma página, contando com o rodapé logo abaixo.
+      Sem eles, o primeiro card de conteúdo sobe cerca de 90 px. */}
 
   <div class:list={['grid gap-8', siteConfig.adsEnabled && 'xl:grid-cols-[minmax(0,1fr)_300px]']}>
     <section>
