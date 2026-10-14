@@ -54,7 +54,7 @@ const recentPosts = posts
           </div>
           <div class="flex min-h-0 flex-1 flex-col overflow-hidden p-6 sm:p-8">
             <p class="mb-3 line-clamp-1 text-sm font-bold uppercase tracking-[0.14em] text-terracotta">{post.data.section}</p>
-            <a href={`/posts/${post.slug}`} class="line-clamp-2 text-3xl font-black leading-tight text-marine hover:text-terracotta sm:text-4xl">
+            <a href={`/posts/${post.slug}/`} class="line-clamp-2 text-3xl font-black leading-tight text-marine hover:text-terracotta sm:text-4xl">
               {post.data.title}
             </a>
             <p class="mt-4 line-clamp-3 text-base leading-7 text-slate-600">{post.data.excerpt}</p>
@@ -68,18 +68,23 @@ const recentPosts = posts
       ))}
       {carouselPosts.length > 1 && (
         <nav aria-label="Controles do carrossel" class="flex h-[52px] items-center justify-center">
-          <div class="flex items-center gap-2" aria-label="Selecionar post">
+          <div class="flex items-center gap-1" role="group" aria-label="Selecionar post">
             {carouselPosts.map((post: CollectionEntry<'posts'>, index: number) => (
               <button
                 type="button"
                 data-carousel-indicator={index}
                 aria-label={`Mostrar post ${index + 1}: ${post.data.title}`}
                 aria-current={index === 0 ? 'true' : undefined}
-                class:list={[
-                  'h-2.5 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2',
-                  index === 0 ? 'w-6 bg-terracotta' : 'w-2.5 bg-slate-300 hover:bg-slate-400'
-                ]}
-              />
+                class="flex h-6 w-6 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2"
+              >
+                <span
+                  data-carousel-dot
+                  class:list={[
+                    'h-2.5 rounded-full transition-all',
+                    index === 0 ? 'w-6 bg-terracotta' : 'w-2.5 bg-slate-300'
+                  ]}
+                ></span>
+              </button>
             ))}
           </div>
         </nav>
@@ -90,7 +95,10 @@ const recentPosts = posts
     <aside class="relative isolate flex flex-col overflow-hidden rounded-[30px] border border-[#b9cfbb] bg-[#dcebdd] p-7 shadow-soft sm:p-8">
       <div aria-hidden="true" class="absolute inset-x-0 top-0 -z-10 h-2 bg-gradient-to-r from-terracotta via-mustard to-terracotta"></div>
       <div aria-hidden="true" class="absolute -right-12 -top-14 -z-10 h-40 w-40 rounded-full border-[24px] border-cream"></div>
-      <h2 class="mt-4 max-w-xs font-serif text-3xl font-bold leading-tight text-marine">Uma boa ideia cabe em poucos minutos.</h2>
+      <!-- h1 da home. Antes a página não tinha nenhum h1: o título do carrossel
+           é um <a> e o primeiro heading do DOM era este h2. Ele já usa
+           font-serif, então promover para h1 não muda nada visualmente. -->
+      <h1 class="mt-4 max-w-xs font-serif text-3xl font-bold leading-tight text-marine">Uma boa ideia cabe em poucos minutos.</h1>
       <p class="mt-4 text-sm leading-7 text-slate-600">
         Conteúdo curto, confiável e útil para quem quer aprender algo sem perder tempo.
       </p>
@@ -103,7 +111,7 @@ const recentPosts = posts
         </span>
         <p class="text-xs leading-5 text-slate-500">Uma pausa leve para descobrir algo novo.</p>
       </div>
-      <a href="/busca" class="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-marine px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[#2b3a5b] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2">
+      <a href="/busca/" class="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-marine px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[#2b3a5b] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2">
         Explorar
         <span aria-hidden="true">→</span>
       </a>
@@ -118,7 +126,7 @@ const recentPosts = posts
 
   <div class="mb-8 flex flex-wrap gap-3">
     {siteConfig.categories.map((category) => (
-      <a href={`/categoria/${category.slug}`} class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-marine transition hover:border-terracotta hover:text-terracotta">{category.shortLabel}</a>
+      <a href={`/categoria/${category.slug}/`} class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-marine transition hover:border-terracotta hover:text-terracotta">{category.shortLabel}</a>
     ))}
   </div>
 
@@ -126,7 +134,7 @@ const recentPosts = posts
     <section>
       <div class="mb-6 flex items-center justify-between gap-3">
         <h2 class="text-3xl font-black text-marine">Posts recentes</h2>
-        <a href="/busca" class="text-sm font-semibold text-terracotta">Ver todas as matérias →</a>
+        <a href="/busca/" class="text-sm font-semibold text-terracotta">Ver todas as matérias →</a>
       </div>
 
       <div class="grid gap-6 md:grid-cols-2">
@@ -135,7 +143,7 @@ const recentPosts = posts
             <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="aspect-[16/9] w-full object-cover" loading="lazy" decoding="async" />
             <div class="p-6">
               <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-terracotta">{post.data.section}</p>
-              <a href={`/posts/${post.slug}`} class="mt-3 block text-2xl font-black leading-tight text-marine hover:text-terracotta">
+              <a href={`/posts/${post.slug}/`} class="mt-3 block text-2xl font-black leading-tight text-marine hover:text-terracotta">
                 {post.data.title}
               </a>
               <p class="mt-4 text-sm leading-7 text-slate-600">{post.data.excerpt}</p>
@@ -190,11 +198,16 @@ const recentPosts = posts
 
       indicators.forEach((indicator, indicatorIndex) => {
         const isActive = indicatorIndex === activeIndex;
+        // O botão é o alvo de toque (24x24, para caber no mínimo do WCAG 2.2
+        // SC 2.5.8); a bolinha visível é o span interno.
+        const dot = indicator.querySelector<HTMLElement>('[data-carousel-dot]');
         indicator.setAttribute('aria-current', String(isActive));
-        indicator.classList.toggle('w-6', isActive);
-        indicator.classList.toggle('bg-terracotta', isActive);
-        indicator.classList.toggle('w-2.5', !isActive);
-        indicator.classList.toggle('bg-slate-300', !isActive);
+
+        if (!dot) return;
+        dot.classList.toggle('w-6', isActive);
+        dot.classList.toggle('bg-terracotta', isActive);
+        dot.classList.toggle('w-2.5', !isActive);
+        dot.classList.toggle('bg-slate-300', !isActive);
       });
 
       if (status) {

@@ -14,6 +14,24 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Respeita quem pediu menos movimento no sistema. O carrossel da home já
+   verificava isso no JavaScript; o CSS não verificava em lugar nenhum, então
+   transições e o scroll suave continuavam animando. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   @apply bg-cream text-graphite antialiased;
   font-family: 'Segoe UI', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;

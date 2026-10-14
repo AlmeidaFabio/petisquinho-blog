@@ -95,3 +95,26 @@
 # O status continua sendo 404 (não 200), o que mantém a página fora do índice
 # de busca — o meta robots noindex é só reforço.
 ErrorDocument 404 /404.html
+
+# ------------------------------------------------------------
+#  5. Cache dos arquivos estáticos
+# ------------------------------------------------------------
+# O HostGator já envia um Cache-Control próprio (era 4 h para CSS e 24 h para
+# imagem). "Header set" substitui o valor em vez de acrescentar outro.
+#
+# O HTML fica de fora de propósito: ele precisa continuar sendo revalidado,
+# porque a home e as categorias mudam quando um post novo entra.
+<IfModule mod_headers.c>
+  # CSS e JS do build carregam hash de conteúdo no nome
+  # (ex.: busca.CPfNWCbS.css), então a mesma URL nunca muda de conteúdo.
+  <FilesMatch "\.(css|js)$">
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Imagens e ícones têm nome estável: trocar a capa de um post mantém a URL.
+  # Por isso o cache é longo, mas não imutável — assim um recarregamento
+  # normal ainda pode revalidar.
+  <FilesMatch "\.(webp|avif|svg|png|jpe?g|gif|ico|woff2?)$">
+    Header always set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
