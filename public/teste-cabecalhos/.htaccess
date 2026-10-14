@@ -1,0 +1,37 @@
+# ============================================================
+#  SONDA — verificação de suporte a .htaccess no HostGator
+#
+#  Este arquivo existe só para descobrir se a hospedagem aceita estas
+#  diretivas, antes de colocá-las na raiz do site. Se algo aqui não for
+#  suportado, o único caminho afetado é /teste-cabecalhos/.
+#
+#  Ele será removido depois da verificação.
+#
+#  NÃO inclui Strict-Transport-Security de propósito: o HSTS vale para o
+#  domínio inteiro, não para o caminho, então uma sonda que o enviasse
+#  prenderia o navegador de quem a visitasse por 1 ano.
+# ============================================================
+
+<IfModule mod_headers.c>
+  # Marcador: se este cabeçalho aparecer na resposta, mod_headers e
+  # AllowOverride estão funcionando e os cabeçalhos reais também vão funcionar.
+  Header always set X-Sonda-Htaccess "ok"
+
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; manifest-src 'self'; upgrade-insecure-requests"
+
+  # A sonda não deve aparecer em busca.
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Marcador de rewrite: /teste-cabecalhos/antigo responde 302 apontando para
+  # a própria pasta. Se esse redirect acontecer, mod_rewrite está ativo e as
+  # regras de redirect da raiz também vão funcionar.
+  RewriteRule ^antigo/?$ /teste-cabecalhos/ [R=302,L]
+</IfModule>
