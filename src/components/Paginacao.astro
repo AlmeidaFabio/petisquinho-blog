@@ -1,0 +1,49 @@
+---
+import { paginasVisiveis, urlDaPagina } from '../utils/categorias';
+
+interface Props {
+  slug: string;
+  /** Rótulo visível da categoria, usado só no aria-label. */
+  rotulo: string;
+  pagina: number;
+  totalPaginas: number;
+}
+
+const { slug, rotulo, pagina, totalPaginas } = Astro.props;
+
+const url = (numero: number) => urlDaPagina(slug, numero);
+const numeros = paginasVisiveis(pagina, totalPaginas);
+
+// Um controle desabilitado é um <span>, não um <a>: link que não leva a lugar
+// nenhum confunde leitor de tela e quebra a navegação por teclado. Fica
+// aria-hidden porque a posição já está dita pelo aria-current e pelo texto.
+const base = 'inline-flex min-h-10 items-center rounded-full border px-4 py-2 text-sm font-semibold transition';
+const ativo = 'border-slate-200 bg-white text-marine hover:border-terracotta hover:text-[#A8432F]';
+const inativo = 'border-slate-200 bg-slate-50 text-slate-500';
+---
+
+{totalPaginas > 1 && (
+  <nav aria-label={`Paginação da categoria ${rotulo}`} class="mt-10 flex flex-wrap items-center justify-center gap-2">
+    {pagina > 1 ? (
+      <a href={url(pagina - 1)} rel="prev" class={`${base} ${ativo}`}>← Anterior</a>
+    ) : (
+      <span class={`${base} ${inativo}`} aria-hidden="true">← Anterior</span>
+    )}
+
+    {numeros.map((numero) =>
+      numero === '...' ? (
+        <span class="px-1 text-sm text-slate-500" aria-hidden="true">…</span>
+      ) : numero === pagina ? (
+        <span aria-current="page" class={`${base} border-marine bg-marine text-white`}>{numero}</span>
+      ) : (
+        <a href={url(numero)} class={`${base} ${ativo}`} aria-label={`Página ${numero} de ${totalPaginas}`}>{numero}</a>
+      )
+    )}
+
+    {pagina < totalPaginas ? (
+      <a href={url(pagina + 1)} rel="next" class={`${base} ${ativo}`}>Próxima →</a>
+    ) : (
+      <span class={`${base} ${inativo}`} aria-hidden="true">Próxima →</span>
+    )}
+  </nav>
+)}

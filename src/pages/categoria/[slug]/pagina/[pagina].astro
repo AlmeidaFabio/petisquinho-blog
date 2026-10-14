@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ListaDaCategoria from '../../../../components/ListaDaCategoria.astro';
+import { siteConfig } from '../../../../config/site';
+import { srcsetDe, SIZES } from '../../../../utils/images';
+import {
+  paginarDaCategoria,
+  postsDaCategoria,
+  postsPublicados,
+  urlDaPagina,
+  type PaginaDeCategoria
+} from '../../../../utils/categorias';
+
+/**
+ * Páginas 2 em diante das categorias (RF3 do PRD).
+ *
+ * A primeira página de cada categoria vive em categoria/[slug].astro, na raiz
+ * da categoria. Aqui ficam só as seguintes, em /categoria/slug/pagina/N/, para
+ * que /categoria/slug/pagina/1/ não exista como endereço duplicado do mesmo
+ * conteúdo.
+ */
+export async function getStaticPaths() {
+  const posts = await postsPublicados();
+
+  return siteConfig.categories.flatMap((categoria) =>
+    paginarDaCategoria(postsDaCategoria(posts, categoria.slug), categoria)
+      .filter((listagem) => listagem.pagina > 1)
+      .map((listagem) => ({
+        params: { slug: categoria.slug, pagina: String(listagem.pagina) },
+        props: { listagem }
+      }))
+  );
+}
+
+const { listagem } = Astro.props as { listagem: PaginaDeCategoria };
+const { categoria, posts, pagina, totalPaginas, totalPosts } = listagem;
+
+const capa = posts[0]?.data.image;
+---
+
+<BaseLayout
+  title={`${categoria.label} - página ${pagina} - Petisquinho`}
+  description={`Página ${pagina} de ${totalPaginas} da categoria ${categoria.label}, no blog Petisquinho.`}
+>
+  <Fragment slot="head">
+    {/* A primeira capa desta página também é o elemento de LCP dela. */}
+    {capa && (
+      <link
+        rel="preload"
+        as="image"
+        href={capa}
+        imagesrcset={srcsetDe(capa) ?? undefined}
+        imagesizes={SIZES.cardDuasColunas}
+        fetchpriority="high"
+      />
+    )}
+    {/* rel=prev/next saiu do Google, mas Bing e outros ainda usam, e o custo é
+        uma linha. As páginas continuam indexáveis e com canonical própria: a
+        orientação atual é não colocar noindex em paginação. */}
+    <link rel="prev" href={urlDaPagina(categoria.slug, pagina - 1)} />
+    {pagina < totalPaginas && <link rel="next" href={urlDaPagina(categoria.slug, pagina + 1)} />}
+  </Fragment>
+
+  <ListaDaCategoria listagem={listagem} />
+</BaseLayout>

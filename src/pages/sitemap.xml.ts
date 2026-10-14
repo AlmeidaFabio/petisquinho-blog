@@ -1,11 +1,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-
-const CATEGORIAS = [
-  '/categoria/curiosidades-de-boteco',
-  '/categoria/petisco-cultural',
-  '/categoria/mix-de-variedades',
-  '/categoria/a-saideira'
-];
+import { siteConfig } from '../config/site';
+import { POSTS_POR_PAGINA, urlDaPagina } from '../utils/categorias';
 
 /** Data mais recente entre uma lista de posts, ou null se a lista estiver vazia. */
 function dataMaisRecente(posts: CollectionEntry<'posts'>[]): Date | null {
@@ -35,10 +30,22 @@ export async function GET(context: { site: string | URL }) {
   const ultimoPost = dataMaisRecente(posts);
   entradas.push({ caminho: '', lastmod: ultimoPost ?? dataDoBuild });
 
-  for (const categoria of CATEGORIAS) {
-    const slug = categoria.split('/').pop();
-    const daCategoria = posts.filter((post: CollectionEntry<'posts'>) => post.data.category === slug);
-    entradas.push({ caminho: categoria, lastmod: dataMaisRecente(daCategoria) ?? dataDoBuild });
+  // Categorias e as páginas de paginação de cada uma. A lista vem de
+  // siteConfig, que é a fonte única: antes havia uma cópia dos quatro
+  // endereços aqui, que podia sair de sincronia com o site.
+  //
+  // Todas as páginas entram no sitemap, não só a primeira: são endereços
+  // canônicos e indexáveis, e é por eles que o rastreador chega aos posts mais
+  // antigos de uma categoria grande.
+  for (const categoria of siteConfig.categories) {
+    const daCategoria = posts.filter((post: CollectionEntry<'posts'>) => post.data.category === categoria.slug);
+    const lastmod = dataMaisRecente(daCategoria) ?? dataDoBuild;
+    const totalPaginas = Math.max(1, Math.ceil(daCategoria.length / POSTS_POR_PAGINA));
+
+    for (let pagina = 1; pagina <= totalPaginas; pagina += 1) {
+      // urlDaPagina devolve com barra final; é o mapa abaixo que a acrescenta.
+      entradas.push({ caminho: urlDaPagina(categoria.slug, pagina).replace(/\/$/, ''), lastmod });
+    }
   }
 
   for (const caminho of ['/sobre', '/contato', '/privacidade', '/termos-de-uso', '/busca']) {
