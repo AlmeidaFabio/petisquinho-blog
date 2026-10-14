@@ -11,10 +11,10 @@ imageAlt: "Cadernos de capa simples empilhados sobre uma mesa de madeira, com um
 sources:
   - label: "Câmara Municipal de São Paulo - Carolina Maria de Jesus, negritude e resistência"
     url: "https://www.saopaulo.sp.leg.br/blog/carolina-maria-de-jesus-negritude-e-resistencia/"
-  - label: "ANPUR - Carolina Maria de Jesus, uma trajetória urbana"
-    url: "https://anais.anpur.org.br/index.php/anaisenanpur/article/download/1801/1780"
-  - label: "Revista Crítica Literária (FCSH/UNL) - Ouvindo a voz de Carolina Maria de Jesus"
-    url: "https://rcl.fcsh.unl.pt/index.php/rcl/article/download/142/118"
+  - label: "Enciclopédia Itaú Cultural - Carolina Maria de Jesus"
+    url: "https://enciclopedia.itaucultural.org.br/pessoas/14374-carolina-maria-de-jesus"
+  - label: "Instituto Moreira Salles - Carolina Maria de Jesus: Quarto de despejo"
+    url: "https://carolinamariadejesus.ims.com.br/quarto-de-despejo/"
   - label: "Dialnet - artigo sobre a tradução francesa de Quarto de despejo"
     url: "https://dialnet.unirioja.es/descarga/articulo/4925675.pdf"
 ---
