@@ -73,13 +73,13 @@ const socialImageUrl = new URL(ogImage, siteUrl).toString();
     <a href="#conteudo" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-marine focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg">Pular para o conteúdo</a>
     <header class="sticky top-0 z-20 border-b border-slate-200/80 bg-cream/90 backdrop-blur-md">
       <div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
-        <a href="/" class="inline-flex items-center gap-3 text-2xl font-black uppercase tracking-tight text-terracotta">
+        <a href="/" class="inline-flex items-center gap-3 text-2xl font-black uppercase tracking-tight text-terracotta-dark">
           <span class="flex h-9 w-9 items-center justify-center rounded-full bg-terracotta text-sm text-white shadow-sm">P</span>
           <span>petisquinho</span>
         </a>
         <nav class="flex flex-wrap items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-marine/80 md:text-[11px]">
           {navItems.map((item) => (
-            <a href={item.href} class="rounded-full border border-slate-200 bg-white/70 px-3 py-2 transition hover:border-terracotta hover:bg-white hover:text-terracotta">{item.label}</a>
+            <a href={item.href} class="rounded-full border border-slate-200 bg-white/70 px-3 py-2 transition hover:border-terracotta hover:bg-white hover:text-terracotta-dark">{item.label}</a>
           ))}
         </nav>
       </div>
@@ -92,7 +92,12 @@ const socialImageUrl = new URL(ogImage, siteUrl).toString();
     <footer class="border-t border-slate-200 bg-marine text-white">
       <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 md:flex-row md:items-center md:justify-between">
         <div>
-          <p class="text-xl font-black uppercase tracking-tight text-terracotta">petisquinho</p>
+          <!-- Mostarda, não terracotta: o rodapé tem fundo azul-marinho escuro,
+               e ali o tom claro é que contrasta. Terracotta cheio dá 3,27:1
+               (serve só para texto grande e no limite) e o tom escuro que uso
+               no resto do site cai para 2,38:1. Mostarda dá 7,53:1 e já era a
+               cor dos links do rodapé no hover. -->
+          <p class="text-xl font-black uppercase tracking-tight text-mustard">petisquinho</p>
           <p class="mt-2 text-sm text-slate-300">Uma porção de curiosidade por dia, sem compromisso.</p>
         </div>
         <div class="flex flex-wrap gap-4 text-sm text-slate-200">

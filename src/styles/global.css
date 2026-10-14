@@ -72,7 +72,7 @@ p, a, span, li, input, button {
 }
 
 .article-content a {
-  @apply text-terracotta underline underline-offset-2;
+  @apply text-terracotta-dark underline underline-offset-2;
 }
 
 .article-content ul,
