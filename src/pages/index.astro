@@ -57,12 +57,12 @@ const recentPosts = posts
             </div>
             {carouselPosts.length > 1 && (
               <div class="absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 justify-between px-4 sm:px-5">
-                <button type="button" data-carousel-prev aria-label="Post anterior" class="group flex h-11 w-11 items-center justify-center rounded-full border border-white/70 bg-white/85 text-marine shadow-lg backdrop-blur-md transition duration-200 hover:scale-105 hover:border-white hover:bg-white hover:text-terracotta-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-white/50 active:scale-95">
+                <button type="button" data-carousel-prev aria-label="Post anterior" class="group flex h-11 w-11 items-center justify-center rounded-full border border-white/70 bg-white/85 text-marine shadow-lg backdrop-blur-md transition duration-200 hover:scale-105 hover:border-white hover:bg-white hover:text-[#A8432F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-white/50 active:scale-95">
                   <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-0.5">
                     <path d="m14.5 5-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
                   </svg>
                 </button>
-                <button type="button" data-carousel-next aria-label="Próximo post" class="group flex h-11 w-11 items-center justify-center rounded-full border border-white/70 bg-white/85 text-marine shadow-lg backdrop-blur-md transition duration-200 hover:scale-105 hover:border-white hover:bg-white hover:text-terracotta-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-white/50 active:scale-95">
+                <button type="button" data-carousel-next aria-label="Próximo post" class="group flex h-11 w-11 items-center justify-center rounded-full border border-white/70 bg-white/85 text-marine shadow-lg backdrop-blur-md transition duration-200 hover:scale-105 hover:border-white hover:bg-white hover:text-[#A8432F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-white/50 active:scale-95">
                   <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5 transition-transform duration-200 group-hover:translate-x-0.5">
                     <path d="m9.5 5 7 7-7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
                   </svg>
@@ -71,8 +71,8 @@ const recentPosts = posts
             )}
           </div>
           <div class="flex min-h-0 flex-1 flex-col overflow-hidden p-6 sm:p-8">
-            <p class="mb-3 line-clamp-1 text-sm font-bold uppercase tracking-[0.14em] text-terracotta-dark">{post.data.section}</p>
-            <a href={`/posts/${post.slug}/`} class="line-clamp-2 text-3xl font-black leading-tight text-marine hover:text-terracotta-dark sm:text-4xl">
+            <p class="mb-3 line-clamp-1 text-sm font-bold uppercase tracking-[0.14em] text-[#A8432F]">{post.data.section}</p>
+            <a href={`/posts/${post.slug}/`} class="line-clamp-2 text-3xl font-black leading-tight text-marine hover:text-[#A8432F] sm:text-4xl">
               {post.data.title}
             </a>
             <p class="mt-4 line-clamp-3 text-base leading-7 text-slate-600">{post.data.excerpt}</p>
@@ -121,7 +121,7 @@ const recentPosts = posts
         Conteúdo curto, confiável e útil para quem quer aprender algo sem perder tempo.
       </p>
       <div class="mt-6 flex items-center gap-3 border-t border-slate-100 pt-5">
-        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-terracotta/10 text-terracotta-dark" aria-hidden="true">
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-terracotta/10 text-[#A8432F]" aria-hidden="true">
           <svg viewBox="0 0 24 24" class="h-5 w-5 fill-none stroke-current stroke-[1.8]">
             <path d="M12 3v2m0 14v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M3 12h2m14 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
             <circle cx="12" cy="12" r="4" />
@@ -144,7 +144,7 @@ const recentPosts = posts
 
   <div class="mb-8 flex flex-wrap gap-3">
     {siteConfig.categories.map((category) => (
-      <a href={`/categoria/${category.slug}/`} class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-marine transition hover:border-terracotta hover:text-terracotta-dark">{category.shortLabel}</a>
+      <a href={`/categoria/${category.slug}/`} class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-marine transition hover:border-terracotta hover:text-[#A8432F]">{category.shortLabel}</a>
     ))}
   </div>
 
@@ -152,7 +152,7 @@ const recentPosts = posts
     <section>
       <div class="mb-6 flex items-center justify-between gap-3">
         <h2 class="text-3xl font-black text-marine">Posts recentes</h2>
-        <a href="/busca/" class="text-sm font-semibold text-terracotta-dark">Ver todas as matérias →</a>
+        <a href="/busca/" class="text-sm font-semibold text-[#A8432F]">Ver todas as matérias →</a>
       </div>
 
       <div class="grid gap-6 md:grid-cols-2">
@@ -160,8 +160,8 @@ const recentPosts = posts
           <article class="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:border-terracotta/30 hover:shadow-soft">
             <img src={post.data.image} srcset={srcsetDe(post.data.image) ?? undefined} sizes={SIZES.cardDuasColunas} alt={post.data.imageAlt ?? post.data.title} class="aspect-[16/9] w-full object-cover" loading="lazy" decoding="async" />
             <div class="p-6">
-              <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-terracotta-dark">{post.data.section}</p>
-              <a href={`/posts/${post.slug}/`} class="mt-3 block text-2xl font-black leading-tight text-marine hover:text-terracotta-dark">
+              <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-[#A8432F]">{post.data.section}</p>
+              <a href={`/posts/${post.slug}/`} class="mt-3 block text-2xl font-black leading-tight text-marine hover:text-[#A8432F]">
                 {post.data.title}
               </a>
               <p class="mt-4 text-sm leading-7 text-slate-600">{post.data.excerpt}</p>
