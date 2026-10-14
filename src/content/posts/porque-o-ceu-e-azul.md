@@ -7,7 +7,7 @@ date: 2026-10-09
 readingTime: "2 min de leitura"
 tags: ["ciência", "atmosfera", "curiosidade"]
 featured: true
-image: "/images/posts/ceu-azul.jpg"
+image: "/images/posts/ceu-azul.webp"
 imageAlt: "Ilustração de um sol azul-claro sobre montanhas sob um céu azul"
 sources:
   - label: "NASA Space Place - Why Is the Sky Blue?"
