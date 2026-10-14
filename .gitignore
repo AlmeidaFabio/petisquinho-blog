@@ -11,6 +11,10 @@ dist/
 # scripts/generate-og-images.mjs a partir das capas e títulos dos posts.
 public/og/
 
+# Variantes de largura das capas, para o srcset. Geradas por
+# scripts/generate-image-variants.mjs no build e no predev.
+public/images/variantes/
+
 # Tipos gerados no build
 astro-types.d.ts
 

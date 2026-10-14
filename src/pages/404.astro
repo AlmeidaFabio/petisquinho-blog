@@ -2,6 +2,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { siteConfig } from '../config/site';
+import { srcsetDe, SIZES } from '../utils/images';
 
 const allPosts: CollectionEntry<'posts'>[] = await getCollection('posts');
 const recentPosts = allPosts
@@ -73,6 +74,8 @@ const recentPosts = allPosts
         <article class="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:border-terracotta/30 hover:shadow-soft">
           <img
             src={post.data.image}
+            srcset={srcsetDe(post.data.image) ?? undefined}
+            sizes={SIZES.cardTresColunas}
             alt={post.data.imageAlt ?? post.data.title}
             class="aspect-[16/9] w-full object-cover"
             loading="lazy"

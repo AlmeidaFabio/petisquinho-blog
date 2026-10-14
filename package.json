@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "node scripts/generate-image-variants.mjs",
     "dev": "astro dev --host",
-    "build": "node scripts/check-image-formats.mjs && node scripts/generate-og-images.mjs && astro build",
+    "build": "node scripts/check-image-formats.mjs && node scripts/generate-image-variants.mjs && node scripts/generate-og-images.mjs && astro build",
     "preview": "astro preview --host",
     "prepare:deploy": "node scripts/prepare-deploy.mjs",
     "deploy": "npm run prepare:deploy && npm run build && node --env-file=.env scripts/deploy-hostgator.mjs"

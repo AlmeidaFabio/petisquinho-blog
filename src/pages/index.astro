@@ -2,6 +2,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { siteConfig } from '../config/site';
+import { srcsetDe, SIZES } from '../utils/images';
 
 const allPosts: CollectionEntry<'posts'>[] = await getCollection('posts');
 const posts = allPosts
@@ -26,12 +27,29 @@ const recentPosts = posts
 ---
 
 <BaseLayout title="Petisquinho - Uma porção de curiosidade pro seu dia" description="Blog brasileiro sobre cultura, curiosidades e variedades.">
+  <Fragment slot="head">
+    <!-- O primeiro slide do carrossel é o elemento de LCP desta página. O
+         preload antecipa o download para antes de o HTML terminar de ser
+         processado, e o imagesrcset garante que o navegador baixe a variante
+         que vai usar de fato, não a maior. -->
+    {carouselPosts[0]?.data.image && (
+      <link
+        rel="preload"
+        as="image"
+        href={carouselPosts[0].data.image}
+        imagesrcset={srcsetDe(carouselPosts[0].data.image) ?? undefined}
+        imagesizes={SIZES.capaDoCarrossel}
+        fetchpriority="high"
+      />
+    )}
+  </Fragment>
+
   <section class="mb-12 grid gap-8 lg:grid-cols-[1.5fr_0.8fr]">
     <div data-post-carousel role="region" aria-roledescription="carrossel" aria-label={thisWeekPosts.length > 0 ? 'Posts da semana' : 'Posts recentes'} class="relative h-[600px] overflow-hidden rounded-[30px] border border-terracotta/10 bg-white shadow-soft sm:h-[640px]">
       {carouselPosts.map((post: CollectionEntry<'posts'>, index: number) => (
         <article data-carousel-slide aria-roledescription="slide" aria-label={`Post ${index + 1} de ${carouselPosts.length}`} class="flex h-[calc(100%-52px)] flex-col" hidden={index !== 0}>
           <div class="relative h-56 shrink-0 sm:h-72">
-            <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="h-full w-full object-cover" loading={index === 0 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : 'auto'} />
+            <img src={post.data.image} srcset={srcsetDe(post.data.image) ?? undefined} sizes={SIZES.capaDoCarrossel} alt={post.data.imageAlt ?? post.data.title} class="h-full w-full object-cover" loading={index === 0 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : 'auto'} />
             <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-marine/75 to-transparent p-5 pt-14 text-white sm:p-6 sm:pt-16">
               <span class="inline-flex rounded-full border border-white/50 bg-marine/25 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] backdrop-blur-sm">
                 {thisWeekPosts.length > 0 ? 'Destaques da semana' : 'Posts recentes'}
@@ -140,7 +158,7 @@ const recentPosts = posts
       <div class="grid gap-6 md:grid-cols-2">
         {recentPosts.map((post: CollectionEntry<'posts'>) => (
           <article class="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:border-terracotta/30 hover:shadow-soft">
-            <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="aspect-[16/9] w-full object-cover" loading="lazy" decoding="async" />
+            <img src={post.data.image} srcset={srcsetDe(post.data.image) ?? undefined} sizes={SIZES.cardDuasColunas} alt={post.data.imageAlt ?? post.data.title} class="aspect-[16/9] w-full object-cover" loading="lazy" decoding="async" />
             <div class="p-6">
               <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-terracotta-dark">{post.data.section}</p>
               <a href={`/posts/${post.slug}/`} class="mt-3 block text-2xl font-black leading-tight text-marine hover:text-terracotta-dark">

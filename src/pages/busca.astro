@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { srcsetDe, SIZES } from '../utils/images';
 
 const allPosts: CollectionEntry<'posts'>[] = await getCollection('posts');
 const posts = allPosts
@@ -13,6 +14,10 @@ const posts = allPosts
     section: post.data.section,
     image: post.data.image,
     imageAlt: post.data.imageAlt ?? post.data.title,
+    // Vai junto no JSON porque os cards são montados no cliente: o navegador
+    // precisa do srcset no HTML gerado para escolher a variante certa.
+    imageSrcset: srcsetDe(post.data.image),
+    imageSizes: SIZES.cardDuasColunas,
     tags: post.data.tags.join(', '),
     date: new Date(post.data.date).toLocaleDateString('pt-BR'),
     readingTime: post.data.readingTime
@@ -132,6 +137,8 @@ const posts = allPosts
         if (post.image) {
           const image = document.createElement('img');
           image.src = post.image;
+          if (post.imageSrcset) image.srcset = post.imageSrcset;
+          if (post.imageSizes) image.sizes = post.imageSizes;
           image.alt = post.imageAlt;
           image.loading = 'lazy';
           image.decoding = 'async';
