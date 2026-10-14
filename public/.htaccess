@@ -1,0 +1,76 @@
+# ============================================================
+#  Petisquinho — configuração do servidor (HostGator / Apache-LiteSpeed)
+#
+#  Este arquivo vive em public/ e é copiado para a raiz do site no build.
+#  Verificado em 14/10/2026 com uma sonda em /teste-cabecalhos/: a hospedagem
+#  aceita mod_headers e mod_rewrite, então as diretivas abaixo funcionam.
+#
+#  Tudo está dentro de <IfModule> de propósito: se um módulo não existir na
+#  hospedagem, o bloco é ignorado em vez de derrubar o site com erro 500.
+# ============================================================
+
+# ------------------------------------------------------------
+#  1. Cabeçalhos de segurança
+# ------------------------------------------------------------
+<IfModule mod_headers.c>
+  # HSTS: 1 ano. Sem includeSubDomains e sem preload, por decisão consciente.
+  # O simula-prova.petisquinho.com ainda não existe; se ele nascer sem HTTPS
+  # válido, um HSTS herdado tornaria o app inacessível — o navegador recusa a
+  # conexão e não oferece "continuar mesmo assim". Reavaliar depois de
+  # confirmar que webmail e cpanel funcionam bem em HTTPS.
+  Header always set Strict-Transport-Security "max-age=31536000"
+
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  # CSP: tudo restrito à própria origem, exceto 'unsafe-inline' em script e
+  # style. Essa exceção é necessária porque todos os scripts do site são
+  # inline (carrossel da home, busca, copiar link) — não há /_astro/*.js.
+  # O domínio cloudflareinsights.com está previsto para o analytics sem
+  # cookies ainda não instalado, para a CSP não quebrar o site quando entrar.
+  # frame-ancestors só funciona em cabeçalho HTTP, não em <meta>.
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; manifest-src 'self'; upgrade-insecure-requests"
+</IfModule>
+
+# ------------------------------------------------------------
+#  2. HTTPS e domínio único
+# ------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # http -> https, apenas quando o visitante realmente veio em http, conforme
+  # o Cloudflare informa em X-Forwarded-Proto.
+  #
+  # De propósito NÃO usa %{HTTPS}: atrás do proxy essa variável reflete a
+  # conexão Cloudflare->origem, não a do visitante. Uma regra baseada nela
+  # redirecionaria para sempre (loop) quando o modo SSL fosse Flexible.
+  RewriteCond %{HTTP:X-Forwarded-Proto} =http [NC]
+  RewriteRule ^(.*)$ https://petisquinho.com/$1 [R=301,L]
+
+  # www -> raiz. Depende só do Host, que o Cloudflare preserva.
+  RewriteCond %{HTTP_HOST} ^www\.petisquinho\.com$ [NC]
+  RewriteRule ^(.*)$ https://petisquinho.com/$1 [R=301,L]
+</IfModule>
+
+# ------------------------------------------------------------
+#  3. Limpeza de arquivos que saíram do repositório
+#
+#  O deploy envia a build mas não apaga no servidor o que deixou de existir
+#  localmente. Os redirects abaixo tornam inalcançável o que já saiu do site,
+#  sem exigir acesso ao Gerenciador de Arquivos.
+#
+#  Este bloco pode ser removido depois que os arquivos forem apagados no
+#  cPanel (public_html/teste-cabecalhos/ e as duas capas .jpg).
+# ------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Sonda de cabeçalhos usada para testar o suporte a .htaccess.
+  RewriteRule ^teste-cabecalhos(/.*)?$ / [R=301,L]
+
+  # Capas em JPEG substituídas por WebP: 4,0 MB de arquivos mortos.
+  # 410 (Gone) em vez de 404 diz ao Google que a imagem foi removida de vez.
+  RewriteRule ^images/posts/(ceu-azul|cheiro-de-terra-molhada)\.jpg$ - [G,L]
+</IfModule>
