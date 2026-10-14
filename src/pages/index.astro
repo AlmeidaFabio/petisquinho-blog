@@ -57,11 +57,40 @@ const recentPosts = posts
   </Fragment>
 
   <section class="mb-12 grid gap-8 lg:grid-cols-[1.5fr_0.8fr]">
-    <div data-post-carousel role="region" aria-roledescription="carrossel" aria-label={destaques.length > 0 ? 'Destaques e posts recentes' : 'Posts recentes'} class="relative h-[600px] overflow-hidden rounded-[30px] border border-terracotta/10 bg-white shadow-soft sm:h-[640px]">
+    {/* Sem altura fixa. Antes o container tinha h-[600px] (640 a partir de sm) e
+        o conteúdo do slide ocupava cerca de 410 px, então sobrava um vazio de
+        uns 190 px entre o resumo e as bolinhas. O bloco ao lado herdava o mesmo
+        vazio, porque esticava para acompanhar a linha da grade.
+
+        Agora os slides ficam empilhados na MESMA célula da grade: a altura vem
+        do slide mais alto e não muda ao trocar de slide, então não há salto de
+        layout. Os inativos usam visibility em vez do atributo hidden — assim
+        continuam ocupando espaço para dimensionar a célula, e saem da árvore de
+        acessibilidade e do foco do mesmo jeito. */}
+    <div data-post-carousel role="region" aria-roledescription="carrossel" aria-label={destaques.length > 0 ? 'Destaques e posts recentes' : 'Posts recentes'} class="relative grid overflow-hidden rounded-[30px] border border-terracotta/10 bg-white shadow-soft">
       {carouselPosts.map((post: CollectionEntry<'posts'>, index: number) => (
-        <article data-carousel-slide aria-roledescription="slide" aria-label={`Post ${index + 1} de ${carouselPosts.length}`} class="flex h-[calc(100%-52px)] flex-col" hidden={index !== 0}>
+        <article
+          data-carousel-slide
+          aria-roledescription="slide"
+          aria-label={`Post ${index + 1} de ${carouselPosts.length}`}
+          class:list={[
+            'col-start-1 row-start-1 flex flex-col transition-opacity duration-300',
+            index === 0 ? 'opacity-100' : 'pointer-events-none invisible opacity-0'
+          ]}
+        >
           <div class="relative h-56 shrink-0 sm:h-72">
-            <img src={post.data.image} srcset={srcsetDe(post.data.image) ?? undefined} sizes={SIZES.capaDoCarrossel} alt={post.data.imageAlt ?? post.data.title} class="h-full w-full object-cover" loading={index === 0 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : 'auto'} />
+            {/* Só o primeiro slide carrega a imagem de imediato. Os outros
+                guardam o endereço em data-src, e o JavaScript materializa
+                quando o slide entra.
+                Motivo: os slides inativos usam visibility para manter a altura
+                do carrossel estável, e com isso o navegador considera as cinco
+                imagens dentro da tela e baixa todas de uma vez. Medido: a home
+                ia de 278 KB para 431 KB. */}
+            {index === 0 ? (
+              <img src={post.data.image} srcset={srcsetDe(post.data.image) ?? undefined} sizes={SIZES.capaDoCarrossel} alt={post.data.imageAlt ?? post.data.title} class="h-full w-full object-cover" loading="eager" fetchpriority="high" decoding="async" />
+            ) : (
+              <img data-src={post.data.image} data-srcset={srcsetDe(post.data.image) ?? undefined} sizes={SIZES.capaDoCarrossel} alt={post.data.imageAlt ?? post.data.title} class="h-full w-full object-cover" decoding="async" />
+            )}
             <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-marine/75 to-transparent p-5 pt-14 text-white sm:p-6 sm:pt-16">
               <span class="inline-flex rounded-full border border-white/50 bg-marine/25 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] backdrop-blur-sm">
                 {/* O selo diz o que o slide é de fato. Antes era fixo em
@@ -87,11 +116,20 @@ const recentPosts = posts
           </div>
           <div class="flex min-h-0 flex-1 flex-col overflow-hidden p-6 sm:p-8">
             <p class="mb-3 line-clamp-1 text-sm font-bold uppercase tracking-[0.14em] text-[#A8432F]">{post.data.section}</p>
+            {/* Sem altura reservada de propósito. Cheguei a reservar duas
+                linhas de título e três de resumo para igualar os slides, e o
+                resultado foi pior: quando o título ocupa uma linha só, os
+                90 px reservados viram um vão entre o título e o resumo, no
+                meio da leitura. O vão no fim do card, que era de cerca de
+                50 px, incomoda menos do que um vão no meio. */}
             <a href={`/posts/${post.slug}/`} class="line-clamp-2 text-3xl font-black leading-tight text-marine hover:text-[#A8432F] sm:text-4xl">
               {post.data.title}
             </a>
             <p class="mt-4 line-clamp-3 text-base leading-7 text-slate-600">{post.data.excerpt}</p>
-            <div class="mt-auto flex flex-wrap items-center gap-3 pt-4 text-sm text-slate-500">
+            {/* Sem mt-auto: com ele a data era empurrada para o fim do card e
+                se soltava do resumo. Agora ela fica logo abaixo, e a sobra cai
+                no fim do bloco, junto do respiro das bolinhas. */}
+            <div class="flex flex-wrap items-center gap-3 pt-4 text-sm text-slate-500">
               <span>{dataLegivel(post.data.date)}</span>
               <span>•</span>
               <span>{tempoDeLeitura(post.body)}</span>
@@ -100,7 +138,7 @@ const recentPosts = posts
         </article>
       ))}
       {carouselPosts.length > 1 && (
-        <nav aria-label="Controles do carrossel" class="flex h-[52px] items-center justify-center">
+        <nav aria-label="Controles do carrossel" class="col-start-1 row-start-2 flex h-[52px] items-center justify-center">
           <div class="flex items-center gap-1" role="group" aria-label="Selecionar post">
             {carouselPosts.map((post: CollectionEntry<'posts'>, index: number) => (
               <button
@@ -226,7 +264,28 @@ const recentPosts = posts
       activeIndex = (index + slides.length) % slides.length;
 
       slides.forEach((slide, slideIndex) => {
-        slide.hidden = slideIndex !== activeIndex;
+        const isActive = slideIndex === activeIndex;
+        // visibility em vez do atributo hidden: os slides inativos continuam
+        // ocupando espaço, que é o que mantém a altura do carrossel estável
+        // quando o slide ativo muda. visibility: hidden já tira o elemento da
+        // árvore de acessibilidade e do alcance do teclado.
+        slide.classList.toggle('invisible', !isActive);
+        slide.classList.toggle('opacity-0', !isActive);
+        slide.classList.toggle('pointer-events-none', !isActive);
+
+        // Materializa a imagem do slide que entrou. Os inativos não têm src,
+        // para o navegador não baixar as cinco imagens do carrossel de uma vez.
+        if (isActive) {
+          const imagem = slide.querySelector<HTMLImageElement>('img[data-src]');
+          if (imagem) {
+            const src = imagem.dataset.src;
+            const srcset = imagem.dataset.srcset;
+            if (src) imagem.src = src;
+            if (srcset) imagem.srcset = srcset;
+            imagem.removeAttribute('data-src');
+            imagem.removeAttribute('data-srcset');
+          }
+        }
       });
 
       indicators.forEach((indicator, indicatorIndex) => {
@@ -293,9 +352,3 @@ const recentPosts = posts
     syncAutoplay();
   }
 </script>
-
-<style>
-  [data-carousel-slide][hidden] {
-    display: none;
-  }
-</style>
