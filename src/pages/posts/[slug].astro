@@ -229,8 +229,12 @@ const trilha = schemaTrilha(
       </div>
     </article>
 
-    <aside class="hidden lg:block">
-      <div class="sticky top-28 space-y-5">
+    {/* A coluna lateral era `hidden lg:block`, então as recomendações por
+        categoria não existiam no celular — onde está a maior parte da
+        audiência. Agora ela empilha abaixo do artigo no mobile e vira coluna
+        lateral a partir de lg. */}
+    <aside class="space-y-5 lg:sticky lg:top-28">
+      <div class="space-y-5">
         {categoryRecommendations.length > 0 && (
           <section aria-labelledby="category-recommendations-title" class="space-y-4">
             <div class="mb-1 flex items-center gap-3">
@@ -259,7 +263,9 @@ const trilha = schemaTrilha(
             ))}
           </section>
         )}
-        {siteConfig.adsEnabled && <div class="ad-slot sticky top-28 h-[520px]">Publicidade</div>}
+        {/* Fixado só a partir de lg, onde existe coluna lateral. No mobile o
+            anúncio empilhado usaria 520 px de altura sem necessidade. */}
+        {siteConfig.adsEnabled && <div class="ad-slot h-40 lg:sticky lg:top-28 lg:h-[520px]">Publicidade</div>}
       </div>
     </aside>
   </div>
