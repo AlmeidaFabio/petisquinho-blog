@@ -2,6 +2,7 @@
 import '../../styles/global.css';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { PostSource } from '../../content/config';
+import { siteConfig } from '../../config/site';
 
 export async function getStaticPaths() {
   const posts: CollectionEntry<'posts'>[] = await getCollection('posts');
@@ -18,9 +19,18 @@ if (!post) {
   throw new Error(`Post não encontrado: ${slug}`);
 }
 
-const siteUrl = Astro.site ?? new URL('https://petisquinho.com');
+const siteUrl = Astro.site ?? siteConfig.url;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
-const socialImageUrl = new URL(post.data.image ?? '/favicon.png', siteUrl).toString();
+
+// Card 1200x630 em JPG, gerado por scripts/generate-og-images.mjs no build.
+// É JPG de propósito: a capa em si é WebP e alguns rastreadores de
+// pré-visualização ainda não exibem WebP.
+const socialImageUrl = new URL(`/og/${slug}.jpg`, siteUrl).toString();
+
+// Texto de compartilhamento. Usa canonicalUrl em vez de montar a URL na mão:
+// Astro.site.toString() termina em "/", e concatenar com Astro.url.pathname
+// (que também começa com "/") gerava https://petisquinho.com//posts/...
+const shareText = `${post.data.title} — ${canonicalUrl}`;
 
 const sameCategoryPosts = posts.filter(
   (entry: CollectionEntry<'posts'>) =>
@@ -62,16 +72,23 @@ const { Content } = await post.render();
     <meta name="description" content={post.data.excerpt} />
     <meta name="theme-color" content="#C8553D" />
     <meta property="og:type" content="article" />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content={siteConfig.locale} />
     <meta property="og:title" content={`${post.data.title} - Petisquinho`} />
     <meta property="og:description" content={post.data.excerpt} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:width" content={String(siteConfig.ogImageWidth)} />
+    <meta property="og:image:height" content={String(siteConfig.ogImageHeight)} />
+    <meta property="og:image:alt" content={post.data.imageAlt ?? post.data.title} />
+    <meta property="article:published_time" content={new Date(post.data.date).toISOString()} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={`${post.data.title} - Petisquinho`} />
     <meta name="twitter:description" content={post.data.excerpt} />
     <meta name="twitter:image" content={socialImageUrl} />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/png" href="/favicon.png?v=2" />
+    <link rel="alternate" type="application/rss+xml" title={siteConfig.name} href="/rss.xml" />
     <title>{post.data.title} - Petisquinho</title>
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
@@ -80,13 +97,16 @@ const { Content } = await post.render();
       description: post.data.excerpt,
       image: socialImageUrl,
       datePublished: new Date(post.data.date).toISOString(),
+      inLanguage: 'pt-BR',
+      articleSection: post.data.section,
       author: {
         '@type': 'Person',
-        name: 'Petisquinho'
+        name: siteConfig.author.name,
+        url: new URL(siteConfig.author.url, siteUrl).toString()
       },
       publisher: {
         '@type': 'Organization',
-        name: 'Petisquinho',
+        name: siteConfig.name,
         logo: {
           '@type': 'ImageObject',
           url: 'https://petisquinho.com/favicon.png'
@@ -122,27 +142,34 @@ const { Content } = await post.render();
 
             <h1 class="article-title max-w-3xl text-4xl font-black leading-[1.05] text-marine sm:text-5xl lg:text-[3.25rem]">{post.data.title}</h1>
             <p class="mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">{post.data.excerpt}</p>
+            <p class="mt-5 text-sm text-slate-600">
+              Por <a href={siteConfig.author.url} class="font-semibold text-marine underline decoration-slate-300 underline-offset-4 transition hover:text-terracotta">{siteConfig.author.name}</a><span class="mx-1.5" aria-hidden="true">·</span>{siteConfig.author.role}
+            </p>
           </div>
 
           <div class="px-4 py-6 sm:px-6 lg:px-8">
-            <div class="mb-8 flex justify-center">
-              <div class="ad-slot h-24 w-full max-w-5xl">Publicidade</div>
-            </div>
+            {siteConfig.adsEnabled && (
+              <div class="mb-8 flex justify-center">
+                <div class="ad-slot h-24 w-full max-w-5xl">Publicidade</div>
+              </div>
+            )}
 
             <div class="article-content prose prose-lg max-w-3xl">
               <Content />
             </div>
 
-            <div class="mt-10 flex justify-center">
-              <div class="ad-slot h-24 w-full max-w-5xl">Publicidade</div>
-            </div>
+            {siteConfig.adsEnabled && (
+              <div class="mt-10 flex justify-center">
+                <div class="ad-slot h-24 w-full max-w-5xl">Publicidade</div>
+              </div>
+            )}
 
             {post.data.sources.length > 0 && (
               <section class="mt-12 rounded-[24px] border border-slate-200 bg-slate-50 p-5 sm:p-6">
                 <h2 class="text-2xl font-black text-marine">Fontes</h2>
-                <ul class="mt-4 space-y-2 text-sm text-slate-700">
+                <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-700">
                   {post.data.sources.map((source: PostSource) => (
-                    <li>• <a href={source.url} target="_blank" rel="noopener noreferrer" class="underline decoration-slate-300 underline-offset-4 hover:text-terracotta">{source.label}</a></li>
+                    <li><a href={source.url} target="_blank" rel="noopener noreferrer" class="underline decoration-slate-300 underline-offset-4 hover:text-terracotta">{source.label}</a></li>
                   ))}
                 </ul>
               </section>
@@ -182,13 +209,13 @@ const { Content } = await post.render();
                   <p class="mt-1 text-xs text-slate-500">Envie esta leitura para alguém.</p>
                 </div>
                 <div class="flex flex-wrap gap-3">
-                  <a href={`https://wa.me/?text=${encodeURIComponent(`${post.data.title} — ${Astro.site ? Astro.site.toString() : 'https://petisquinho.com'}${Astro.url.pathname}`)}`} target="_blank" rel="noopener" class="inline-flex h-11 items-center gap-2 rounded-full border border-emerald-700/15 bg-emerald-700 px-4 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-emerald-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2" aria-label="Compartilhar no WhatsApp">
+                  <a href={`https://wa.me/?text=${encodeURIComponent(shareText)}`} target="_blank" rel="noopener" class="inline-flex h-11 items-center gap-2 rounded-full border border-emerald-700/15 bg-emerald-700 px-4 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-emerald-600 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2" aria-label="Compartilhar no WhatsApp">
                     <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4 fill-current">
                       <path d="M12.04 2C6.59 2 2.17 6.29 2.17 11.63c0 2.04.63 4.03 1.72 5.7L2 22l4.89-1.53a9.66 9.66 0 0 0 5.15 1.59h.01c5.45 0 9.87-4.29 9.87-9.63S17.49 2 12.04 2Zm5.56 13.65c-.22.62-1.29 1.16-1.78 1.23-.47.07-1.06.1-3.42-.72-2.9-1.04-4.78-3.64-4.93-3.83-.15-.19-1.22-1.62-1.22-3.09 0-1.47.77-2.2 1.03-2.5.27-.31.58-.38.78-.38h.56c.18 0 .42.01.64.49.29.62.98 2.17 1.06 2.33.08.16.13.35.02.56-.11.2-.17.33-.34.51-.17.18-.36.4-.52.55-.17.17-.35.35-.15.69.2.34.9 1.48 1.94 2.39 1.33 1.18 2.45 1.55 2.8 1.73.35.18.56.15.76-.09.2-.24.86-1 1.09-1.34.23-.34.46-.28.78-.17.32.11 2.05 1.03 2.41 1.21.36.18.6.27.69.42.09.16.09.93-.13 1.55Z"/>
                     </svg>
                     <span>WhatsApp</span>
                   </a>
-                  <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`${post.data.title} — ${Astro.site ? Astro.site.toString() : 'https://petisquinho.com'}${Astro.url.pathname}`)}`} target="_blank" rel="noopener" class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300/80 bg-white text-marine shadow-sm transition hover:-translate-y-0.5 hover:border-marine/30 hover:bg-slate-50 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-marine focus-visible:ring-offset-2" aria-label="Compartilhar no X" title="Compartilhar no X">
+                  <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`} target="_blank" rel="noopener" class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300/80 bg-white text-marine shadow-sm transition hover:-translate-y-0.5 hover:border-marine/30 hover:bg-slate-50 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-marine focus-visible:ring-offset-2" aria-label="Compartilhar no X" title="Compartilhar no X">
                     <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4 fill-current">
                       <path d="M18.9 2h3.6l-7.87 9.01L22.7 22h-7.11l-5.55-7.82L3.18 22H-0.4l8.43-9.66L0.5 2h7.28l5.02 7.05L18.9 2Zm-1.26 18.1h1.97L7.12 3.8H5.09l12.55 16.3Z"/>
                     </svg>
@@ -234,7 +261,7 @@ const { Content } = await post.render();
                 ))}
               </section>
             )}
-            <div class="ad-slot sticky top-28 h-[520px]">Publicidade</div>
+            {siteConfig.adsEnabled && <div class="ad-slot sticky top-28 h-[520px]">Publicidade</div>}
           </div>
         </aside>
       </div>

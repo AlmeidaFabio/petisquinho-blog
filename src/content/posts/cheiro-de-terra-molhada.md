@@ -18,8 +18,6 @@ sources:
     url: "https://blogs.reading.ac.uk/weather-and-climate-at-reading/2016/ah-the-sweet-smell-of-rain/"
 ---
 
-# Por que a chuva deixa aquele cheiro de terra molhada?
-
 Basta a primeira chuva depois de vários dias de tempo seco para o ar ganhar um aroma característico. Para muita gente, é um dos cheiros mais agradáveis da natureza. Mas ele não vem simplesmente da água da chuva: boa parte dessa experiência tem origem no solo e nos microrganismos que vivem nele.
 
 Esse aroma é conhecido como **petricor**, nome usado para descrever o cheiro característico associado à chuva, especialmente quando ela chega depois de um período seco.

@@ -1,7 +1,22 @@
 ---
 import '../styles/global.css';
+import { siteConfig } from '../config/site';
 
-const { title = 'Petisquinho', description = 'Uma porção de curiosidade por dia, sem compromisso.' } = Astro.props;
+interface Props {
+  title?: string;
+  description?: string;
+  /** Caminho absoluto a partir da raiz, ex.: /og/meu-post.jpg */
+  ogImage?: string;
+  ogType?: string;
+}
+
+const {
+  title = 'Petisquinho',
+  description = 'Uma porção de curiosidade por dia, sem compromisso.',
+  ogImage = siteConfig.defaultOgImage,
+  ogType = 'website'
+} = Astro.props;
+
 const navItems = [
   { label: 'Início', href: '/' },
   { label: 'Papo de Boteco', href: '/categoria/curiosidades-de-boteco' },
@@ -9,8 +24,10 @@ const navItems = [
   { label: 'Mix de Variedades', href: '/categoria/mix-de-variedades' },
   { label: 'A Saideira', href: '/categoria/a-saideira' }
 ];
-const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : `https://petisquinho.com${Astro.url.pathname}`;
-const ogImage = 'https://petisquinho.com/favicon.png';
+
+const siteUrl = Astro.site ?? siteConfig.url;
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const socialImageUrl = new URL(ogImage, siteUrl).toString();
 ---
 
 <html lang="pt-BR">
@@ -19,18 +36,24 @@ const ogImage = 'https://petisquinho.com/favicon.png';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#C8553D" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content={siteConfig.locale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:width" content={String(siteConfig.ogImageWidth)} />
+    <meta property="og:image:height" content={String(siteConfig.ogImageHeight)} />
+    <meta property="og:image:alt" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={socialImageUrl} />
     <link rel="canonical" href={canonicalUrl} />
     <title>{title}</title>
     <link rel="icon" type="image/png" href="/favicon.png?v=2" />
+    <link rel="alternate" type="application/rss+xml" title={siteConfig.name} href="/rss.xml" />
     <link rel="sitemap" href="/sitemap.xml" />
   </head>
   <body class="flex min-h-screen flex-col">

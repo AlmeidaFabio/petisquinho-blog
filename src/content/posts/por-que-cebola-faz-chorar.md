@@ -18,8 +18,6 @@ sources:
     url: "https://news.cornell.edu/stories/2025/10/mist-opportunity-reveals-how-onions-make-cooks-cry"
 ---
 
-# Por que cortar cebola faz a gente chorar?
-
 Você pode estar preparando o almoço tranquilamente quando, de repente, seus olhos começam a arder e as lágrimas aparecem. Não aconteceu nada triste: você só cortou uma cebola.
 
 A culpada é uma reação química que libera uma substância irritante no ar. Quando ela chega aos olhos, nosso organismo tenta se proteger produzindo lágrimas.

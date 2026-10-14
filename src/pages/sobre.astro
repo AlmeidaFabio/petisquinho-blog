@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site';
 ---
 
-<BaseLayout title="Sobre - Petisquinho" description="Conheça a proposta do blog Petisquinho.">
+<BaseLayout title="Sobre - Petisquinho" description="Conheça a proposta do blog Petisquinho e quem escreve.">
   <article class="mx-auto max-w-3xl rounded-3xl bg-white p-8 shadow-soft">
     <p class="mb-3 text-sm font-semibold uppercase tracking-[0.15em] text-terracotta">Sobre</p>
     <h1 class="text-4xl font-black text-marine">Uma porção de curiosidade por dia.</h1>
@@ -11,5 +12,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p>Em vez de textos longos, vídeos intermináveis e clickbait, o blog aposta em textos curtos com identidade, fontes e uma ideia clara: informação útil, sem enrolação.</p>
       <p>O objetivo é simples: ajudar as pessoas a sair do intervalo com uma curiosidade nova e algo que valha a pena compartilhar.</p>
     </div>
+
+    <section id="autor" class="mt-10 border-t border-slate-200 pt-8">
+      <p class="text-xs font-bold uppercase tracking-[0.18em] text-terracotta">Quem escreve</p>
+      <h2 class="mt-3 text-2xl font-black text-marine">{siteConfig.author.name}</h2>
+      <p class="mt-1 text-sm font-semibold text-slate-600">{siteConfig.author.role} do Petisquinho</p>
+      <div class="mt-5 space-y-4 text-base leading-8 text-slate-700">
+        <p>O Petisquinho é escrito por uma pessoa só. Cada matéria é apurada com as fontes citadas no fim do texto, e os limites de cada estudo aparecem quando existem.</p>
+        <p>Encontrou um erro ou quer sugerir uma pauta? <a href="/contato" class="font-semibold text-marine underline decoration-slate-300 underline-offset-4 transition hover:text-terracotta">Fale comigo</a>.</p>
+      </div>
+    </section>
   </article>
 </BaseLayout>

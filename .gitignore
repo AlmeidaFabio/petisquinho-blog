@@ -7,6 +7,10 @@ dist/
 .vite/
 .dist/
 
+# Cards de pré-visualização (Open Graph): gerados a cada build por
+# scripts/generate-og-images.mjs a partir das capas e títulos dos posts.
+public/og/
+
 # Tipos gerados no build
 astro-types.d.ts
 
