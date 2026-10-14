@@ -149,39 +149,24 @@ Depois de criar o post, forneça também um prompt para gerar a capa, seguindo o
 
 ----------
 
-Create an original, realistic editorial image for Petisquinho, a Brazilian culture, curiosity, and lifestyle blog.
+Create an original conceptual editorial illustration for a Brazilian culture and curiosity blog.
 
-ARTICLE TOPIC: [Briefly describe the article topic]
+ARTICLE TOPIC: Why the sky appears blue
+CORE IDEA TO COMMUNICATE: Sunlight scattering through Earth's atmosphere
+KEY VISUAL ELEMENTS: A soft blue sky, a warm sun, and simple atmospheric layers
 
-CORE IDEA TO COMMUNICATE: [Describe the main concept, message, or feeling the image should convey]
-
-KEY VISUAL ELEMENTS: [List one to three essential objects, subjects, or visual elements related to the topic]
-
-**Visual direction:**
-
-- Photorealistic editorial photography with natural textures, realistic materials, accurate lighting, and believable details.
-- The image should look like a high-quality photograph taken by a professional editorial photographer, not a drawing, painting, 3D render, or digital illustration.
-- Use natural-looking light, physically plausible shadows, realistic reflections, and subtle depth of field where appropriate.
-- Favor a sophisticated, warm, approachable visual style suitable for a contemporary independent Brazilian blog.
-- Use a restrained, harmonious color palette. Earthy terracotta, warm cream, muted blue, sage green, and mustard yellow may be used when appropriate to the subject. Do not force these colors if another palette better represents the topic.
-- Prioritize realism, visual clarity, and an immediately understandable central subject.
-- Use a carefully composed scene with a small number of relevant elements. Every visible object must have a clear visual purpose.
-- Make each cover visually distinctive according to its article topic while maintaining a consistent photographic quality across the website.
+Visual direction:
+- A warm, thoughtful, approachable editorial illustration — clearly illustrated, not photorealistic.
+- Use a refined, simple composition with a few recognizable shapes and subtle visual storytelling.
+- Soft, muted colors inspired by terracotta, warm cream, dusty blue, sage green, and mustard yellow. Choose only the colors that suit the subject.
+- Gentle natural light, soft shadows, lightly textured shapes, and clean edges.
+- Sophisticated but friendly, suitable for a contemporary independent blog.
+- Make this image visually distinct from other article covers while keeping the same overall art direction.
 - Wide landscape composition, 16:9 aspect ratio, suitable for a website article cover.
-- Keep the main subject comfortably inside the frame, with sufficient negative space and safe margins for responsive cropping.
-- Ensure the image remains clear and recognizable at thumbnail size.
-- Represent objects, environments, natural phenomena, and scientific concepts as accurately as possible.
-- When a concept cannot be photographed directly, use a believable conceptual scene or a subtle visual metaphor rendered with photographic realism. Do not present a fictional visualization as documentary evidence or a real scientific observation.
-- Do not add artificial visual effects unless they are physically plausible and directly relevant to the topic.
+- Keep the main subject clear and comfortably inside the frame, with enough breathing room around it.
+- The image must still read well when cropped slightly on different screen sizes.
 
-**Restrictions:**
-
-Do not include text, letters, numbers, logos, watermarks, borders, UI elements, or fake interface details.
-
-Do not imitate a specific photographer, artist, existing photograph, copyrighted artwork, recognizable fictional character, or brand identity.
-
-Avoid illustrations, cartoon aesthetics, painterly textures, plastic-looking 3D objects, excessive HDR, oversharpening, exaggerated bokeh, oversaturated colors, artificial-looking lighting, visual clutter, stereotypical stock-photo compositions, and unrelated decorative elements.
-
-Do not invent documentary details, scientific evidence, historical records, or real people and events. Prioritize credibility and visual coherence over dramatic effects.
+Do not include any text, letters, numbers, logos, watermarks, borders, UI elements, or fake interface details. Do not imitate a specific artist, existing illustration, brand, copyrighted character, or recognizable artwork. Avoid photorealism, stock-photo aesthetics, visual clutter, overly saturated colors, and unrelated decorative objects.
 
 Create one finished image only.
+
