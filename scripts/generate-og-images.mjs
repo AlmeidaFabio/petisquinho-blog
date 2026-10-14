@@ -138,6 +138,12 @@ function cardPadrao() {
 
 // ---------------------------------------------------------------- execucao
 
+// Recria a pasta do zero. O deploy envia a build mas não apaga no servidor o
+// que deixou de existir aqui, então o card de um post renomeado ou removido
+// ficaria lá para sempre — foi o que aconteceu ao renomear o slug do post do
+// café. Como este script regenera todos os cards a cada build, limpar antes
+// não custa nada e evita acúmulo de arquivo morto no servidor.
+await fs.rm(outDir, { recursive: true, force: true });
 await fs.mkdir(outDir, { recursive: true });
 
 const arquivos = (await fs.readdir(postsDir))

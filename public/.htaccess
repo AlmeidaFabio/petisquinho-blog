@@ -61,8 +61,10 @@
 #  localmente. Os redirects abaixo tornam inalcançável o que já saiu do site,
 #  sem exigir acesso ao Gerenciador de Arquivos.
 #
-#  Este bloco pode ser removido depois que os arquivos forem apagados no
-#  cPanel (public_html/teste-cabecalhos/ e as duas capas .jpg).
+#  Atenção ao remover: o bloco do mod_rewrite e a regra da sonda são
+#  temporários e podem sair depois de apagar no cPanel
+#  (public_html/teste-cabecalhos/ e as duas capas .jpg). O redirecionamento do
+#  post do café, que fica no mesmo bloco do mod_alias, é permanente.
 # ------------------------------------------------------------
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -81,6 +83,18 @@
   # esperado — a regra simplesmente não disparou. O RedirectMatch casa com o
   # caminho completo da URL, com a barra inicial, em qualquer contexto.
   RedirectMatch 301 ^/teste-cabecalhos(/.*)?$ /
+
+  # Slug do post do café renomeado (P1-8).
+  #
+  # O endereço antigo perguntava "por que as pessoas falam em café com leite?",
+  # mas o texto responde por que o café muda tanto de sabor — a pergunta nunca
+  # era respondida em lugar nenhum. O endereço passou a ser
+  # /posts/por-que-o-cafe-muda-tanto-de-sabor/ e o antigo fica redirecionado em
+  # definitivo, para não deixar 404 em link já compartilhado nem no que o Google
+  # indexou enquanto o endereço antigo esteve no ar.
+  #
+  # O /? opcional cobre as duas formas, com e sem barra final.
+  RedirectMatch 301 ^/posts/por-que-as-pessoas-falam-em-cafe-com-leite/?$ /posts/por-que-o-cafe-muda-tanto-de-sabor/
 </IfModule>
 
 # ------------------------------------------------------------
