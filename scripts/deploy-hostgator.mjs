@@ -53,7 +53,45 @@ try {
   );
 
   console.log(`Enviando a build do site para ${host}...`);
-  await client.uploadFromDir(distDir, remotePath);
+
+  // Os assets sobem ANTES do HTML, e não junto.
+  //
+  // O CSS e o JS carregam hash de conteúdo no nome, então o HTML novo aponta
+  // para um arquivo que ainda não existe no servidor até o envio chegar nele.
+  // Subindo tudo de uma vez, a ordem é a do sistema de arquivos, e o HTML pode
+  // ir primeiro: nessa janela, um pedido do CSS recebe 404 e a Cloudflare
+  // guarda esse 404 — a página fica sem estilo por horas, mesmo com o arquivo
+  // já publicado. Foi o que aconteceu no deploy de 15/10/2026: o
+  // busca.DaQYGQm0.css respondeu 404 com cf-cache-status HIT por 4 horas,
+  // enquanto a mesma URL com um parâmetro qualquer devolvia 200 text/css.
+  //
+  // Com os assets primeiro, o HTML só aparece quando tudo que ele referencia já
+  // está lá. Torna o deploy quase atômico do ponto de vista do leitor.
+  const pastasDeAsset = ['_astro', 'images', 'og'];
+
+  for (const pasta of pastasDeAsset) {
+    const local = path.join(distDir, pasta);
+    if (fs.existsSync(local)) {
+      await client.uploadFromDir(local, path.posix.join(remotePath, pasta));
+      console.log(`  assets: ${pasta}/ enviado`);
+    }
+  }
+
+  const entradas = await fsPromises.readdir(distDir, { withFileTypes: true });
+  for (const entrada of entradas) {
+    if (pastasDeAsset.includes(entrada.name)) continue;
+
+    const local = path.join(distDir, entrada.name);
+    const remoto = path.posix.join(remotePath, entrada.name);
+
+    if (entrada.isDirectory()) {
+      await client.uploadFromDir(local, remoto);
+    } else {
+      await client.uploadFrom(local, remoto);
+    }
+  }
+
+  console.log('  HTML, feeds e .htaccess enviados');
 
   for (const post of originalPosts) {
     await fsPromises.unlink(path.join(draftPostsDir, post.name));
