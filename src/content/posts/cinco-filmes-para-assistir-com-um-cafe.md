@@ -4,7 +4,6 @@ excerpt: "Cinco histórias acolhedoras de estilos diferentes - com duração e c
 section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-03
-readingTime: "4 min de leitura"
 tags: ["cinema", "recomendação", "filme"]
 featured: false
 image: "/images/posts/filmes-cafe.svg"

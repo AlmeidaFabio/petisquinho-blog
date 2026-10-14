@@ -4,7 +4,6 @@ excerpt: "Três histórias fechadas em temporadas curtas com tons bem diferentes
 section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-08
-readingTime: "3 min de leitura"
 tags: ["séries", "recomendação", "cultura"]
 featured: false
 image: "/images/posts/minisserie.svg"

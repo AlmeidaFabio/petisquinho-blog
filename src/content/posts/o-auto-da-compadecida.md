@@ -4,7 +4,6 @@ excerpt: "Escrita em 1955, a obra-prima do teatro nordestino une literatura de c
 section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-13
-readingTime: "3 min de leitura"
 tags: ["teatro", "cinema", "literatura", "cultura-brasileira"]
 featured: false
 image: "/images/posts/o-auto-da-compadecida.webp"

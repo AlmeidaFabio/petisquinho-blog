@@ -4,6 +4,8 @@ import type { PostSource } from '../../content/config';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { siteConfig } from '../../config/site';
 import { srcsetDe, SIZES } from '../../utils/images';
+import { dataLegivel, relacionados, tempoDeLeitura, tituloDaPagina } from '../../utils/posts';
+import { schemaTrilha } from '../../utils/schema';
 
 export async function getStaticPaths() {
   const posts: CollectionEntry<'posts'>[] = await getCollection('posts');
@@ -34,35 +36,23 @@ const socialImageUrl = new URL(ogImagePath, siteUrl).toString();
 // (que também começa com "/") gerava https://petisquinho.com//posts/...
 const shareText = `${post.data.title} — ${canonicalUrl}`;
 
-const sameCategoryPosts = posts.filter(
-  (entry: CollectionEntry<'posts'>) =>
-    entry.slug !== post.slug &&
-    !entry.data.draft &&
-    entry.data.category === post.data.category
-);
+// Recomendações da mesma categoria para a coluna lateral: as mais recentes, em
+// ordem estável.
+const categoryRecommendations = posts
+  .filter(
+    (entry: CollectionEntry<'posts'>) =>
+      entry.slug !== post.slug &&
+      !entry.data.draft &&
+      entry.data.category === post.data.category
+  )
+  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf())
+  .slice(0, 2);
 
-for (let index = sameCategoryPosts.length - 1; index > 0; index -= 1) {
-  const randomIndex = Math.floor(Math.random() * (index + 1));
-  [sameCategoryPosts[index], sameCategoryPosts[randomIndex]] = [
-    sameCategoryPosts[randomIndex],
-    sameCategoryPosts[index]
-  ];
-}
-
-const categoryRecommendations = sameCategoryPosts.slice(0, 2);
-const relatedPosts = posts.filter(
-  (entry: CollectionEntry<'posts'>) => !entry.data.draft && entry.slug !== post.slug
-);
-
-for (let index = relatedPosts.length - 1; index > 0; index -= 1) {
-  const randomIndex = Math.floor(Math.random() * (index + 1));
-  [relatedPosts[index], relatedPosts[randomIndex]] = [
-    relatedPosts[randomIndex],
-    relatedPosts[index]
-  ];
-}
-
-relatedPosts.length = Math.min(relatedPosts.length, 3);
+// "Leia também" por relevância, não por sorteio. Antes o template embaralhava
+// todos os posts com Math.random(), então a lista não tinha relação com o que
+// estava sendo lido — e o HTML mudava a cada build, atrapalhando cache e
+// comparação de versões. Ver relacionados() em src/utils/posts.ts.
+const relatedPosts = relacionados(post, posts, 3);
 
 const { Content } = await post.render();
 
@@ -73,6 +63,10 @@ const structuredData = {
   description: post.data.excerpt,
   image: socialImageUrl,
   datePublished: new Date(post.data.date).toISOString(),
+  // dateModified só sai quando o post declara `updated` no frontmatter. Usar a
+  // data do build faria todo post parecer revisado a cada deploy, o que é um
+  // sinal falso — pior que a ausência do campo.
+  ...(post.data.updated ? { dateModified: new Date(post.data.updated).toISOString() } : {}),
   inLanguage: 'pt-BR',
   articleSection: post.data.section,
   author: {
@@ -93,10 +87,21 @@ const structuredData = {
     '@id': canonicalUrl
   }
 };
+
+// Trilha hierárquica: no lugar da URL crua, o Google mostra
+// "petisquinho.com › Papo de Boteco › título".
+const trilha = schemaTrilha(
+  [
+    { nome: 'Início', caminho: '/' },
+    { nome: post.data.section, caminho: `/categoria/${post.data.category}/` },
+    { nome: post.data.title, caminho: `/posts/${post.slug}/` }
+  ],
+  siteUrl
+);
 ---
 
 <BaseLayout
-  title={`${post.data.title} - Petisquinho`}
+  title={tituloDaPagina(post.data.title)}
   description={post.data.excerpt}
   ogImage={ogImagePath}
   ogType="article"
@@ -116,6 +121,7 @@ const structuredData = {
     )}
     <meta property="article:published_time" content={new Date(post.data.date).toISOString()} />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script type="application/ld+json" set:html={JSON.stringify(trilha)} />
   </Fragment>
 
   <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_260px]">
@@ -125,8 +131,8 @@ const structuredData = {
         <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
           <a href={`/categoria/${post.data.category}/`} class="inline-flex rounded-full border border-terracotta/20 bg-terracotta/5 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[#A8432F] transition hover:border-terracotta/40">{post.data.section}</a>
           <div class="flex flex-wrap items-center gap-2 text-xs text-slate-600">
-            <span class="rounded-full bg-slate-100 px-2.5 py-1">{new Date(post.data.date).toLocaleDateString('pt-BR')}</span>
-            <span class="rounded-full bg-terracotta/10 px-2.5 py-1 font-semibold text-[#A8432F]">{post.data.readingTime}</span>
+            <span class="rounded-full bg-slate-100 px-2.5 py-1">{dataLegivel(post.data.date)}</span>
+            <span class="rounded-full bg-terracotta/10 px-2.5 py-1 font-semibold text-[#A8432F]">{tempoDeLeitura(post.body)}</span>
           </div>
         </div>
 
@@ -182,9 +188,9 @@ const structuredData = {
                   </a>
                   <p class="mt-3 text-sm leading-6 text-slate-600">{related.data.excerpt}</p>
                   <div class="mt-4 flex items-center gap-2 text-[11px] text-slate-500">
-                    <span>{new Date(related.data.date).toLocaleDateString('pt-BR')}</span>
+                    <span>{dataLegivel(related.data.date)}</span>
                     <span>•</span>
-                    <span>{related.data.readingTime}</span>
+                    <span>{tempoDeLeitura(related.body)}</span>
                   </div>
                 </div>
               </article>

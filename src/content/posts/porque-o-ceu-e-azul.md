@@ -4,7 +4,6 @@ excerpt: "A atmosfera espalha a luz solar de maneira desigual, e isso muda as co
 section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-09
-readingTime: "2 min de leitura"
 tags: ["ciência", "atmosfera", "curiosidade"]
 featured: true
 image: "/images/posts/ceu-azul.webp"

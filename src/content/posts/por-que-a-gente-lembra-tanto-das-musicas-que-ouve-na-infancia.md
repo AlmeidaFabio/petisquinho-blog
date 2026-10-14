@@ -4,7 +4,6 @@ excerpt: "Uma música pode trazer de volta lembranças pessoais; pesquisadores e
 section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-05
-readingTime: "2 min de leitura"
 tags: ["memória", "música", "psicologia"]
 featured: false
 image: "/images/posts/musica-memoria.svg"

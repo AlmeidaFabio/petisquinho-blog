@@ -4,7 +4,6 @@ excerpt: "Muitas palavras do dia a dia vêm do tupi. Entenda de onde veio essa h
 section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-10
-readingTime: "3 min de leitura"
 tags: ["língua portuguesa", "tupi", "história"]
 featured: false
 image: "/images/posts/tupi-palavras-portugues.webp"

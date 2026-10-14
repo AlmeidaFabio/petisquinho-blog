@@ -10,6 +10,7 @@ import {
   urlDaPagina,
   type PaginaDeCategoria
 } from '../../../../utils/categorias';
+import { schemaItemList, schemaTrilha } from '../../../../utils/schema';
 
 /**
  * Páginas 2 em diante das categorias (RF3 do PRD).
@@ -36,6 +37,16 @@ const { listagem } = Astro.props as { listagem: PaginaDeCategoria };
 const { categoria, posts, pagina, totalPaginas, totalPosts } = listagem;
 
 const capa = posts[0]?.data.image;
+const siteUrl = Astro.site ?? siteConfig.url;
+
+const lista = schemaItemList(posts, (post) => `/posts/${post.slug}/`, siteUrl);
+const trilha = schemaTrilha(
+  [
+    { nome: 'Início', caminho: '/' },
+    { nome: categoria.label, caminho: `/categoria/${categoria.slug}/` }
+  ],
+  siteUrl
+);
 ---
 
 <BaseLayout
@@ -59,6 +70,8 @@ const capa = posts[0]?.data.image;
         orientação atual é não colocar noindex em paginação. */}
     <link rel="prev" href={urlDaPagina(categoria.slug, pagina - 1)} />
     {pagina < totalPaginas && <link rel="next" href={urlDaPagina(categoria.slug, pagina + 1)} />}
+    <script type="application/ld+json" set:html={JSON.stringify(lista)} />
+    <script type="application/ld+json" set:html={JSON.stringify(trilha)} />
   </Fragment>
 
   <ListaDaCategoria listagem={listagem} />

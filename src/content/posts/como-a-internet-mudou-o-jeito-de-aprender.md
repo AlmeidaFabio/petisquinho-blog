@@ -4,7 +4,6 @@ excerpt: "Ter informação disponível é diferente de aprender: o acesso ajuda,
 section: "Mix de Variedades"
 category: "mix-de-variedades"
 date: 2026-10-01
-readingTime: "4 min de leitura"
 tags: ["internet", "aprendizado", "tecnologia"]
 featured: false
 image: "/images/posts/aprender-internet.svg"

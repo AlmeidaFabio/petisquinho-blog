@@ -4,7 +4,6 @@ excerpt: "Pintada em 1928 como um presente de aniversário, a obra deu origem a 
 section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-12
-readingTime: "3 min de leitura"
 tags: ["arte", "história", "modernismo", "cultura-brasileira"]
 featured: false
 image: "/images/posts/o-abaporu-e-o-movimento-antropofagico.webp"

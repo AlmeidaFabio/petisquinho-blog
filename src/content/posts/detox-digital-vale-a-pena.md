@@ -4,7 +4,6 @@ excerpt: "Em vez de abandonar a tecnologia, experimente mudar um hábito de cada
 section: "Mix de Variedades"
 category: "mix-de-variedades"
 date: 2026-10-07
-readingTime: "4 min de leitura"
 tags: ["tecnologia", "bem-estar", "digital"]
 featured: false
 image: "/images/posts/detox-digital.svg"

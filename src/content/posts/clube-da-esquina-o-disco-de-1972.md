@@ -4,7 +4,6 @@ excerpt: "A história do álbum duplo que uniu MPB, rock e sonoridades mineiras 
 section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-12
-readingTime: "3 min de leitura"
 tags: ["música", "mpb", "história", "cultura-brasileira"]
 featured: false
 image: "/images/posts/clube-da-esquina-o-disco-de-1972.webp"

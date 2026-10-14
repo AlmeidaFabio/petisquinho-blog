@@ -4,7 +4,6 @@ excerpt: "Três portas de entrada — da definição de cultura à relação ent
 section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-02
-readingTime: "3 min de leitura"
 tags: ["livros", "cultura", "leitura"]
 featured: false
 image: "/images/posts/livros-cultura.svg"

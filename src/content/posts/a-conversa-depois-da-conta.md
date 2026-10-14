@@ -4,7 +4,6 @@ excerpt: "Uma crônica sobre aquele momento em que a mesa já está paga, o gar�
 section: "A Saideira"
 category: "a-saideira"
 date: 2026-10-10
-readingTime: "2 min de leitura"
 tags: ["crônica", "cotidiano", "amizade"]
 featured: false
 image: "/images/posts/a-conversa-depois-da-conta.webp"

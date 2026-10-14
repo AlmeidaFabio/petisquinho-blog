@@ -2,6 +2,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { srcsetDe, SIZES } from '../utils/images';
+import { dataLegivel, tempoDeLeitura } from '../utils/posts';
 
 const allPosts: CollectionEntry<'posts'>[] = await getCollection('posts');
 const posts = allPosts
@@ -19,8 +20,8 @@ const posts = allPosts
     imageSrcset: srcsetDe(post.data.image),
     imageSizes: SIZES.cardDuasColunas,
     tags: post.data.tags.join(', '),
-    date: new Date(post.data.date).toLocaleDateString('pt-BR'),
-    readingTime: post.data.readingTime
+    date: dataLegivel(post.data.date),
+    readingTime: tempoDeLeitura(post.body)
   }));
 ---
 

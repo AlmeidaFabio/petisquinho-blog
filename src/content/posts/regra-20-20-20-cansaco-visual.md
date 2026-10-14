@@ -4,7 +4,6 @@ excerpt: "A dica de olhar para longe a cada 20 minutos é recomendada por entida
 section: "Mix de Variedades"
 category: "mix-de-variedades"
 date: 2026-10-10
-readingTime: "3 min de leitura"
 tags: ["saúde ocular", "telas", "hábitos"]
 featured: false
 image: "/images/posts/regra-20-20-20-cansaco-visual.webp"

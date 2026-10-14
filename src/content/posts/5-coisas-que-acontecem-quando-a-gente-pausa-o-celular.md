@@ -4,7 +4,6 @@ excerpt: "Não existe uma reação igual para todo mundo. Este pequeno experimen
 section: "Mix de Variedades"
 category: "mix-de-variedades"
 date: 2026-09-30
-readingTime: "3 min de leitura"
 tags: ["celular", "bem-estar", "rotina"]
 featured: false
 image: "/images/posts/pausa-celular.svg"

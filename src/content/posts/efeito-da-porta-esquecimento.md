@@ -4,7 +4,6 @@ excerpt: "Atravessar uma porta pode atrapalhar a memória do que você tinha em 
 section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-10
-readingTime: "3 min de leitura"
 tags: ["memória", "psicologia", "cotidiano"]
 featured: false
 image: "/images/posts/efeito-da-porta-esquecimento.webp"

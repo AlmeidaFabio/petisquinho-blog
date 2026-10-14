@@ -4,7 +4,6 @@ excerpt: "Espécie, região e processamento influenciam o café - e ajudam a exp
 section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-04
-readingTime: "3 min de leitura"
 tags: ["café", "cotidiano", "curiosidade"]
 featured: false
 image: "/images/posts/cafe.svg"

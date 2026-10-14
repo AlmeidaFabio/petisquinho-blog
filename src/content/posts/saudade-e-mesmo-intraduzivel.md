@@ -4,7 +4,6 @@ excerpt: "Embora famosa como exclusividade da língua portuguesa, a ideia de que
 section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-12
-readingTime: "3 min de leitura"
 tags: ["linguística", "cultura", "português", "curiosidades"]
 featured: false
 image: "/images/posts/saudade-e-mesmo-intraduzivel.webp"

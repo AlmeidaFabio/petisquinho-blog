@@ -4,7 +4,6 @@ excerpt: "Uma reflexão prática sobre deixar espaço no domingo, sem transforma
 section: "A Saideira"
 category: "a-saideira"
 date: 2026-10-06
-readingTime: "3 min de leitura"
 tags: ["reflexão", "domingo", "cotidiano"]
 featured: false
 image: "/images/posts/domingo-sem-pressa.svg"

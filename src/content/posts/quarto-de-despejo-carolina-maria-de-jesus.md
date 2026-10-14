@@ -4,7 +4,6 @@ excerpt: "Como um di√°rio escrito por uma catadora de papel da favela do Canind√
 section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-10
-readingTime: "3 min de leitura"
 tags: ["livros", "literatura brasileira", "Carolina Maria de Jesus"]
 featured: false
 image: "/images/posts/quarto-de-despejo-carolina-maria-de-jesus.webp"

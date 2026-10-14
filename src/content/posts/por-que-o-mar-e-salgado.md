@@ -4,7 +4,6 @@ excerpt: "A chuva, as rochas e a evaporação explicam por que os rios carregam 
 section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-12
-readingTime: "3 min de leitura"
 tags: ["ciência", "geologia", "curiosidades", "natureza"]
 featured: false
 image: "/images/posts/por-que-o-mar-e-salgado.webp"

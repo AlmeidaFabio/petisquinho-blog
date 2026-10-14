@@ -4,7 +4,6 @@ excerpt: "Publicado em 1938, o romance acompanha uma família de retirantes no s
 section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-11
-readingTime: "3 min de leitura"
 tags: ["livros", "literatura brasileira", "Graciliano Ramos"]
 featured: false
 image: "/images/posts/vidas-secas-graciliano-ramos.webp"

@@ -3,23 +3,30 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { siteConfig } from '../config/site';
 import { srcsetDe, SIZES } from '../utils/images';
+import { dataLegivel, tempoDeLeitura } from '../utils/posts';
+import { schemaOrganizacao, schemaWebSite } from '../utils/schema';
+
+const siteUrl = Astro.site ?? siteConfig.url;
 
 const allPosts: CollectionEntry<'posts'>[] = await getCollection('posts');
 const posts = allPosts
   .filter((post: CollectionEntry<'posts'>) => !post.data.draft)
   .sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 
-const currentWeekStart = new Date();
-currentWeekStart.setUTCHours(0, 0, 0, 0);
-currentWeekStart.setUTCDate(currentWeekStart.getUTCDate() - ((currentWeekStart.getUTCDay() + 6) % 7));
-const nextWeekStart = new Date(currentWeekStart);
-nextWeekStart.setUTCDate(nextWeekStart.getUTCDate() + 7);
-
-const thisWeekPosts = posts.filter((post: CollectionEntry<'posts'>) => {
-  const postDate = new Date(post.data.date);
-  return postDate >= currentWeekStart && postDate < nextWeekStart;
-});
-const carouselPosts = (thisWeekPosts.length > 0 ? thisWeekPosts : posts).slice(0, 5);
+// O carrossel passa a usar `featured`, que existia no schema desde o início e
+// não era lido por nenhum template — o post marcado como destaque não recebia
+// destaque nenhum.
+//
+// Antes o critério era "posts caídos na semana do build": a mesma home assumia
+// formas diferentes conforme o dia em que o build rodasse, e numa semana sem
+// posts o carrossel virava a lista de recentes. Agora depende só do conteúdo,
+// que é o que torna o resultado estável e reproduzível.
+//
+// Destaques primeiro, completando com os mais recentes para o carrossel não
+// encolher quando houver só um post marcado.
+const destaques = posts.filter((post: CollectionEntry<'posts'>) => post.data.featured);
+const recentes = posts.filter((post: CollectionEntry<'posts'>) => !post.data.featured);
+const carouselPosts = (destaques.length > 0 ? [...destaques, ...recentes] : posts).slice(0, 5);
 const carouselPostSlugs = new Set(carouselPosts.map((post: CollectionEntry<'posts'>) => post.slug));
 const recentPosts = posts
   .filter((post: CollectionEntry<'posts'>) => !carouselPostSlugs.has(post.slug))
@@ -42,17 +49,25 @@ const recentPosts = posts
         fetchpriority="high"
       />
     )}
+    <!-- WebSite com SearchAction habilita a caixa de pesquisa do site direto
+         no resultado do Google; Organization liga a marca a uma entidade. A
+         home não tinha nenhum JSON-LD. -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaWebSite(siteUrl))} />
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrganizacao(siteUrl))} />
   </Fragment>
 
   <section class="mb-12 grid gap-8 lg:grid-cols-[1.5fr_0.8fr]">
-    <div data-post-carousel role="region" aria-roledescription="carrossel" aria-label={thisWeekPosts.length > 0 ? 'Posts da semana' : 'Posts recentes'} class="relative h-[600px] overflow-hidden rounded-[30px] border border-terracotta/10 bg-white shadow-soft sm:h-[640px]">
+    <div data-post-carousel role="region" aria-roledescription="carrossel" aria-label={destaques.length > 0 ? 'Destaques e posts recentes' : 'Posts recentes'} class="relative h-[600px] overflow-hidden rounded-[30px] border border-terracotta/10 bg-white shadow-soft sm:h-[640px]">
       {carouselPosts.map((post: CollectionEntry<'posts'>, index: number) => (
         <article data-carousel-slide aria-roledescription="slide" aria-label={`Post ${index + 1} de ${carouselPosts.length}`} class="flex h-[calc(100%-52px)] flex-col" hidden={index !== 0}>
           <div class="relative h-56 shrink-0 sm:h-72">
             <img src={post.data.image} srcset={srcsetDe(post.data.image) ?? undefined} sizes={SIZES.capaDoCarrossel} alt={post.data.imageAlt ?? post.data.title} class="h-full w-full object-cover" loading={index === 0 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : 'auto'} />
             <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-marine/75 to-transparent p-5 pt-14 text-white sm:p-6 sm:pt-16">
               <span class="inline-flex rounded-full border border-white/50 bg-marine/25 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] backdrop-blur-sm">
-                {thisWeekPosts.length > 0 ? 'Destaques da semana' : 'Posts recentes'}
+                {/* O selo diz o que o slide é de fato. Antes era fixo em
+                    "Destaques da semana", que deixou de ser verdade quando o
+                    critério passou de "semana do build" para `featured`. */}
+                {post.data.featured ? 'Destaque' : 'Recente'}
               </span>
             </div>
             {carouselPosts.length > 1 && (
@@ -77,9 +92,9 @@ const recentPosts = posts
             </a>
             <p class="mt-4 line-clamp-3 text-base leading-7 text-slate-600">{post.data.excerpt}</p>
             <div class="mt-auto flex flex-wrap items-center gap-3 pt-4 text-sm text-slate-500">
-              <span>{new Date(post.data.date).toLocaleDateString('pt-BR')}</span>
+              <span>{dataLegivel(post.data.date)}</span>
               <span>•</span>
-              <span>{post.data.readingTime}</span>
+              <span>{tempoDeLeitura(post.body)}</span>
             </div>
           </div>
         </article>
@@ -166,9 +181,9 @@ const recentPosts = posts
               </a>
               <p class="mt-4 text-sm leading-7 text-slate-600">{post.data.excerpt}</p>
               <div class="mt-5 flex flex-wrap items-center gap-3 text-xs text-slate-500">
-                <span>{new Date(post.data.date).toLocaleDateString('pt-BR')}</span>
+                <span>{dataLegivel(post.data.date)}</span>
                 <span>•</span>
-                <span>{post.data.readingTime}</span>
+                <span>{tempoDeLeitura(post.body)}</span>
               </div>
             </div>
           </article>

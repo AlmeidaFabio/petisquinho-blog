@@ -10,6 +10,7 @@ import {
   urlDaPagina,
   type PaginaDeCategoria
 } from '../../utils/categorias';
+import { schemaItemList, schemaTrilha } from '../../utils/schema';
 
 /**
  * Primeira página de cada categoria (RF3 do PRD).
@@ -31,6 +32,18 @@ const { listagem } = Astro.props as { listagem: PaginaDeCategoria };
 const { categoria, posts, totalPaginas } = listagem;
 
 const capa = posts[0]?.data.image;
+const siteUrl = Astro.site ?? siteConfig.url;
+
+// A listagem diz ao Google que a página é uma lista ordenada de matérias, e a
+// trilha troca a URL crua por "petisquinho.com › Papo de Boteco".
+const lista = schemaItemList(posts, (post) => `/posts/${post.slug}/`, siteUrl);
+const trilha = schemaTrilha(
+  [
+    { nome: 'Início', caminho: '/' },
+    { nome: categoria.label, caminho: `/categoria/${categoria.slug}/` }
+  ],
+  siteUrl
+);
 ---
 
 <BaseLayout
@@ -53,6 +66,8 @@ const capa = posts[0]?.data.image;
       />
     )}
     {totalPaginas > 1 && <link rel="next" href={urlDaPagina(categoria.slug, 2)} />}
+    <script type="application/ld+json" set:html={JSON.stringify(lista)} />
+    <script type="application/ld+json" set:html={JSON.stringify(trilha)} />
   </Fragment>
 
   <ListaDaCategoria listagem={listagem} />

@@ -4,7 +4,6 @@ excerpt: "O cheiro de terra molhada tem nome e uma origem surpreendente: microrg
 section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-09
-readingTime: "3 min de leitura"
 tags: ["chuva", "ciência cotidiana", "natureza", "curiosidades"]
 featured: false
 image: "/images/posts/cheiro-de-terra-molhada.webp"

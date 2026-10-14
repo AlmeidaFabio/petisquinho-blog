@@ -4,7 +4,6 @@ excerpt: "Exigir símbolos e números aleatórios pode ser menos eficaz do que u
 section: "Mix de Variedades"
 category: "mix-de-variedades"
 date: 2026-10-13
-readingTime: "3 min de leitura"
 tags: ["tecnologia", "segurança", "hábitos", "dicas"]
 featured: false
 image: "/images/posts/senha-longa-ou-senha-complicada.webp"

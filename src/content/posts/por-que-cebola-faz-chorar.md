@@ -4,7 +4,6 @@ excerpt: "Não é tristeza nem frescura: quando cortamos uma cebola, uma reaçã
 section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-11
-readingTime: "3 min de leitura"
 tags: ["cebola", "ciência cotidiana", "curiosidades", "química"]
 featured: false
 image: "/images/posts/por-que-cebola-faz-chorar.webp"

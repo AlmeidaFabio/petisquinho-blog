@@ -14,7 +14,12 @@ const postsCollection = defineCollection({
     section: z.string(),
     category: z.string(),
     date: z.coerce.date(),
-    readingTime: z.string(),
+    // Opcional: preencher só quando o post for de fato revisado depois de
+    // publicado. É o que alimenta o dateModified do JSON-LD.
+    updated: z.coerce.date().optional(),
+    // Sem `readingTime` de propósito: o valor era digitado à mão e 24 dos 25
+    // posts anunciavam o dobro do real. Agora é calculado do corpo no build,
+    // por tempoDeLeitura() em src/utils/posts.ts.
     tags: z.array(z.string()).default([]),
     featured: z.boolean().default(false),
     image: z.string().optional(),

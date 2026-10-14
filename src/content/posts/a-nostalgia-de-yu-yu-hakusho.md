@@ -4,7 +4,6 @@ excerpt: "Com dublagem histórica e personagens inesquecíveis, o anime marcou o
 section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-14
-readingTime: "3 min de leitura"
 tags: ["anime", "nostalgia", "anos-90", "pop-culture", "tv-manchete"]
 featured: false
 image: "/images/posts/a-nostalgia-de-yu-yu-hakusho.webp"
