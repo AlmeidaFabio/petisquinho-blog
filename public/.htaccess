@@ -67,10 +67,18 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # Sonda de cabeçalhos usada para testar o suporte a .htaccess.
-  RewriteRule ^teste-cabecalhos(/.*)?$ / [R=301,L]
-
   # Capas em JPEG substituídas por WebP: 4,0 MB de arquivos mortos.
   # 410 (Gone) em vez de 404 diz ao Google que a imagem foi removida de vez.
   RewriteRule ^images/posts/(ceu-azul|cheiro-de-terra-molhada)\.jpg$ - [G,L]
+</IfModule>
+
+<IfModule mod_alias.c>
+  # Sonda de cabeçalhos usada para testar o suporte a .htaccess.
+  #
+  # RedirectMatch (mod_alias) em vez de RewriteRule de propósito: em .htaccess,
+  # o RewriteRule casa com o caminho relativo ao diretório, e para uma pasta que
+  # existe e tem .htaccess próprio essa resolução não se comportou como
+  # esperado — a regra simplesmente não disparou. O RedirectMatch casa com o
+  # caminho completo da URL, com a barra inicial, em qualquer contexto.
+  RedirectMatch 301 ^/teste-cabecalhos(/.*)?$ /
 </IfModule>
