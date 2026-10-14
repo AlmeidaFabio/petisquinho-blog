@@ -91,7 +91,7 @@ O nome visível de cada seção não é igual ao endereço. Os valores técnicos
 - Todo post responde "e daí?": por que importa ou diverte.
 - Tempo de leitura sempre no topo do post.
 - Fontes citadas no final, com checagem em pelo menos duas fontes para fatos e ciência.
-- De dois a três links internos contextuais por post, no corpo do texto, apontando para outros posts ou para as categorias. Instruções em `direcao-editorial.md`.
+- Links internos no corpo quando o texto citar de fato outro assunto do site, apontando para posts ou para categorias. Não há número mínimo: o site já liga cada post à sua seção e a três posts relacionados sem intervenção do autor, e cota de link vira link inventado. Instruções em `direcao-editorial.md`.
 - Tom de conversa entre amigos: informal, sem erros e sem sensacionalismo.
 - Imagens próprias ou de licença livre; nunca copiar texto de terceiros.
 

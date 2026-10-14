@@ -53,18 +53,25 @@ Prefira pautas com recorte claro. Evite títulos genéricos e temas que só perm
 
 ## Links internos
 
-Cada post deve trazer **de dois a três links internos contextuais** no corpo do texto. Eles são o caminho pelo qual quem chegou de uma busca passa para um segundo artigo. Sem eles, o post é um beco sem saída: o leitor termina de ler e sai.
+Ligue para outro conteúdo do site **quando o texto citar de fato outro assunto que já existe aqui**. Não há número mínimo.
 
-Antes de escrever, liste os arquivos de `src/content/posts/` e escolha de dois a três cujo assunto converse de fato com o trecho em que você vai linkar. O slug do link é o nome do arquivo, sem a extensão.
+**O site já liga sozinho, e bastante.** Cada post recebe, sem nenhum trabalho seu: o selo da seção apontando para a categoria, dois posts da mesma categoria em "Na mesma linha", três posts por categoria e tags em comum em "Leia também", e as quatro categorias no menu e no rodapé. O caminho do leitor que chegou de uma busca já existe.
 
-- **Contextuais, não uma lista no fim.** O link entra na própria frase, no ponto em que o assunto aparece: "a mesma coisa acontece no [efeito da porta](/posts/efeito-da-porta-esquecimento/)". Evite blocos de "veja também" ao pé do texto.
-- **Aponte para posts e para categorias.** A categoria serve quando o trecho toca o tema de uma seção inteira: "[outras curiosidades de boteco](/categoria/curiosidades-de-boteco/)".
-- **Sempre com barra no fim:** `/posts/nome-do-post/` e `/categoria/nome-da-categoria/`. O site publica em formato de diretório, então sem a barra o leitor paga um redirecionamento antes de chegar à página.
-- **Copie o slug do arquivo.** O endereço é o nome do arquivo em `src/content/posts/`, sem a extensão. Não deduza do título: um post sobre café já ficou com a URL errada por isso.
-- **Texto do link descritivo.** Escreva o que o leitor vai encontrar, não "clique aqui" nem "leia mais". Vale para quem usa leitor de tela e para busca.
-- **Varie os destinos.** Não aponte sempre para os mesmos dois posts.
-- **Sem excesso.** Em 300 a 600 palavras, mais de quatro links competem com a leitura.
+O que o link no corpo acrescenta é o **texto de âncora com contexto**: "a conversa que sobra depois que a conta chega" diz mais ao leitor e ao buscador do que o título repetido num cartão.
+
+Quando fizer sentido, o link entra assim:
+
+- **Na própria frase, no ponto em que o assunto aparece.** "É a mesma matéria da [conversa que sobra depois que a conta chega](/posts/a-conversa-depois-da-conta/): nada acontece, e ainda assim algo fica." Não use bloco de "veja também" ao pé do texto.
+- **Só quando for verdade.** Se o texto não cita outro assunto do site, **não linke nada**. Link forçado para cumprir cota vira link inventado: o primeiro post escrito sob uma regra de número mínimo saiu com dois links apontando para crônicas que não existiam.
+- **Copie o slug do arquivo**, em `src/content/posts/`, sem a extensão. Não deduza do título: um post sobre café já ficou com a URL errada por isso.
+- **Sempre com barra no fim:** `/posts/nome-do-post/` e `/categoria/nome-da-categoria/`. Sem a barra, o leitor paga um redirecionamento antes de chegar.
+- **Texto do link descritivo.** Escreva o que o leitor vai encontrar, não "clique aqui" nem "leia mais".
+- **Não passe de quatro links.** Acima disso eles competem com a leitura.
 - **Link externo é fonte**, e vai em `sources` — não no meio do texto.
+
+A categoria merece link quando o trecho toca o tema de uma seção inteira: "[outras curiosidades de boteco](/categoria/curiosidades-de-boteco/)".
+
+O build confere todo link interno: se apontar para post ou categoria que não existe, ou estiver sem a barra final, a publicação para.
 
 ## Tamanho e leitura
 
@@ -130,7 +137,7 @@ Antes de marcar o post como pronto:
 - O título representa fielmente o texto?
 - O artigo entrega o que promete e responde à pergunta central?
 - As afirmações factuais têm fontes específicas, acessíveis e adequadas?
-- Há **de dois a três links internos contextuais**, para posts e para categorias, todos com barra no fim?
+- Os links internos que o texto pedir estão lá, todos com barra no fim e apontando para conteúdo que existe? (não há número mínimo)
 - O texto dos links descreve o destino, sem "clique aqui" nem "leia mais"?
 - Os slugs dos links foram copiados do nome real dos arquivos?
 - Nomes, datas, números, títulos e links foram conferidos?
