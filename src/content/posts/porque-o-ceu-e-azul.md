@@ -11,6 +11,8 @@ imageAlt: "Ilustração de um sol azul-claro sobre montanhas sob um céu azul"
 sources:
   - label: "NASA Space Place - Why Is the Sky Blue?"
     url: "https://spaceplace.nasa.gov/blue-sky/en/"
+  - label: "Sociedade Brasileira de Física / SciELO - Por que o céu é azul? Um experimento sobre espalhamento Rayleigh (Rev. Bras. Ensino Fís.)"
+    url: "https://www.scielo.br/j/rbef/a/tW7kmBXJxLqmLggLYm8HcCb/?lang=pt"
 ---
 
 A luz do Sol parece branca, mas é uma mistura de várias cores. Ao atravessar a atmosfera, ela encontra moléculas e partículas minúsculas que espalham parte da luz em várias direções.

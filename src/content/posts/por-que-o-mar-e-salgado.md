@@ -11,6 +11,8 @@ imageAlt: "Ilustração conceitual mostrando rios fluindo de montanhas rochosas 
 sources:
   - label: "U.S. Geological Survey (USGS) - Why is the Ocean Salty?"
     url: "https://www.usgs.gov/water-science-school/science/why-ocean-salty"
+  - label: "NOAA National Ocean Service - Please Pass the Salt"
+    url: "https://oceanservice.noaa.gov/education/dyw-pass-salt.html"
 ---
 
 Se os rios deságuam continuamente nos oceanos levando água doce, por que o mar é salgado e os rios não? A resposta envolve um ciclo contínuo de erosão, evaporação e acúmulo mineral que vem acontecendo há bilhões de anos.

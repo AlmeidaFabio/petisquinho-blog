@@ -11,6 +11,8 @@ imageAlt: "Celular em modo silencioso ao lado de uma pequena planta"
 sources:
   - label: "CDC - hábitos que podem ajudar a dormir melhor"
     url: "https://www.cdc.gov/sleep/about/index.html"
+  - label: "Revista Latino-Americana de Enfermagem (USP) - Intervenção educativa sobre hábitos de higiene do sono"
+    url: "https://revistas.usp.br/rlae/pt_BR/article/view/246720"
 ---
 
 “Detox digital” pode soar como a promessa de resolver tudo desligando o celular. Na prática, não há uma receita universal: para algumas pessoas, reduzir notificações ajuda; para outras, o telefone é ferramenta de trabalho, estudo, acessibilidade e contato com quem está longe.

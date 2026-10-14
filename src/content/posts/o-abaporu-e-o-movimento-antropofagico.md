@@ -11,6 +11,8 @@ imageAlt: "Ilustração conceitual com cactos sob um sol radiante e formas orgâ
 sources:
   - label: "Enciclopédia Itaú Cultural - Abaporu"
     url: "https://enciclopedia.itaucultural.org.br/obra3177/abaporu"
+  - label: "MALBA (Museo de Arte Latinoamericano de Buenos Aires) - Abaporu na coleção permanente"
+    url: "https://malba.org.ar/malba-anuncia-el-prestamo-de-abaporu-al-art-institute-of-chicago-y-el-moma-de-nueva-york/"
 ---
 
 Em janeiro de 1928, a pintora Tarsila do Amaral finalizou uma tela para presentear seu então marido, o escritor Oswald de Andrade. A imagem de uma figura melancólica, com pés e mãos agigantados ao lado de um cacto sob o sol, impressionou Oswald a ponto de transformar a história das artes no Brasil.

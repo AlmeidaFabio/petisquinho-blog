@@ -11,6 +11,8 @@ imageAlt: "Disco de vinil com fones de ouvido e notas musicais"
 sources:
   - label: "Janata (2009) - The Neural Architecture of Music-Evoked Autobiographical Memories"
     url: "https://doi.org/10.1093/cercor/bhp008"
+  - label: "Aarhus University / WIREs Cognitive Science - The cognitive characteristics of music-evoked autobiographical memories (Kaiser e Berntsen)"
+    url: "https://pure.au.dk/ws/files/338096928/WIRES_Cognitive_Science_-_2022_-_Kaiser.pdf"
 ---
 
 Uma música antiga pode fazer uma cena inteira reaparecer: a casa onde tocava, uma viagem, alguém que estava por perto. Isso é mais do que reconhecer a melodia; às vezes, a canção funciona como pista para uma lembrança autobiográfica.

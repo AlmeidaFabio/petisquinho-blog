@@ -9,8 +9,10 @@ featured: false
 image: "/images/posts/senha-longa-ou-senha-complicada.webp"
 imageAlt: "Ilustração conceitual com um cadeado aberto conectado a blocos de texto formando uma palavra longa e segura"
 sources:
-  - label: "National Institute of Standards and Technology (NIST) - Digital Identity Guidelines (SP 800-63B)"
-    url: "https://pages.nist.gov/800-63-3/sp800-63b.html"
+  - label: "NIST - Special Publication 800-63B-4, Digital Identity Guidelines (revisão 4, 2025)"
+    url: "https://pages.nist.gov/800-63-4/sp800-63b.html"
+  - label: "NCSC (Reino Unido) - Password policy: updating your approach"
+    url: "https://www.ncsc.gov.uk/collection/passwords/updating-your-approach"
 ---
 
 Ao cadastrar uma senha, é comum sermos instruídos a misturar letras maiúsculas, minúsculas, números e caracteres especiais. No entanto, as diretrizes do Instituto Nacional de Padrões e Tecnologia dos Estados Unidos (NIST), referência internacional em segurança cibernética, recomendam uma abordagem bem mais prática: priorizar o tamanho em vez da complexidade.

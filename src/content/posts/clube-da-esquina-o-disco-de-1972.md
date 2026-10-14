@@ -9,8 +9,10 @@ featured: false
 image: "/images/posts/clube-da-esquina-o-disco-de-1972.webp"
 imageAlt: "Ilustração conceitual com um violão de madeira, discos de vinil e uma placa de esquina de rua sob luz suave"
 sources:
-  - label: "Instituto Memória Musical Brasileira (IMMuB) - Ficha técnica de Clube da Esquina (1972)"
-    url: "https://immub.org"
+  - label: "Enciclopédia Itaú Cultural - Clube de Esquina (verbete)"
+    url: "https://enciclopedia.itaucultural.org.br/obras/121069-clube-de-esquina"
+  - label: "Dicionário Cravo Albin da Música Popular Brasileira - Clube da Esquina"
+    url: "https://dicionariompb.com.br/termo/clube-da-esquina/"
 ---
 
 Em 1972, um grupo de jovens músicos lançou um álbum duplo que transformou a história da música popular brasileira. Liderado por Milton Nascimento e pelo então jovem Lô Borges, o disco *"Clube da Esquina"* fundiu bossa nova, rock, jazz, música erudita e influências regionais mineiras em uma sonoridade inovadora.

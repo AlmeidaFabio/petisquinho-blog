@@ -11,6 +11,8 @@ imageAlt: "Xícara de café coado ao lado de grãos e folhas de café"
 sources:
   - label: "Ministério da Agricultura - Cafeicultura brasileira"
     url: "https://www.gov.br/agricultura/pt-br/assuntos/politica-agricola/cafe/cafeicultura-brasileira"
+  - label: "Embrapa Café - Alterações na qualidade do café submetido a diferentes formas de processamento e secagem"
+    url: "https://www.embrapa.br/web/cafe/busca-de-publicacoes/-/publicacao/1171523/alteracoes-na-qualidade-do-cafe-submetido-a-diferentes-formas-de-processamento-e-secagem"
 ---
 
 “Café” parece uma coisa só até a gente provar xícaras bem diferentes. No Brasil, o Ministério da Agricultura destaca a diversidade de regiões produtoras e de condições de cultivo, que contribui para a variedade de grãos e perfis de bebida.

@@ -11,6 +11,8 @@ imageAlt: "Notebook aberto com livros e anotações ao redor"
 sources:
   - label: "UNESCO - Global Education Monitoring Report 2023: Technology in education"
     url: "https://unesdoc.unesco.org/ark:/48223/pf0000385723"
+  - label: "OCDE - Students, digital devices and success (PISA 2022)"
+    url: "https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/05/students-digital-devices-and-success_621829ff/9e4c0624-en.pdf"
 ---
 
 Com a internet, uma dúvida pode levar a uma aula aberta, um artigo, uma demonstração em vídeo ou a um curso inteiro. Esse acesso ampliou as maneiras de estudar — mas encontrar uma resposta rápida não significa, por si só, compreender o assunto.

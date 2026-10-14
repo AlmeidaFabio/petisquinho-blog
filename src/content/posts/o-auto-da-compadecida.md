@@ -11,6 +11,8 @@ imageAlt: "Ilustração conceitual evocando o sertão e a tradição do cordel, 
 sources:
   - label: "Enciclopédia Itaú Cultural - O Auto da Compadecida"
     url: "https://enciclopedia.itaucultural.org.br/obra66371/o-auto-da-compadecida"
+  - label: "PÓS: Revista do Programa de Pós-graduação em Artes da EBA/UFMG - Reminiscências clássicas e o exercício da moralidade em Auto da Compadecida"
+    url: "https://doi.org/10.35699/2238-2046.2025.52630"
 ---
 
 Escrita pelo paraibano Ariano Suassuna em 1955 e encenada no ano seguinte, a peça teatral *O Auto da Compadecida* tornou-se um dos maiores marcos da dramaturgia brasileira. Ambientada no sertão de Pernambuco, a história acompanha as peripécias de João Grilo e Chicó, dois sertanejos astutos que lutam pela sobrevivência entre a extrema pobreza e a exploração.
