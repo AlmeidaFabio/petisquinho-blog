@@ -18,6 +18,9 @@ const posts = allPosts
   .filter((post: CollectionEntry<'posts'>) => post.data.category === slug)
   .sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 
+// O slug técnico é diferente do nome visível de propósito: "curiosidades" é o
+// termo de busca real da categoria, então o endereço /categoria/curiosidades-de-boteco
+// permanece mesmo que o rótulo mude. Ver docs/direcao-editorial.md.
 const labels: Record<string, string> = {
   'curiosidades-de-boteco': 'Papo de Boteco',
   'petisco-cultural': 'Petisco Cultural',

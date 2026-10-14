@@ -9,7 +9,7 @@
 
 Para organizar os assuntos sem perder a essência do nome, podemos usar trocadilhos sutis que remetem ao conceito de "petiscar" conteúdo:
 • Petisco Cultural (Cultura): Dicas de livros, resenhas rápidas de filmes/séries, música e indicações de artistas.
-• Curiosidades de Boteco (Curiosidades): Fatos nerds, histórias bizarras do mundo, ciência explicada de forma simples e "você sabia?".
+• Papo de Boteco (Curiosidades): Fatos nerds, histórias bizarras do mundo, ciência explicada de forma simples e "você sabia?".
 • Mix de Variedades (Variedades): Comportamento, cotidiano, tendências da internet e tecnologia.
 • A Saideira (Destaques/Opinião): Crônicas semanais, reflexões do autor ou o post mais leve de domingo.
 

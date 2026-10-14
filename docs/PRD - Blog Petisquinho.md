@@ -72,9 +72,11 @@ O conteúdo se organiza em quatro seções fixas e cinco formatos recorrentes, c
 | Seção | Foco | Exemplo de post |
 | --- | --- | --- |
 | Petisco Cultural | Livros, séries, filmes, música, artistas | "3 séries curtas para ver numa noite" |
-| Curiosidades de Boteco | Fatos, ciência simples, histórias do mundo | "Por que o céu é azul?" |
+| Papo de Boteco | Fatos, ciência simples, histórias do mundo | "Por que o céu é azul?" |
 | Mix de Variedades | Comportamento, cotidiano, internet, tecnologia | "Detox digital: vale a pena?" |
 | A Saideira | Crônica, opinião, post leve de domingo | Reflexão semanal do autor |
+
+O nome visível de cada seção não é igual ao endereço. Os valores técnicos de `category` são `curiosidades-de-boteco`, `petisco-cultural`, `mix-de-variedades` e `a-saideira`. O endereço de "Papo de Boteco" continua `curiosidades-de-boteco` de propósito: "curiosidades" é o termo de busca real, e trocar o slug quebraria as URLs já publicadas. Detalhes em `direcao-editorial.md`.
 
 **Formatos fixos**
 
@@ -96,7 +98,7 @@ O conteúdo se organiza em quatro seções fixas e cinco formatos recorrentes, c
 
 | Dia | Seção |
 | --- | --- |
-| Segunda | Curiosidades de Boteco |
+| Segunda | Papo de Boteco |
 | Quarta | Petisco Cultural |
 | Sexta | Mix de Variedades |
 | Domingo (opcional) | A Saideira |
