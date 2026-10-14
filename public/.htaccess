@@ -72,12 +72,15 @@
   # Capas que saíram do repositório e que o deploy não apagou no servidor:
   #   - os dois JPEG substituídos por WebP (4,0 MB de arquivos mortos)
   #   - o ceu-azul.svg, que nenhum post referenciava (o post do céu usa o .webp)
+  #   - a capa do post "Chegou bem?", despublicado pelo autor em 15/10/2026
   #
   # 410 (Gone) em vez de 404 diz ao Google que o arquivo foi removido de vez.
-  # Sem esta regra o SVG continuava respondendo 200 em produção, porque o
+  # Sem estas regras eles continuariam respondendo 200 em produção, porque o
   # deploy envia a build mas não remove o que deixou de existir localmente.
   RewriteRule ^images/posts/ceu-azul\.(jpg|svg)$ - [G,L]
   RewriteRule ^images/posts/cheiro-de-terra-molhada\.jpg$ - [G,L]
+  RewriteRule ^images/posts/chegou-bem\.webp$ - [G,L]
+  RewriteRule ^og/chegou-bem\.jpg$ - [G,L]
 </IfModule>
 
 <IfModule mod_alias.c>
@@ -89,6 +92,17 @@
   # esperado — a regra simplesmente não disparou. O RedirectMatch casa com o
   # caminho completo da URL, com a barra inicial, em qualquer contexto.
   RedirectMatch 301 ^/teste-cabecalhos(/.*)?$ /
+
+  # Post "Chegou bem?", despublicado pelo autor em 15/10/2026.
+  #
+  # A página já esteve no ar, então continua existindo como diretório no
+  # servidor e responderia 200 com um conteúdo que o autor tirou do site. O 410
+  # diz ao buscador que a remoção é definitiva — 404 sugeriria que o endereço
+  # pode voltar.
+  #
+  # RedirectMatch porque é um diretório que ainda existe no servidor, o mesmo
+  # caso que não funcionou com RewriteRule na sonda de cabeçalhos.
+  RedirectMatch gone ^/posts/chegou-bem(/.*)?$
 
   # Slug do post do café renomeado (P1-8).
   #
