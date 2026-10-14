@@ -51,6 +51,21 @@ Prefira pautas com recorte claro. Evite títulos genéricos e temas que só perm
 - Evite clickbait, repetição, enchimento, afirmações absolutas sem suporte e fórmulas vagas como “estudos comprovam” sem identificar os estudos.
 - Não apresente uma ilustração conceitual como fotografia ou prova de um acontecimento real.
 
+## Links internos
+
+Cada post deve trazer **de dois a três links internos contextuais** no corpo do texto. Eles são o caminho pelo qual quem chegou de uma busca passa para um segundo artigo. Sem eles, o post é um beco sem saída: o leitor termina de ler e sai.
+
+Antes de escrever, liste os arquivos de `src/content/posts/` e escolha de dois a três cujo assunto converse de fato com o trecho em que você vai linkar. O slug do link é o nome do arquivo, sem a extensão.
+
+- **Contextuais, não uma lista no fim.** O link entra na própria frase, no ponto em que o assunto aparece: "a mesma coisa acontece no [efeito da porta](/posts/efeito-da-porta-esquecimento/)". Evite blocos de "veja também" ao pé do texto.
+- **Aponte para posts e para categorias.** A categoria serve quando o trecho toca o tema de uma seção inteira: "[outras curiosidades de boteco](/categoria/curiosidades-de-boteco/)".
+- **Sempre com barra no fim:** `/posts/nome-do-post/` e `/categoria/nome-da-categoria/`. O site publica em formato de diretório, então sem a barra o leitor paga um redirecionamento antes de chegar à página.
+- **Copie o slug do arquivo.** O endereço é o nome do arquivo em `src/content/posts/`, sem a extensão. Não deduza do título: um post sobre café já ficou com a URL errada por isso.
+- **Texto do link descritivo.** Escreva o que o leitor vai encontrar, não "clique aqui" nem "leia mais". Vale para quem usa leitor de tela e para busca.
+- **Varie os destinos.** Não aponte sempre para os mesmos dois posts.
+- **Sem excesso.** Em 300 a 600 palavras, mais de quatro links competem com a leitura.
+- **Link externo é fonte**, e vai em `sources` — não no meio do texto.
+
 ## Tamanho e leitura
 
 Como referência, planeje aproximadamente **300 a 600 palavras**, com leitura de **2 a 4 minutos**. A pauta pode ser menor ou maior quando o assunto justificar; clareza e completude vêm antes de atingir uma contagem.
@@ -84,7 +99,6 @@ excerpt: "Resumo breve do que o leitor encontrará."
 section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: AAAA-MM-DD
-readingTime: "3 min de leitura"
 tags: ["tema principal", "subtema"]
 featured: false
 image: "/images/posts/nome-descritivo.svg"
@@ -101,6 +115,12 @@ Desenvolvimento com explicação, contexto e exemplos verificáveis.
 Conclusão que sintetiza a ideia ou mostra por que ela importa.
 ```
 
+**Não existe campo `readingTime`.** O tempo de leitura é calculado do corpo no build, com a régua de 200 palavras por minuto. Informar à mão só criava divergência: nos primeiros 25 posts, 24 anunciavam o dobro do tempo real.
+
+**O campo `featured`** coloca o post no carrossel da home, à frente dos recentes. Use em poucos posts; se nenhum estiver marcado, o carrossel mostra os mais recentes.
+
+**O campo `opiniao`** é para crônica e reflexão sem afirmação factual externa — o caso da Saideira. Marque `opiniao: true` nesses textos: a regra de duas fontes não se aplica a eles, e o verificador de fontes passa a mostrá-los como informação em vez de problema. Sem a marca, `npm run checar-fontes` acusa o post para sempre.
+
 O campo `sources` deve conter apenas referências realmente consultadas e pertinentes. Quando o texto for uma reflexão original sem afirmações factuais externas, não invente fontes; o site não precisa exibir uma seção de fontes vazia.
 
 ## Revisão antes de publicar
@@ -110,18 +130,22 @@ Antes de marcar o post como pronto:
 - O título representa fielmente o texto?
 - O artigo entrega o que promete e responde à pergunta central?
 - As afirmações factuais têm fontes específicas, acessíveis e adequadas?
+- Há **de dois a três links internos contextuais**, para posts e para categorias, todos com barra no fim?
+- O texto dos links descreve o destino, sem "clique aqui" nem "leia mais"?
+- Os slugs dos links foram copiados do nome real dos arquivos?
 - Nomes, datas, números, títulos e links foram conferidos?
 - A opinião está distinguível de fatos e conclusões de pesquisas?
 - Há generalizações, promessas ou trechos vagos que devem ser corrigidos?
 - Ortografia, acentuação, pontuação e leitura em voz alta foram revisadas?
-- Categoria, data, tempo de leitura e tags estão corretos?
+- Categoria, data e tags estão corretos? (o tempo de leitura é calculado, não se informa)
 - Imagem e `imageAlt` estão presentes e o arquivo existe?
 - Links das fontes abrem o material citado?
+- Se o texto é crônica ou reflexão, está marcado com `opiniao: true`?
 - O slug preserva URLs existentes?
 
+## Prompt para a imagem de capa
 
-
-- Depois de criar o post forneça tambem um prompt para criar a imagem de capa seguindo o modelo abaixo:
+Depois de criar o post, forneça também um prompt para gerar a capa, seguindo o modelo abaixo:
 
 ----------
 
