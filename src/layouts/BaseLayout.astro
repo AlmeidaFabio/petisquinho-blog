@@ -59,6 +59,8 @@ const socialImageUrl = new URL(ogImage, siteUrl).toString();
     <link rel="icon" type="image/png" href="/favicon.png?v=2" />
     <link rel="alternate" type="application/rss+xml" title={siteConfig.name} href="/rss.xml" />
     <link rel="sitemap" href="/sitemap.xml" />
+    <!-- Conteúdo específico da página: dados estruturados, meta de artigo. -->
+    <slot name="head" />
   </head>
   <body class="flex min-h-screen flex-col">
     <header class="sticky top-0 z-20 border-b border-slate-200/80 bg-cream/90 backdrop-blur-md">
