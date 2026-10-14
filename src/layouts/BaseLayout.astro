@@ -25,9 +25,10 @@ const {
 // chegar na página. O menu e o rodapé aparecem em todas as páginas, então o
 // custo desse detalhe se multiplicava por 37.
 const navItems = [
-  { label: 'Início', href: '/' },
+  { label: 'Início', shortLabel: 'Início', href: '/' },
   ...siteConfig.categories.map((category) => ({
     label: category.label,
+    shortLabel: category.shortLabel,
     href: `/categoria/${category.slug}/`
   }))
 ];
@@ -77,9 +78,29 @@ const socialImageUrl = new URL(ogImage, siteUrl).toString();
           <span class="flex h-9 w-9 items-center justify-center rounded-full bg-terracotta text-sm text-white shadow-sm">P</span>
           <span>petisquinho</span>
         </a>
-        <nav class="flex flex-wrap items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-marine/80 md:text-[11px]">
+        {/* Uma linha só, sempre.
+        
+            Antes os cinco chips quebravam em duas linhas no celular, e o
+            cabeçalho ocupava cerca de 145 px acima do conteúdo em TODAS as
+            páginas — ele é sticky, então essa faixa ficava na tela o tempo todo.
+
+            Abaixo de lg o rótulo é o curto (Início, Boteco, Cultura,
+            Variedades, Saideira), que cabe em uma linha; a partir de lg, onde
+            há espaço, volta o nome completo.
+
+            O flex-nowrap com overflow-x-auto é rede de segurança: em tela bem
+            estreita a linha desliza em vez de quebrar. Por isso o px pequeno nas
+            bordas — sem ele o anel de foco do primeiro e do último chip seria
+            cortado pelo contêiner de rolagem. */}
+        <nav class="-mx-1 flex items-center gap-1.5 overflow-x-auto px-1 pb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-marine/80 md:gap-2 md:text-[11px] lg:mx-0 lg:flex-wrap lg:overflow-visible lg:pb-0">
           {navItems.map((item) => (
-            <a href={item.href} class="rounded-full border border-slate-200 bg-white/70 px-3 py-2 transition hover:border-terracotta hover:bg-white hover:text-[#A8432F]">{item.label}</a>
+            <a
+              href={item.href}
+              class="shrink-0 whitespace-nowrap rounded-full border border-slate-200 bg-white/70 px-2.5 py-2 transition hover:border-terracotta hover:bg-white hover:text-[#A8432F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta md:px-3"
+            >
+              <span class="lg:hidden">{item.shortLabel}</span>
+              <span class="hidden lg:inline">{item.label}</span>
+            </a>
           ))}
         </nav>
       </div>

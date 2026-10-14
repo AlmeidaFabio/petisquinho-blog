@@ -56,7 +56,20 @@ const recentPosts = posts
     <script type="application/ld+json" set:html={JSON.stringify(schemaOrganizacao(siteUrl))} />
   </Fragment>
 
-  <section class="mb-12 grid gap-8 lg:grid-cols-[1.5fr_0.8fr]">
+  {/* Uma grade só para o carrossel, o bloco de proposta e as matérias recentes.
+      É o que permite reordenar no celular: lá o bloco de proposta vai para
+      DEPOIS das matérias, porque antes do primeiro card ele tomava uma tela
+      inteira de quem chegou pelo destaque — a promessa da casa atrasava a
+      entrega.
+
+      A <section> interna usa display: contents, então os filhos dela (carrossel
+      e bloco) se comportam como filhos diretos desta grade e podem receber
+      ordem. Ela não tem nome acessível, portanto não perde papel de landmark.
+
+      No desktop nada muda: carrossel e bloco lado a lado na primeira linha, e
+      as matérias ocupando as duas colunas na segunda. */}
+  <div class="flex flex-col gap-12 lg:grid lg:grid-cols-[1.5fr_0.8fr] lg:gap-x-8 lg:gap-y-12">
+    <section class="contents">
     {/* Sem altura fixa. Antes o container tinha h-[600px] (640 a partir de sm) e
         o conteúdo do slide ocupava cerca de 410 px, então sobrava um vazio de
         uns 190 px entre o resumo e as bolinhas. O bloco ao lado herdava o mesmo
@@ -67,7 +80,7 @@ const recentPosts = posts
         layout. Os inativos usam visibility em vez do atributo hidden — assim
         continuam ocupando espaço para dimensionar a célula, e saem da árvore de
         acessibilidade e do foco do mesmo jeito. */}
-    <div data-post-carousel role="region" aria-roledescription="carrossel" aria-label={destaques.length > 0 ? 'Destaques e posts recentes' : 'Posts recentes'} class="relative grid overflow-hidden rounded-[30px] border border-terracotta/10 bg-white shadow-soft">
+    <div data-post-carousel role="region" aria-roledescription="carrossel" aria-label={destaques.length > 0 ? 'Destaques e posts recentes' : 'Posts recentes'} class="order-1 relative grid overflow-hidden rounded-[30px] border border-terracotta/10 bg-white shadow-soft lg:order-none lg:col-start-1 lg:row-start-1">
       {carouselPosts.map((post: CollectionEntry<'posts'>, index: number) => (
         <article
           data-carousel-slide
@@ -163,7 +176,7 @@ const recentPosts = posts
       <p data-carousel-status class="sr-only" aria-live="off">Post 1 de {carouselPosts.length}</p>
     </div>
 
-    <aside class="relative isolate flex flex-col overflow-hidden rounded-[30px] border border-[#b9cfbb] bg-[#dcebdd] p-7 shadow-soft sm:p-8">
+    <aside class="order-3 relative isolate flex flex-col overflow-hidden rounded-[30px] border border-[#b9cfbb] bg-[#dcebdd] p-7 shadow-soft sm:p-8 lg:order-none lg:col-start-2 lg:row-start-1">
       <div aria-hidden="true" class="absolute inset-x-0 top-0 -z-10 h-2 bg-gradient-to-r from-terracotta via-mustard to-terracotta"></div>
       <div aria-hidden="true" class="absolute -right-12 -top-14 -z-10 h-40 w-40 rounded-full border-[24px] border-cream"></div>
       <!-- h1 da home. Antes a página não tinha nenhum h1: o título do carrossel
@@ -190,7 +203,7 @@ const recentPosts = posts
   </section>
 
   {siteConfig.adsEnabled && (
-    <div class="mb-10 flex items-center justify-center">
+    <div class="order-4 flex items-center justify-center lg:col-span-2 lg:row-start-3">
       <div class="ad-slot h-24 w-full max-w-5xl">Publicidade</div>
     </div>
   )}
@@ -201,7 +214,7 @@ const recentPosts = posts
       das mesmas seções na mesma página, contando com o rodapé logo abaixo.
       Sem eles, o primeiro card de conteúdo sobe cerca de 90 px. */}
 
-  <div class:list={['grid gap-8', siteConfig.adsEnabled && 'xl:grid-cols-[minmax(0,1fr)_300px]']}>
+  <div class:list={['order-2 grid gap-8 lg:order-none lg:col-span-2 lg:col-start-1 lg:row-start-2', siteConfig.adsEnabled && 'xl:grid-cols-[minmax(0,1fr)_300px]']}>
     <section>
       <div class="mb-6 flex items-center justify-between gap-3">
         <h2 class="text-3xl font-black text-marine">Posts recentes</h2>
@@ -234,6 +247,7 @@ const recentPosts = posts
         <div class="ad-slot sticky top-28 h-[520px]">Publicidade</div>
       </aside>
     )}
+  </div>
   </div>
 
   {siteConfig.adsEnabled && <div class="ad-slot mt-10 h-28 w-full">Publicidade</div>}
