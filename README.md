@@ -39,9 +39,25 @@ sobrescrevê-lo.
 npm run prepare:deploy
 ```
 
-O comando `npm run deploy:hostgator` executa essa preparação automaticamente
+O comando `npm run deploy` executa essa preparação automaticamente
 antes de gerar e enviar a build. Executar somente `npm run prepare:deploy` não
 apaga as imagens nem os posts originais.
+
+### Verificação de imagens no build
+
+`public/images/posts` é o **destino** do pipeline, não a origem. Colocar um arquivo
+lá direto pula a conversão para WebP e o manda para produção em tamanho original.
+
+Por isso o `npm run build` começa por `scripts/check-image-formats.mjs`, que
+interrompe a build (antes de gerar qualquer página) se encontrar:
+
+- imagem raster em `public/images/posts` — `.jpg`, `.jpeg`, `.png`, `.gif`,
+  `.tif`, `.tiff` ou `.bmp`;
+- post cujo campo `image:` do frontmatter aponta para um arquivo inexistente.
+
+Formatos aceitos na pasta: `.webp`, `.svg` e `.avif`. Arquivos sem nenhuma
+referência no frontmatter geram apenas aviso, sem interromper o build.
+
 
 ## Deploy para HostGator
 
