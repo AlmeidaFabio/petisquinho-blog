@@ -1,0 +1,29 @@
+# Dependências
+node_modules/
+
+# Build e cache do Astro
+dist/
+.astro/
+.vite/
+.dist/
+
+# Tipos gerados no build
+astro-types.d.ts
+
+# Variáveis de ambiente — NUNCA commitar credenciais FTPS
+.env
+.env.*
+!.env.example
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editores
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*

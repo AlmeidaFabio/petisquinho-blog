@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <defs><linearGradient id="bg" x1="105" y1="30" x2="1095" y2="675" gradientUnits="userSpaceOnUse"><stop stop-color="#F3E6D2"/><stop offset="1" stop-color="#E3EFE7"/></linearGradient><linearGradient id="phone" x1="410" y1="136" x2="727" y2="536" gradientUnits="userSpaceOnUse"><stop stop-color="#486D78"/><stop offset="1" stop-color="#24434F"/></linearGradient></defs>
+  <path fill="url(#bg)" d="M0 0h1200v675H0z"/><circle cx="905" cy="160" r="108" fill="#FFF9ED" fill-opacity=".72"/><path d="M0 535c221-86 416-97 586-34 171-80 376-70 614 29v145H0V535Z" fill="#B8CCB5"/>
+  <rect x="420" y="102" width="310" height="470" rx="48" fill="url(#phone)"/><rect x="443" y="138" width="264" height="386" rx="27" fill="#E7F1E9"/><rect x="531" y="118" width="86" height="10" rx="5" fill="#B5C7BF"/>
+  <circle cx="575" cy="312" r="74" fill="#F6C766"/><path d="M537 312h76M575 274v76" stroke="#FFFDF8" stroke-width="12" stroke-linecap="round"/>
+  <path d="M830 455c0-75 61-136 136-136s136 61 136 136v111H830V455Z" fill="#6F9B7C"/><path d="M965 320c-55-91-31-164 37-204 21 77 4 139-37 204Z" fill="#5B8368"/><path d="M960 327c-9-94 34-146 117-151-7 75-47 126-117 151Z" fill="#80A987"/><path d="M884 494h112" stroke="#F7E8C9" stroke-width="8" stroke-linecap="round"/>
+</svg>

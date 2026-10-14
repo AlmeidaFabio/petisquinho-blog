@@ -1,0 +1,251 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const allPosts: CollectionEntry<'posts'>[] = await getCollection('posts');
+const posts = allPosts
+  .filter((post: CollectionEntry<'posts'>) => !post.data.draft)
+  .sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+
+const currentWeekStart = new Date();
+currentWeekStart.setUTCHours(0, 0, 0, 0);
+currentWeekStart.setUTCDate(currentWeekStart.getUTCDate() - ((currentWeekStart.getUTCDay() + 6) % 7));
+const nextWeekStart = new Date(currentWeekStart);
+nextWeekStart.setUTCDate(nextWeekStart.getUTCDate() + 7);
+
+const thisWeekPosts = posts.filter((post: CollectionEntry<'posts'>) => {
+  const postDate = new Date(post.data.date);
+  return postDate >= currentWeekStart && postDate < nextWeekStart;
+});
+const carouselPosts = (thisWeekPosts.length > 0 ? thisWeekPosts : posts).slice(0, 5);
+const carouselPostSlugs = new Set(carouselPosts.map((post: CollectionEntry<'posts'>) => post.slug));
+const recentPosts = posts
+  .filter((post: CollectionEntry<'posts'>) => !carouselPostSlugs.has(post.slug))
+  .slice(0, 6);
+---
+
+<BaseLayout title="Petisquinho - Uma porção de curiosidade pro seu dia" description="Blog brasileiro sobre cultura, curiosidades e variedades.">
+  <section class="mb-12 grid gap-8 lg:grid-cols-[1.5fr_0.8fr]">
+    <div data-post-carousel role="region" aria-roledescription="carrossel" aria-label={thisWeekPosts.length > 0 ? 'Posts da semana' : 'Posts recentes'} class="relative h-[600px] overflow-hidden rounded-[30px] border border-terracotta/10 bg-white shadow-soft sm:h-[640px]">
+      {carouselPosts.map((post: CollectionEntry<'posts'>, index: number) => (
+        <article data-carousel-slide aria-roledescription="slide" aria-label={`Post ${index + 1} de ${carouselPosts.length}`} class="flex h-[calc(100%-52px)] flex-col" hidden={index !== 0}>
+          <div class="relative h-56 shrink-0 sm:h-72">
+            <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="h-full w-full object-cover" loading={index === 0 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : 'auto'} />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-marine/75 to-transparent p-5 pt-14 text-white sm:p-6 sm:pt-16">
+              <span class="inline-flex rounded-full border border-white/50 bg-marine/25 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] backdrop-blur-sm">
+                {thisWeekPosts.length > 0 ? 'Destaques da semana' : 'Posts recentes'}
+              </span>
+            </div>
+            {carouselPosts.length > 1 && (
+              <div class="absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 justify-between px-4 sm:px-5">
+                <button type="button" data-carousel-prev aria-label="Post anterior" class="group flex h-11 w-11 items-center justify-center rounded-full border border-white/70 bg-white/85 text-marine shadow-lg backdrop-blur-md transition duration-200 hover:scale-105 hover:border-white hover:bg-white hover:text-terracotta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-white/50 active:scale-95">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-0.5">
+                    <path d="m14.5 5-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                  </svg>
+                </button>
+                <button type="button" data-carousel-next aria-label="Próximo post" class="group flex h-11 w-11 items-center justify-center rounded-full border border-white/70 bg-white/85 text-marine shadow-lg backdrop-blur-md transition duration-200 hover:scale-105 hover:border-white hover:bg-white hover:text-terracotta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-white/50 active:scale-95">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5 transition-transform duration-200 group-hover:translate-x-0.5">
+                    <path d="m9.5 5 7 7-7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                  </svg>
+                </button>
+              </div>
+            )}
+          </div>
+          <div class="flex min-h-0 flex-1 flex-col overflow-hidden p-6 sm:p-8">
+            <p class="mb-3 line-clamp-1 text-sm font-bold uppercase tracking-[0.14em] text-terracotta">{post.data.section}</p>
+            <a href={`/posts/${post.slug}`} class="line-clamp-2 text-3xl font-black leading-tight text-marine hover:text-terracotta sm:text-4xl">
+              {post.data.title}
+            </a>
+            <p class="mt-4 line-clamp-3 text-base leading-7 text-slate-600">{post.data.excerpt}</p>
+            <div class="mt-auto flex flex-wrap items-center gap-3 pt-4 text-sm text-slate-500">
+              <span>{new Date(post.data.date).toLocaleDateString('pt-BR')}</span>
+              <span>•</span>
+              <span>{post.data.readingTime}</span>
+            </div>
+          </div>
+        </article>
+      ))}
+      {carouselPosts.length > 1 && (
+        <nav aria-label="Controles do carrossel" class="flex h-[52px] items-center justify-center">
+          <div class="flex items-center gap-2" aria-label="Selecionar post">
+            {carouselPosts.map((post: CollectionEntry<'posts'>, index: number) => (
+              <button
+                type="button"
+                data-carousel-indicator={index}
+                aria-label={`Mostrar post ${index + 1}: ${post.data.title}`}
+                aria-current={index === 0 ? 'true' : undefined}
+                class:list={[
+                  'h-2.5 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2',
+                  index === 0 ? 'w-6 bg-terracotta' : 'w-2.5 bg-slate-300 hover:bg-slate-400'
+                ]}
+              />
+            ))}
+          </div>
+        </nav>
+      )}
+      <p data-carousel-status class="sr-only" aria-live="off">Post 1 de {carouselPosts.length}</p>
+    </div>
+
+    <aside class="relative isolate flex flex-col overflow-hidden rounded-[30px] border border-[#b9cfbb] bg-[#dcebdd] p-7 shadow-soft sm:p-8">
+      <div aria-hidden="true" class="absolute inset-x-0 top-0 -z-10 h-2 bg-gradient-to-r from-terracotta via-mustard to-terracotta"></div>
+      <div aria-hidden="true" class="absolute -right-12 -top-14 -z-10 h-40 w-40 rounded-full border-[24px] border-cream"></div>
+      <h2 class="mt-4 max-w-xs font-serif text-3xl font-bold leading-tight text-marine">Uma boa ideia cabe em poucos minutos.</h2>
+      <p class="mt-4 text-sm leading-7 text-slate-600">
+        Conteúdo curto, confiável e útil para quem quer aprender algo sem perder tempo.
+      </p>
+      <div class="mt-6 flex items-center gap-3 border-t border-slate-100 pt-5">
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-terracotta/10 text-terracotta" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="h-5 w-5 fill-none stroke-current stroke-[1.8]">
+            <path d="M12 3v2m0 14v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M3 12h2m14 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            <circle cx="12" cy="12" r="4" />
+          </svg>
+        </span>
+        <p class="text-xs leading-5 text-slate-500">Uma pausa leve para descobrir algo novo.</p>
+      </div>
+      <a href="/busca" class="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-marine px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[#2b3a5b] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2">
+        Explorar
+        <span aria-hidden="true">→</span>
+      </a>
+    </aside>
+  </section>
+
+  <div class="mb-10 flex items-center justify-center">
+    <div class="ad-slot h-24 w-full max-w-5xl">Publicidade</div>
+  </div>
+
+  <div class="mb-8 flex flex-wrap gap-3">
+    <a href="/categoria/curiosidades-de-boteco" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-marine transition hover:border-terracotta hover:text-terracotta">Boteco</a>
+    <a href="/categoria/petisco-cultural" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-marine transition hover:border-terracotta hover:text-terracotta">Cultura</a>
+    <a href="/categoria/mix-de-variedades" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-marine transition hover:border-terracotta hover:text-terracotta">Variedades</a>
+    <a href="/categoria/a-saideira" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-marine transition hover:border-terracotta hover:text-terracotta">Saideira</a>
+  </div>
+
+  <div class="grid gap-8 xl:grid-cols-[minmax(0,1fr)_300px]">
+    <section>
+      <div class="mb-6 flex items-center justify-between gap-3">
+        <h2 class="text-3xl font-black text-marine">Posts recentes</h2>
+        <a href="/busca" class="text-sm font-semibold text-terracotta">Ver todas as matérias →</a>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        {recentPosts.map((post: CollectionEntry<'posts'>) => (
+          <article class="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:border-terracotta/30 hover:shadow-soft">
+            <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="aspect-[16/9] w-full object-cover" loading="lazy" decoding="async" />
+            <div class="p-6">
+              <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-terracotta">{post.data.section}</p>
+              <a href={`/posts/${post.slug}`} class="mt-3 block text-2xl font-black leading-tight text-marine hover:text-terracotta">
+                {post.data.title}
+              </a>
+              <p class="mt-4 text-sm leading-7 text-slate-600">{post.data.excerpt}</p>
+              <div class="mt-5 flex flex-wrap items-center gap-3 text-xs text-slate-500">
+                <span>{new Date(post.data.date).toLocaleDateString('pt-BR')}</span>
+                <span>•</span>
+                <span>{post.data.readingTime}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <aside class="hidden xl:block">
+      <div class="ad-slot sticky top-28 h-[520px]">Publicidade</div>
+    </aside>
+  </div>
+
+  <div class="ad-slot mt-10 h-28 w-full">Publicidade</div>
+</BaseLayout>
+
+<script>
+  const carousel = document.querySelector<HTMLElement>('[data-post-carousel]');
+
+  if (carousel) {
+    const slides = Array.from(carousel.querySelectorAll<HTMLElement>('[data-carousel-slide]'));
+    const indicators = Array.from(carousel.querySelectorAll<HTMLButtonElement>('[data-carousel-indicator]'));
+    const status = carousel.querySelector<HTMLElement>('[data-carousel-status]');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let activeIndex = 0;
+    let interval: number | undefined;
+    let pointerInside = false;
+
+    const syncAutoplay = () => {
+      window.clearInterval(interval);
+      interval = undefined;
+
+      if (slides.length > 1 && !pointerInside && !carousel.matches(':focus-within') && !document.hidden && !reducedMotion.matches) {
+        interval = window.setInterval(() => showSlide(activeIndex + 1), 6000);
+      }
+    };
+
+    const showSlide = (index: number) => {
+      activeIndex = (index + slides.length) % slides.length;
+
+      slides.forEach((slide, slideIndex) => {
+        slide.hidden = slideIndex !== activeIndex;
+      });
+
+      indicators.forEach((indicator, indicatorIndex) => {
+        const isActive = indicatorIndex === activeIndex;
+        indicator.setAttribute('aria-current', String(isActive));
+        indicator.classList.toggle('w-6', isActive);
+        indicator.classList.toggle('bg-terracotta', isActive);
+        indicator.classList.toggle('w-2.5', !isActive);
+        indicator.classList.toggle('bg-slate-300', !isActive);
+      });
+
+      if (status) {
+        status.textContent = `Post ${activeIndex + 1} de ${slides.length}`;
+      }
+    };
+
+    carousel.addEventListener('click', (event) => {
+      if (!(event.target instanceof Element)) {
+        return;
+      }
+
+      const button = event.target.closest<HTMLButtonElement>('button');
+      if (!button || !carousel.contains(button)) {
+        return;
+      }
+
+      if (button.matches('[data-carousel-prev]')) {
+        showSlide(activeIndex - 1);
+        syncAutoplay();
+      } else if (button.matches('[data-carousel-next]')) {
+        showSlide(activeIndex + 1);
+        syncAutoplay();
+      } else if (button.matches('[data-carousel-indicator]')) {
+        const index = Number(button.dataset.carouselIndicator);
+        if (Number.isInteger(index)) {
+          showSlide(index);
+          syncAutoplay();
+        }
+      }
+    });
+
+    carousel.addEventListener('mouseenter', () => {
+      pointerInside = true;
+      syncAutoplay();
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+      pointerInside = false;
+      syncAutoplay();
+    });
+
+    carousel.addEventListener('focusin', syncAutoplay);
+    carousel.addEventListener('focusout', () => {
+      window.setTimeout(syncAutoplay, 0);
+    });
+
+    document.addEventListener('visibilitychange', syncAutoplay);
+    reducedMotion.addEventListener('change', syncAutoplay);
+    syncAutoplay();
+  }
+</script>
+
+<style>
+  [data-carousel-slide][hidden] {
+    display: none;
+  }
+</style>

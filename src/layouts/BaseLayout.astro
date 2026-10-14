@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+
+const { title = 'Petisquinho', description = 'Uma porção de curiosidade por dia, sem compromisso.' } = Astro.props;
+const navItems = [
+  { label: 'Início', href: '/' },
+  { label: 'Papo de Boteco', href: '/categoria/curiosidades-de-boteco' },
+  { label: 'Petisco Cultural', href: '/categoria/petisco-cultural' },
+  { label: 'Mix de Variedades', href: '/categoria/mix-de-variedades' },
+  { label: 'A Saideira', href: '/categoria/a-saideira' }
+];
+const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : `https://petisquinho.com${Astro.url.pathname}`;
+const ogImage = 'https://petisquinho.com/favicon.png';
+---
+
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#C8553D" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="canonical" href={canonicalUrl} />
+    <title>{title}</title>
+    <link rel="icon" type="image/png" href="/favicon.png?v=2" />
+    <link rel="sitemap" href="/sitemap.xml" />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <header class="sticky top-0 z-20 border-b border-slate-200/80 bg-cream/90 backdrop-blur-md">
+      <div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
+        <a href="/" class="inline-flex items-center gap-3 text-2xl font-black uppercase tracking-tight text-terracotta">
+          <span class="flex h-9 w-9 items-center justify-center rounded-full bg-terracotta text-sm text-white shadow-sm">P</span>
+          <span>petisquinho</span>
+        </a>
+        <nav class="flex flex-wrap items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-marine/80 md:text-[11px]">
+          {navItems.map((item) => (
+            <a href={item.href} class="rounded-full border border-slate-200 bg-white/70 px-3 py-2 transition hover:border-terracotta hover:bg-white hover:text-terracotta">{item.label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:px-6 lg:px-8">
+      <slot />
+    </main>
+
+    <footer class="border-t border-slate-200 bg-marine text-white">
+      <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p class="text-xl font-black uppercase tracking-tight text-terracotta">petisquinho</p>
+          <p class="mt-2 text-sm text-slate-300">Uma porção de curiosidade por dia, sem compromisso.</p>
+        </div>
+        <div class="flex flex-wrap gap-4 text-sm text-slate-200">
+          <a href="/sobre" class="transition hover:text-mustard">Sobre</a>
+          <a href="/contato" class="transition hover:text-mustard">Contato</a>
+          <a href="/privacidade" class="transition hover:text-mustard">Privacidade</a>
+          <a href="/termos-de-uso" class="transition hover:text-mustard">Termos de Uso</a>
+          <a href="/rss.xml" class="transition hover:text-mustard">RSS</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+# Normalização de fim de linha.
+# O Git guarda LF no histórico e mantém CRLF no Windows (core.eol=native),
+# então não há conversão visível no diretório de trabalho.
+* text=auto
+
+# Imagens e fontes: binários, nunca normalizar nem tratar como texto
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.tif binary
+*.tiff binary
+*.woff binary
+*.woff2 binary
+
+# Outros binários
+*.pdf binary
+*.zip binary
+
+# O lockfile é gerado: não polui o diff do GitHub
+package-lock.json linguist-generated=true
