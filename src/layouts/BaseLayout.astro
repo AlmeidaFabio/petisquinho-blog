@@ -8,21 +8,24 @@ interface Props {
   /** Caminho absoluto a partir da raiz, ex.: /og/meu-post.jpg */
   ogImage?: string;
   ogType?: string;
+  /** Quando informado, emite <meta name="robots">. */
+  robots?: string;
 }
 
 const {
   title = 'Petisquinho',
   description = 'Uma porção de curiosidade por dia, sem compromisso.',
   ogImage = siteConfig.defaultOgImage,
-  ogType = 'website'
+  ogType = 'website',
+  robots
 } = Astro.props;
 
 const navItems = [
   { label: 'Início', href: '/' },
-  { label: 'Papo de Boteco', href: '/categoria/curiosidades-de-boteco' },
-  { label: 'Petisco Cultural', href: '/categoria/petisco-cultural' },
-  { label: 'Mix de Variedades', href: '/categoria/mix-de-variedades' },
-  { label: 'A Saideira', href: '/categoria/a-saideira' }
+  ...siteConfig.categories.map((category) => ({
+    label: category.label,
+    href: `/categoria/${category.slug}`
+  }))
 ];
 
 const siteUrl = Astro.site ?? siteConfig.url;
@@ -36,6 +39,7 @@ const socialImageUrl = new URL(ogImage, siteUrl).toString();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#C8553D" />
+    {robots && <meta name="robots" content={robots} />}
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={siteConfig.name} />
     <meta property="og:locale" content={siteConfig.locale} />

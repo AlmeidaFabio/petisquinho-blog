@@ -166,6 +166,10 @@ const posts = allPosts
       });
     });
 
-    searchPosts('');
+    // Aceita ?q=termo para a busca poder ser acionada de fora. É o que faz o
+    // formulário de busca da página 404 funcionar.
+    const termoInicial = new URLSearchParams(window.location.search).get('q') ?? '';
+    if (input && termoInicial) input.value = termoInicial;
+    searchPosts(termoInicial);
   </script>
 </BaseLayout>

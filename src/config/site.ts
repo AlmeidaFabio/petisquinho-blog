@@ -25,6 +25,26 @@ export const siteConfig = {
   ogImageHeight: 630,
 
   /**
+   * Categorias do blog: fonte única. O menu, as páginas de categoria, os
+   * atalhos da home e a página 404 leem daqui, para o rótulo visível e o
+   * endereço nunca divergirem.
+   *
+   * `slug` é o valor técnico gravado no frontmatter (campo `category`) e
+   * também o endereço da página. `label` é o nome exibido e `shortLabel` a
+   * versão curta dos atalhos da home.
+   *
+   * O slug de "Papo de Boteco" é `curiosidades-de-boteco` de propósito:
+   * "curiosidades" é o termo de busca real, e trocar o slug quebraria as URLs
+   * publicadas. Ver docs/direcao-editorial.md.
+   */
+  categories: [
+    { slug: 'curiosidades-de-boteco', label: 'Papo de Boteco', shortLabel: 'Boteco' },
+    { slug: 'petisco-cultural', label: 'Petisco Cultural', shortLabel: 'Cultura' },
+    { slug: 'mix-de-variedades', label: 'Mix de Variedades', shortLabel: 'Variedades' },
+    { slug: 'a-saideira', label: 'A Saideira', shortLabel: 'Saideira' }
+  ],
+
+  /**
    * Blocos "Publicidade" reservados para o AdSense. Ficam ocultos enquanto
    * não houver anúncio real: caixa rotulada sem anúncio parece site inacabado
    * e, quando fica antes do primeiro parágrafo, atrapalha a leitura.

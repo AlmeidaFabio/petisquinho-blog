@@ -1,14 +1,10 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { siteConfig } from '../../config/site';
 
 export async function getStaticPaths() {
-  return [
-    { params: { slug: 'curiosidades-de-boteco' } },
-    { params: { slug: 'petisco-cultural' } },
-    { params: { slug: 'mix-de-variedades' } },
-    { params: { slug: 'a-saideira' } }
-  ];
+  return siteConfig.categories.map((category) => ({ params: { slug: category.slug } }));
 }
 
 const { slug } = Astro.params;
@@ -18,17 +14,10 @@ const posts = allPosts
   .filter((post: CollectionEntry<'posts'>) => post.data.category === slug)
   .sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 
-// O slug técnico é diferente do nome visível de propósito: "curiosidades" é o
-// termo de busca real da categoria, então o endereço /categoria/curiosidades-de-boteco
-// permanece mesmo que o rótulo mude. Ver docs/direcao-editorial.md.
-const labels: Record<string, string> = {
-  'curiosidades-de-boteco': 'Papo de Boteco',
-  'petisco-cultural': 'Petisco Cultural',
-  'mix-de-variedades': 'Mix de Variedades',
-  'a-saideira': 'A Saideira'
-};
-
-const title = labels[slug] ?? 'Categoria';
+// O rótulo visível e o endereço vivem em siteConfig.categories, que é a fonte
+// única. O slug técnico é diferente do nome exibido de propósito; a explicação
+// está no próprio arquivo de configuração.
+const title = siteConfig.categories.find((category) => category.slug === slug)?.label ?? 'Categoria';
 ---
 
 <BaseLayout title={`${title} - Petisquinho`} description={`Artigos da categoria ${title} no blog Petisquinho.`}>

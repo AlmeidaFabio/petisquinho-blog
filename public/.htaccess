@@ -82,3 +82,16 @@
   # caminho completo da URL, com a barra inicial, em qualquer contexto.
   RedirectMatch 301 ^/teste-cabecalhos(/.*)?$ /
 </IfModule>
+
+# ------------------------------------------------------------
+#  4. Página 404 própria
+# ------------------------------------------------------------
+# ErrorDocument é do core do Apache, então não fica dentro de <IfModule>.
+#
+# Sem esta linha o HostGator serve a página de erro padrão dele (/cgi-sys/...),
+# que tem a marca da hospedagem e um convite para contratar plano. O arquivo
+# 404.html é gerado pelo Astro a partir de src/pages/404.astro.
+#
+# O status continua sendo 404 (não 200), o que mantém a página fora do índice
+# de busca — o meta robots noindex é só reforço.
+ErrorDocument 404 /404.html

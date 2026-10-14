@@ -117,10 +117,9 @@ const recentPosts = posts
   )}
 
   <div class="mb-8 flex flex-wrap gap-3">
-    <a href="/categoria/curiosidades-de-boteco" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-marine transition hover:border-terracotta hover:text-terracotta">Boteco</a>
-    <a href="/categoria/petisco-cultural" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-marine transition hover:border-terracotta hover:text-terracotta">Cultura</a>
-    <a href="/categoria/mix-de-variedades" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-marine transition hover:border-terracotta hover:text-terracotta">Variedades</a>
-    <a href="/categoria/a-saideira" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-marine transition hover:border-terracotta hover:text-terracotta">Saideira</a>
+    {siteConfig.categories.map((category) => (
+      <a href={`/categoria/${category.slug}`} class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-marine transition hover:border-terracotta hover:text-terracotta">{category.shortLabel}</a>
+    ))}
   </div>
 
   <div class:list={['grid gap-8', siteConfig.adsEnabled && 'xl:grid-cols-[minmax(0,1fr)_300px]']}>
