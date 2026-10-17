@@ -51,31 +51,9 @@ Prefira pautas com recorte claro. Evite títulos genéricos e temas que só perm
 - Evite clickbait, repetição, enchimento, afirmações absolutas sem suporte e fórmulas vagas como “estudos comprovam” sem identificar os estudos.
 - Não apresente uma ilustração conceitual como fotografia ou prova de um acontecimento real.
 
-## Links internos
-
-Ligue para outro conteúdo do site **quando o texto citar de fato outro assunto que já existe aqui**. Não há número mínimo.
-
-**O site já liga sozinho, e bastante.** Cada post recebe, sem nenhum trabalho seu: o selo da seção apontando para a categoria, dois posts da mesma categoria em "Na mesma linha", três posts por categoria e tags em comum em "Leia também", e as quatro categorias no menu e no rodapé. O caminho do leitor que chegou de uma busca já existe.
-
-O que o link no corpo acrescenta é o **texto de âncora com contexto**: "a conversa que sobra depois que a conta chega" diz mais ao leitor e ao buscador do que o título repetido num cartão.
-
-Quando fizer sentido, o link entra assim:
-
-- **Na própria frase, no ponto em que o assunto aparece.** "É a mesma matéria da [conversa que sobra depois que a conta chega](/posts/a-conversa-depois-da-conta/): nada acontece, e ainda assim algo fica." Não use bloco de "veja também" ao pé do texto.
-- **Só quando for verdade.** Se o texto não cita outro assunto do site, **não linke nada**. Link forçado para cumprir cota vira link inventado: o primeiro post escrito sob uma regra de número mínimo saiu com dois links apontando para crônicas que não existiam.
-- **Copie o slug do arquivo**, em `src/content/posts/`, sem a extensão. Não deduza do título: um post sobre café já ficou com a URL errada por isso.
-- **Sempre com barra no fim:** `/posts/nome-do-post/` e `/categoria/nome-da-categoria/`. Sem a barra, o leitor paga um redirecionamento antes de chegar.
-- **Texto do link descritivo.** Escreva o que o leitor vai encontrar, não "clique aqui" nem "leia mais".
-- **Não passe de quatro links.** Acima disso eles competem com a leitura.
-- **Link externo é fonte**, e vai em `sources` — não no meio do texto.
-
-A categoria merece link quando o trecho toca o tema de uma seção inteira: "[outras curiosidades de boteco](/categoria/curiosidades-de-boteco/)".
-
-O build confere todo link interno: se apontar para post ou categoria que não existe, ou estiver sem a barra final, a publicação para.
-
 ## Tamanho e leitura
 
-Como referência, planeje aproximadamente **300 a 600 palavras**, com leitura de **2 a 4 minutos**. A pauta pode ser menor ou maior quando o assunto justificar; clareza e completude vêm antes de atingir uma contagem.
+Como referência, planeje aproximadamente **400 a 800 palavras**. A pauta pode ser menor ou maior quando o assunto justificar; clareza e completude vêm antes de atingir uma contagem.
 
 ## Título, resumo e tags
 
@@ -108,7 +86,7 @@ category: "curiosidades-de-boteco"
 date: AAAA-MM-DD
 tags: ["tema principal", "subtema"]
 featured: false
-image: "/images/posts/nome-descritivo.svg"
+image: "/images/posts/nome-descritivo.webp"
 imageAlt: "Descrição objetiva da ilustração de capa"
 sources:
   - label: "Instituição ou autor - título da fonte"
@@ -137,10 +115,7 @@ Antes de marcar o post como pronto:
 - O título representa fielmente o texto?
 - O artigo entrega o que promete e responde à pergunta central?
 - As afirmações factuais têm fontes específicas, acessíveis e adequadas?
-- Os links internos que o texto pedir estão lá, todos com barra no fim e apontando para conteúdo que existe? (não há número mínimo)
-- O texto dos links descreve o destino, sem "clique aqui" nem "leia mais"?
-- Os slugs dos links foram copiados do nome real dos arquivos?
-- Nomes, datas, números, títulos e links foram conferidos?
+- Nomes, datas, números e títulos foram conferidos?
 - A opinião está distinguível de fatos e conclusões de pesquisas?
 - Há generalizações, promessas ou trechos vagos que devem ser corrigidos?
 - Ortografia, acentuação, pontuação e leitura em voz alta foram revisadas?
