@@ -186,7 +186,9 @@ Antes de marcar o post como pronto:
 
 ## Prompt para a imagem de capa
 
-Depois de criar o post, forneça também um prompt para gerar a capa, seguindo o modelo abaixo:
+Depois de criar o post, forneça também um prompt para gerar a capa, seguindo o modelo abaixo.
+
+**Por que o modelo tem tantas proibições.** As capas deste blog saíram com plantas e folhas em 18 dos 26 posts — inclusive em assuntos que nada têm de botânico, como backup, senhas e memória musical. A causa não era o gerador de imagem: era o prompt. Ele pedia a cor "sage green" (sálvia é uma planta), pedia "breathing room" em volta do assunto (e espaço vazio o gerador preenche com o que for seguro), e vetava "unrelated decorative objects" — um veto que não pega vegetação, porque folha é lida como atmosfera, não como objeto. As regras abaixo fecham essas três portas. Não remova nenhuma delas achando que é redundante.
 
 ----------
 
@@ -198,14 +200,17 @@ KEY VISUAL ELEMENTS: A soft blue sky, a warm sun, and simple atmospheric layers
 
 Visual direction:
 - A warm, thoughtful, approachable editorial illustration — clearly illustrated, not photorealistic.
-- Use a refined, simple composition with a few recognizable shapes and subtle visual storytelling.
-- Soft, muted colors inspired by terracotta, warm cream, dusty blue, sage green, and mustard yellow. Choose only the colors that suit the subject.
+- Use a refined, simple composition with a few recognizable shapes and subtle visual storytelling. The visual elements should be what the article explains, not scenery arranged around it.
+- Soft, muted palette: terracotta, warm cream, dusty blue, sage-toned green, and mustard yellow. Apply these as colors, not as objects — a color named after a plant is still a color.
+- Choose only the colors that suit the subject. The full palette does not need to appear.
 - Gentle natural light, soft shadows, lightly textured shapes, and clean edges.
 - Sophisticated but friendly, suitable for a contemporary independent blog.
 - Make this image visually distinct from other article covers while keeping the same overall art direction.
 - Wide landscape composition, 16:9 aspect ratio, suitable for a website article cover.
-- Keep the main subject clear and comfortably inside the frame, with enough breathing room around it.
+- Keep the main subject clear, with generous clean negative space: a plain, uncluttered background with no decorative props.
 - The image must still read well when cropped slightly on different screen sizes.
+
+Do not add plants, leaves, flowers, branches, vines, or foliage unless the subject is specifically botanical. If the article is not about nature, keep the setting neutral: no vegetation, no landscape, no botanical elements, and no potted plant as decoration.
 
 Do not include any text, letters, numbers, logos, watermarks, borders, UI elements, or fake interface details. Do not imitate a specific artist, existing illustration, brand, copyrighted character, or recognizable artwork. Avoid photorealism, stock-photo aesthetics, visual clutter, overly saturated colors, and unrelated decorative objects.
 
