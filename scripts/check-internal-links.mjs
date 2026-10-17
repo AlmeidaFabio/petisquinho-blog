@@ -2,11 +2,10 @@
  * Confere os links internos do site antes do build.
  *
  * Por que existe:
- *   A direção editorial pede de dois a três links internos contextuais por
- *   post. O primeiro post escrito sob essa regra saiu com três links no
- *   formato perfeito — contextuais, com barra final, texto descritivo — e
- *   DOIS deles apontando para slugs que não existem. O leitor clicava e caía
- *   na 404. Escrever a regra no documento não bastou: faltava a trava.
+ *   Link quebrado é o defeito que não aparece na leitura. Um post saiu com
+ *   três links no formato perfeito — contextuais, com barra final, texto
+ *   descritivo — e DOIS deles apontando para slugs que não existem. O leitor
+ *   clicava e caía na 404. Revisar lendo não pega isso: falta a trava.
  *
  * O que ele acusa:
  *   1. link para post que não existe
@@ -14,6 +13,9 @@
  *   3. link interno sem barra no fim (custa um redirecionamento, ver P1-4)
  *   4. link para página de categoria além da última que existe
  *   5. link interno para caminho desconhecido
+ *
+ * Não exige quantidade. O direcionamento editorial não pede link interno no
+ * corpo, e um post sem nenhum link passa — ele confere só os que existirem.
  *
  * Roda no build: é verificação de sistema de arquivos, sem rede, então não
  * tem o risco que fez o checador de fontes ficar fora dele.
