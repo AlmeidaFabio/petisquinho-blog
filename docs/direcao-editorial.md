@@ -30,6 +30,22 @@ Antes de escrever, responda:
 
 Prefira pautas com recorte claro. Evite títulos genéricos e temas que só permitam repetir conselhos comuns. Listas devem cumprir o número anunciado e explicar por que cada item foi escolhido.
 
+## Palavra-chave e intenção de busca
+
+Antes de escrever, defina **a palavra-chave primária**: o termo que uma pessoa digitaria no buscador para chegar a este post. Ela é a pergunta que o texto responde, não um rótulo genérico.
+
+- **Uma primária.** Se o texto precisa de dois termos principais para ser descrito, a pauta ainda está difusa.
+- **Onde ela precisa aparecer:** no título, no `excerpt`, no `imageAlt` e no primeiro parágrafo. No corpo, entra quando o texto pedir — repetição mecânica o leitor percebe e o buscador ignora.
+- **As secundárias são as tags.** Termos próximos e variações reais vão em `tags`, com o vocabulário do site. Não invente grafias só para cobrir combinações.
+- **Registre a primária no frontmatter**, no campo `keyword`.
+
+**Intenção de busca** é o que a pessoa quer ao digitar o termo: entender um fenômeno, resolver um problema, decidir o que ler ou assistir. O texto precisa começar entregando isso, não contornando.
+
+- Se o título é uma pergunta, o **primeiro parágrafo responde**.
+- Se o termo é de comparação ou escolha, o texto precisa **concluir**, não apenas listar opções.
+- Se a intenção é aprender, entregue a explicação inteira no próprio artigo: não empurre a resposta para uma fonte externa.
+- Se o termo é de curiosidade (“por que o céu é azul”), a resposta vem antes do contexto histórico ou das exceções.
+
 ## Pesquisa e fontes
 
 - Pesquise antes de redigir afirmações factuais. Priorize fontes primárias e confiáveis: órgãos públicos, universidades, artigos científicos, documentação oficial, editoras e páginas oficiais de obras ou serviços.
@@ -47,9 +63,22 @@ Prefira pautas com recorte claro. Evite títulos genéricos e temas que só perm
 - Dê preferência a frases claras, parágrafos curtos e exemplos concretos.
 - Comece respondendo à pergunta ou apresentando a ideia principal; não use longas introduções genéricas.
 - Desenvolva a explicação com fatos e contexto, e encerre com uma síntese, uma implicação ou uma pergunta que convide à reflexão.
-- Use listas apenas quando ajudarem a organizar o conteúdo. Se o título anunciar “5”, entregue exatamente cinco itens.
+- **Parágrafos de até cinco linhas** no celular, ou cerca de 50 palavras. Bloco de dez linhas não é lido: é pulado.
+- **Lista só quando os itens forem paralelos** e o leitor for compará-los. Lista de frases corridas é prosa disfarçada. Se o título anunciar “5”, entregue exatamente cinco.
+- **Tabela só quando o conteúdo for tabular** — números, comparação de opções, datas. Fora disso, prosa.
+- **Negrito com parcimônia:** no máximo uma expressão por parágrafo, para marcar o que o leitor não pode perder.
 - Evite clickbait, repetição, enchimento, afirmações absolutas sem suporte e fórmulas vagas como “estudos comprovam” sem identificar os estudos.
 - Não apresente uma ilustração conceitual como fotografia ou prova de um acontecimento real.
+
+## Hierarquia de cabeçalhos
+
+O título do post já vira o `H1` da página. No corpo, use `##` e `###`.
+
+- **Acima de 300 palavras, pelo menos dois `##`.** Cada um abre um bloco de assunto, e o nome diz do que o trecho trata.
+- **Abaixo de 300 palavras, subtítulo é opcional.** Uma sequência de parágrafos curtos lê melhor do que dois cabeçalhos espremidos.
+- **`###` só dentro de um `##`**, nunca abrindo um bloco.
+- **Nunca use `#` no corpo:** o `H1` é o título do post.
+- O subtítulo não repete o título nem usa “Introdução”, “Conclusão” nem “Considerações finais”. Diga o assunto.
 
 ## Tamanho e leitura
 
@@ -57,10 +86,31 @@ Como referência, planeje aproximadamente **400 a 800 palavras**. A pauta pode s
 
 ## Título, resumo e tags
 
-- **Título:** específico, fiel ao conteúdo e fácil de entender. Uma pergunta funciona bem quando o artigo realmente a responde.
-- **Resumo (`excerpt`):** uma ou duas frases que antecipem o que o leitor aprenderá, sem repetir apenas o título ou prometer algo ausente do texto.
-- **Tags:** use poucas tags relevantes e consistentes com o vocabulário do site; evite tags redundantes ou muito amplas.
-- **Tempo de leitura:** informe uma estimativa coerente com o texto final, sem arredondar para baixo para parecer mais rápido.
+**Título** — vira o `H1` da página e a `Title Tag` do resultado de busca.
+
+- Específico, fiel ao conteúdo e fácil de entender.
+- **Até 60 caracteres.** Acima disso o buscador corta.
+- A palavra-chave primária **no começo**. Pergunta funciona bem quando o artigo de fato a responde, e é a forma que mais se parece com a busca.
+- Sem clickbait e sem dois-pontos seguidos de promessa vaga.
+
+**Resumo (`excerpt`)** — vira a meta descrição exibida no resultado de busca.
+
+- **Até 156 caracteres.** É o que o buscador mostra antes de cortar.
+- Contém a palavra-chave, de forma natural.
+- Antecipa a resposta e **não repete o título**. O título é o nome; o resumo é a propaganda.
+- Uma ou duas frases, sem prometer o que o texto não entrega.
+
+**Tags** — são os termos secundários.
+
+- Poucas e relevantes, com o vocabulário do site.
+- Evite tags redundantes, muito amplas ou sinônimos inventados para cobrir variações.
+
+## Fechamento e chamada para ação
+
+- O texto **encerra com uma síntese, uma implicação ou uma pergunta** que convide à reflexão — não com um resumo repetido.
+- Depois do último parágrafo, o template já oferece “Na mesma linha” e “Leia também”. Não escreva chamada para o leitor continuar lendo: isso já acontece sozinho.
+- **Não escreva “assine a newsletter”, “compartilhe” nem “deixe seu comentário”**: nenhum desses recursos existe no site. Chamada para o que não existe quebra a confiança.
+- Se quiser provocar, prefira uma pergunta que o leitor possa responder de cabeça, não uma tarefa.
 
 ## Imagens e acessibilidade
 
@@ -68,7 +118,7 @@ Como referência, planeje aproximadamente **400 a 800 palavras**. A pauta pode s
 - Ilustrações conceituais podem ser criadas com IA, desde que respeitem os termos da ferramenta e não imitem artistas, personagens, marcas ou obras específicas.
 - Não use imagens geradas para simular registros documentais. Se uma imagem puder ser confundida com fotografia real, deixe claro que é ilustrativa e informe a origem quando necessário.
 - Salve o arquivo em `public/images/posts/`, usando um nome descritivo, curto e sem espaços. Prefira formatos otimizados para web; comprima os arquivos e evite dimensões excessivas.
-- Escreva `imageAlt` descrevendo o que a imagem mostra de forma útil. Não comece com “imagem de” nem repita palavras-chave artificialmente.
+- Escreva `imageAlt` descrevendo o que a imagem mostra, e **inclua a palavra-chave quando ela descrever de fato a cena**. Não comece com “imagem de” nem empilhe termos que a ilustração não mostra.
 - Confirme que o caminho informado no frontmatter corresponde ao arquivo existente.
 
 ## Metadados e estrutura do arquivo
@@ -81,6 +131,7 @@ Modelo:
 ---
 title: "Título claro e específico"
 excerpt: "Resumo breve do que o leitor encontrará."
+keyword: "palavra-chave primária da busca"
 section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: AAAA-MM-DD
@@ -102,6 +153,8 @@ Conclusão que sintetiza a ideia ou mostra por que ela importa.
 
 **Não existe campo `readingTime`.** O tempo de leitura é calculado do corpo no build, com a régua de 200 palavras por minuto. Informar à mão só criava divergência: nos primeiros 25 posts, 24 anunciavam o dobro do tempo real.
 
+**O campo `keyword`** registra a palavra-chave primária. Os 26 posts anteriores a esta revisão não têm e não precisam ter — o padrão vale para os novos. Ainda não é consumido pelo build: serve para o autor fixar o termo antes de escrever e para uma checagem automática futura.
+
 **O campo `featured`** coloca o post no carrossel da home, à frente dos recentes. Use em poucos posts; se nenhum estiver marcado, o carrossel mostra os mais recentes.
 
 **O campo `opiniao`** é para crônica e reflexão sem afirmação factual externa — o caso da Saideira. Marque `opiniao: true` nesses textos: a regra de duas fontes não se aplica a eles, e o verificador de fontes passa a mostrá-los como informação em vez de problema. Sem a marca, `npm run checar-fontes` acusa o post para sempre.
@@ -112,14 +165,20 @@ O campo `sources` deve conter apenas referências realmente consultadas e pertin
 
 Antes de marcar o post como pronto:
 
-- O título representa fielmente o texto?
-- O artigo entrega o que promete e responde à pergunta central?
+- A palavra-chave primária está definida e aparece no título, no `excerpt`, no `imageAlt` e no primeiro parágrafo?
+- O título representa fielmente o texto e cabe em 60 caracteres?
+- O resumo cabe em 156 caracteres, contém a palavra-chave e não repete o título?
+- O artigo entrega o que promete e responde à pergunta central já no primeiro parágrafo?
+- Acima de 300 palavras, o texto tem pelo menos dois `##`, e nenhum `###` abre bloco?
+- Nenhum `#` no corpo do texto?
+- Os parágrafos cabem em cinco linhas, e listas e tabelas aparecem só onde o conteúdo justifica?
+- O fechamento sintetiza ou provoca, sem prometer recurso que o site não tem?
 - As afirmações factuais têm fontes específicas, acessíveis e adequadas?
 - Nomes, datas, números e títulos foram conferidos?
 - A opinião está distinguível de fatos e conclusões de pesquisas?
 - Há generalizações, promessas ou trechos vagos que devem ser corrigidos?
 - Ortografia, acentuação, pontuação e leitura em voz alta foram revisadas?
-- Categoria, data e tags estão corretos? (o tempo de leitura é calculado, não se informa)
+- Categoria, data, tags e `keyword` estão corretos? (o tempo de leitura é calculado, não se informa)
 - Imagem e `imageAlt` estão presentes e o arquivo existe?
 - Links das fontes abrem o material citado?
 - Se o texto é crônica ou reflexão, está marcado com `opiniao: true`?

@@ -11,6 +11,12 @@ const postsCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
+    // Palavra-chave primária do post, definida antes de escrever (ver
+    // docs/direcao-editorial.md). Opcional porque os 26 posts anteriores à
+    // revisão de 16/10/2026 não a têm e não é preciso retroagir. Ainda não é
+    // consumida pelo build: serve para o autor fixar o termo e para uma
+    // checagem automática futura.
+    keyword: z.string().optional(),
     section: z.string(),
     category: z.string(),
     date: z.coerce.date(),
