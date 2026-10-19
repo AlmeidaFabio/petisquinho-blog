@@ -103,9 +103,13 @@ const posts = allPosts
         .trim();
     }
 
-    function addTextElement(parent: HTMLElement, tag: string, text: string, className: string) {
+    // className é opcional: a data e o tempo de leitura no rodapé do card
+    // herdam a cor e o tamanho do container, então não precisam de classe
+    // própria. Era por isso que duas chamadas passavam três argumentos e o
+    // verificador de tipos reclamava do quarto.
+    function addTextElement(parent: HTMLElement, tag: string, text: string, className = '') {
       const element = document.createElement(tag);
-      element.className = className;
+      if (className) element.className = className;
       element.textContent = text;
       parent.append(element);
       return element;

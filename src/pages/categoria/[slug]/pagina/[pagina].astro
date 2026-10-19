@@ -34,7 +34,7 @@ export async function getStaticPaths() {
 }
 
 const { listagem } = Astro.props as { listagem: PaginaDeCategoria };
-const { categoria, posts, pagina, totalPaginas, totalPosts } = listagem;
+const { categoria, posts, pagina, totalPaginas } = listagem;
 
 const capa = posts[0]?.data.image;
 const siteUrl = Astro.site ?? siteConfig.url;
