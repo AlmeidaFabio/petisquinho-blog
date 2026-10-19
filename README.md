@@ -1,102 +1,133 @@
 # Petisquinho
 
-Blog estático em Astro para publicar textos curtos sobre cultura, curiosidades e variedades.
+Blog de leitura rápida sobre cultura, curiosidades e variedades. Estático de ponta a ponta — HTML, CSS, imagens e um `.htaccess`, sem servidor de aplicação, banco de dados ou processo Node em produção.
+
+**[petisquinho.com](https://petisquinho.com)**
+
+![Página inicial do Petisquinho](docs/assets/home.webp)
+
+## O que é
+
+Cada post responde uma pergunta concreta em poucos minutos: por que o céu é azul, como calcular a distância de uma tempestade pelo trovão, o que a regra 3-2-1 de backup resolve. Texto curto, fontes citadas e ilustrações próprias.
+
+O site é gerado com Astro e não carrega framework de UI nem JavaScript de terceiros. Os dois únicos scripts de cliente — o carrossel da home e a busca — são escritos à mão e embutidos na página.
 
 ## Stack
 
-- Astro
-- Tailwind CSS
-- Markdown para conteúdo editorial
-- RSS e sitemap em produção
-- Busca local em JavaScript
+| | |
+|---|---|
+| Framework | Astro 5, geração estática |
+| Estilo | Tailwind CSS 3 |
+| Conteúdo | Markdown com frontmatter validado por Zod |
+| Imagens | `sharp` — variantes responsivas e cartões de compartilhamento |
+| Deploy | FTPS explícito para HostGator, atrás da Cloudflare |
+| Node | 24 |
 
-## Como rodar
+## Rodando localmente
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Build de produção
+O `predev` gera as variantes responsivas das imagens antes de subir o servidor. O site fica em `http://localhost:4321`.
+
+Para conferir a build de produção:
 
 ```bash
 npm run build
+npm run preview
 ```
 
-## Preparar e publicar posts
+## Escrevendo um post
 
-Os arquivos em `docs/posts` ficam fora do site até serem preparados para publicação.
-O comando de deploy otimiza imagens JPG/JPEG, PNG, WebP, GIF, AVIF, TIFF e SVG
-de `docs/imgs` para WebP (qualidade 80, largura máxima de 1600 px), coloca as imagens em `public/images/posts` e copia
-os posts Markdown para `src/content/posts` antes da build. A pasta `docs` fica
-fora do site publicado. As imagens originais em `docs/imgs` e os posts Markdown em
-`docs/posts` são apagados somente depois que o upload FTPS termina com sucesso;
-falhas anteriores preservam os arquivos originais. Se um post com o mesmo nome
-já existir na pasta de produção e tiver conteúdo diferente, o processo para sem
-sobrescrevê-lo.
+O guia completo está em [docs/direcao-editorial.md](docs/direcao-editorial.md): pauta, pesquisa, palavra-chave, hierarquia de cabeçalhos, tamanho, metadados e o prompt da imagem de capa.
+
+O fluxo, em resumo:
+
+1. Escreva o post em `docs/posts/`, com `.md`
+2. Coloque a capa em `docs/imgs/`
+3. Rode `npm run deploy`
+
+A preparação converte a imagem para WebP, copia o post para `src/content/posts/` e só apaga a caixa de entrada depois que o upload termina com sucesso. Um post com o mesmo nome já publicado e conteúdo diferente interrompe o processo em vez de sobrescrever.
+
+### O que a build recusa
+
+Nem todo post chega em produção. A build para, antes de gerar qualquer página, quando encontra:
+
+- **imagem raster** em `public/images/posts/` — `.jpg`, `.png`, `.gif` e afins. A pasta é destino do pipeline, não origem: arquivo colocado à mão pula a conversão e iria para o ar no tamanho original
+- **capa inexistente** — `image:` no frontmatter apontando para arquivo que não existe
+- **link interno quebrado** — post ou categoria inexistente, link sem barra final, página de categoria além da última, ou caminho desconhecido
+
+A checagem de fontes fica fora da build porque depende de rede, e uma queda de DNS não deveria impedir uma publicação:
 
 ```bash
-npm run prepare:deploy
+npm run checar-fontes
 ```
 
-O comando `npm run deploy` executa essa preparação automaticamente
-antes de gerar e enviar a build. Executar somente `npm run prepare:deploy` não
-apaga as imagens nem os posts originais.
+## Scripts
 
-### Verificação de imagens no build
+| Comando | O que faz |
+|---|---|
+| `npm run dev` | servidor de desenvolvimento em `:4321` |
+| `npm run build` | checagens, variantes, cartões de OG e build em `dist/` |
+| `npm run preview` | serve a build de produção localmente |
+| `npm run prepare:deploy` | converte imagens e copia os posts da caixa de entrada |
+| `npm run deploy` | prepara, gera a build e envia por FTPS |
+| `npm run checar-fontes` | confere as fontes citadas nos posts, com acesso à rede |
 
-`public/images/posts` é o **destino** do pipeline, não a origem. Colocar um arquivo
-lá direto pula a conversão para WebP e o manda para produção em tamanho original.
+## Deploy
 
-Por isso o `npm run build` começa por `scripts/check-image-formats.mjs`, que
-interrompe a build (antes de gerar qualquer página) se encontrar:
+O envio é por **FTPS explícito** (FTP sobre TLS), com validação do certificado. Não é SFTP, e a validação não deve ser desativada.
 
-- imagem raster em `public/images/posts` — `.jpg`, `.jpeg`, `.png`, `.gif`,
-  `.tif`, `.tiff` ou `.bmp`;
-- post cujo campo `image:` do frontmatter aponta para um arquivo inexistente.
-
-Formatos aceitos na pasta: `.webp`, `.svg` e `.avif`. Arquivos sem nenhuma
-referência no frontmatter geram apenas aviso, sem interromper o build.
-
-
-## Deploy para HostGator
-
-Este projeto envia a build estática usando FTPS explícito (FTP protegido por TLS), na porta 21 por padrão. O certificado do servidor é validado pelo Node.js; não desative essa validação.
-
-1. Copie o arquivo de exemplo:
+As credenciais ficam em `.env`, fora do versionamento:
 
 ```bash
 cp .env.example .env
 ```
 
-2. Preencha as credenciais FTPS do HostGator no `.env`:
+Variáveis: `HOSTGATOR_HOST`, `HOSTGATOR_PORT`, `HOSTGATOR_USER`, `HOSTGATOR_PASSWORD`, `HOSTGATOR_REMOTE_PATH` e, quando o host for um IP, `HOSTGATOR_TLS_SERVERNAME`.
 
-```env
-HOSTGATOR_HOST=ftp.seudominio.com
-HOSTGATOR_PORT=21
-HOSTGATOR_USER=seu_usuario_ftp
-HOSTGATOR_PASSWORD=sua_senha_ftp
-HOSTGATOR_REMOTE_PATH=/public_html
-# Opcional: nome DNS do certificado FTPS quando HOSTGATOR_HOST for um IP
-HOSTGATOR_TLS_SERVERNAME=servidor.hostgator.com.br
+O envio manda **primeiro os assets** (`_astro/`, `images/`, `og/`) e **depois o HTML**. Não é detalhe: como o CSS carrega hash de conteúdo no nome, subir o HTML antes abre uma janela em que a página nova pede um arquivo que ainda não existe. O 404 dessa janela fica em cache na borda, e o site aparece sem estilo mesmo depois que o arquivo chega.
+
+Em produção, o `.htaccess` cuida do resto:
+
+- HSTS, CSP, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` e `Permissions-Policy`
+- http e www redirecionando para `https://petisquinho.com`
+- 410 para os arquivos que saíram do repositório, que o deploy não apaga no servidor
+- cache longo e imutável para CSS e JS, que carregam hash de conteúdo
+
+## Estrutura
+
+```
+src/
+  components/     carrossel, cards, paginação
+  config/         dados do site: nome, autor, categorias
+  content/        coleção de posts e schema do frontmatter
+  layouts/        layout base, cabeçalho e rodapé
+  pages/          rotas
+  styles/         estilos globais
+  utils/          posts, imagens, schema.org, categorias
+public/
+  images/posts/   capas publicadas — destino do pipeline
+  og/             cartões de compartilhamento
+  .htaccess       cabeçalhos, redirecionamentos e cache
+docs/             documentação e caixa de entrada, fora do site
+scripts/          pipeline: checagens, variantes, OG e deploy
 ```
 
-3. Rode o deploy:
+A pasta `docs/` **não vai para o site publicado**. Ela reúne a documentação, os rascunhos e a caixa de entrada do pipeline.
 
-```bash
-npm run deploy:hostgator
-```
+## Documentação
 
-A rotina faz `npm run build` automaticamente e envia o conteúdo da pasta `dist` para o diretório remoto configurado.
+- [Direção editorial](docs/direcao-editorial.md) — como escolher, escrever e revisar um post
+- [PRD](docs/PRD%20-%20Blog%20Petisquinho.md) — escopo e requisitos do projeto
+- [Segurança](docs/seguranca.md) — o que foi verificado e o que segue em aberto
 
-> No painel da hospedagem, confirme que a conta permite FTPS explícito. O padrão é porta 21; use a porta e o host FTPS informados pelo HostGator. Este script não usa SFTP. O caminho remoto é relativo à raiz visível da conta FTP: se a conta FTP estiver limitada diretamente à raiz pública do domínio, use `/`; se estiver limitada à pasta pessoal, use o caminho da raiz do domínio que esteja acessível dentro dessa conta. Não tente contornar a limitação da conta com `..`.
+## Qualidade
 
-## Estrutura principal
+Medido em 16/10/2026, no celular e no desktop: Lighthouse 100 em Acessibilidade, SEO e Boas Práticas; Performance entre 98 e 100; LCP de 1,5 s e CLS zero.
 
-- `src/content/posts` — artigos em Markdown
-- `docs/posts` — posts aguardando publicação
-- `docs/imgs` — imagens originais dos posts
-- `src/pages` — páginas do blog e rotas estáticas
-- `src/layouts` — layout base do site
-- `src/styles` — estilos globais
-- `public` — assets públicos
+## Licença
+
+O conteúdo e as ilustrações são de autoria própria. O código não tem licença de uso definida.
