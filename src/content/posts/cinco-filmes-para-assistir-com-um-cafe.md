@@ -5,7 +5,6 @@ section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-03
 tags: ["cinema", "recomendação", "filme"]
-featured: false
 image: "/images/posts/filmes-cafe.svg"
 imageAlt: "Xícara de café e claquete diante de uma tela de cinema"
 sources:

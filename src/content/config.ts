@@ -27,7 +27,10 @@ const postsCollection = defineCollection({
     // posts anunciavam o dobro do real. Agora é calculado do corpo no build,
     // por tempoDeLeitura() em src/utils/posts.ts.
     tags: z.array(z.string()).default([]),
-    featured: z.boolean().default(false),
+    // Sem `featured`: o carrossel da home passou a ser derivado do conteúdo —
+    // a matéria mais recente de cada seção. Um post marcado à mão ficava preso
+    // na primeira posição para sempre, e destaque permanente vira conteúdo
+    // antigo. A seleção está em src/pages/index.astro.
     image: z.string().optional(),
     imageAlt: z.string().optional(),
     sources: z.array(sourceSchema).default([]),

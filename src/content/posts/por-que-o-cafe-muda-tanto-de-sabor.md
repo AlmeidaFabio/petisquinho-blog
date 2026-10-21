@@ -5,7 +5,6 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-04
 tags: ["café", "cotidiano", "curiosidade"]
-featured: false
 image: "/images/posts/cafe.svg"
 imageAlt: "Xícara de café coado ao lado de grãos e folhas de café"
 sources:

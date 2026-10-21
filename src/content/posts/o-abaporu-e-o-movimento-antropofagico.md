@@ -5,7 +5,6 @@ section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-12
 tags: ["arte", "história", "modernismo", "cultura-brasileira"]
-featured: false
 image: "/images/posts/o-abaporu-e-o-movimento-antropofagico.webp"
 imageAlt: "Ilustração conceitual com cactos sob um sol radiante e formas orgânicas que remetem à arte modernista brasileira"
 sources:

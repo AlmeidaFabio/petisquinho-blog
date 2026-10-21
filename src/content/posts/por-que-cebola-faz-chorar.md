@@ -5,7 +5,6 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-11
 tags: ["cebola", "ciência cotidiana", "curiosidades", "química"]
-featured: false
 image: "/images/posts/por-que-cebola-faz-chorar.webp"
 imageAlt: "Cebola recém-cortada sobre uma tábua de madeira, com camadas translúcidas e pequenas gotículas de umidade."
 sources:

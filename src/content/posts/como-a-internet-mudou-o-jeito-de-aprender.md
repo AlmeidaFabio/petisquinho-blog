@@ -5,7 +5,6 @@ section: "Mix de Variedades"
 category: "mix-de-variedades"
 date: 2026-10-01
 tags: ["internet", "aprendizado", "tecnologia"]
-featured: false
 image: "/images/posts/aprender-internet.svg"
 imageAlt: "Notebook aberto com livros e anotações ao redor"
 sources:

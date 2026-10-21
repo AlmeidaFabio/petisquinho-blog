@@ -5,7 +5,6 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-10
 tags: ["língua portuguesa", "tupi", "história"]
-featured: false
 image: "/images/posts/tupi-palavras-portugues.webp"
 imageAlt: "Ilustração de uma capivara à beira de um rio, ao lado de uma cesta com abacaxi e mandioca e uma tigela de pipoca"
 sources:

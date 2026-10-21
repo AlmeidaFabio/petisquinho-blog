@@ -5,7 +5,6 @@ section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-08
 tags: ["séries", "recomendação", "cultura"]
-featured: false
 image: "/images/posts/minisserie.svg"
 imageAlt: "Claquete de cinema e rolos de filme em uma mesa"
 sources:

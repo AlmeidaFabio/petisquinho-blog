@@ -5,7 +5,6 @@ section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-10
 tags: ["livros", "literatura brasileira", "Carolina Maria de Jesus"]
-featured: false
 image: "/images/posts/quarto-de-despejo-carolina-maria-de-jesus.webp"
 imageAlt: "Cadernos de capa simples empilhados sobre uma mesa de madeira, com um lápis ao lado e luz de janela entrando de lado"
 sources:

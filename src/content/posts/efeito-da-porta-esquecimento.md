@@ -5,7 +5,6 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-10
 tags: ["memória", "psicologia", "cotidiano"]
-featured: false
 image: "/images/posts/efeito-da-porta-esquecimento.webp"
 imageAlt: "Porta de madeira aberta ligando uma sala iluminada a uma cozinha ao fundo, com um bilhete sobre a mesa em primeiro plano"
 sources:

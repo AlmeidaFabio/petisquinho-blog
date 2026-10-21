@@ -5,7 +5,6 @@ section: "Mix de Variedades"
 category: "mix-de-variedades"
 date: 2026-10-07
 tags: ["tecnologia", "bem-estar", "digital"]
-featured: false
 image: "/images/posts/detox-digital.svg"
 imageAlt: "Celular em modo silencioso ao lado de uma pequena planta"
 sources:

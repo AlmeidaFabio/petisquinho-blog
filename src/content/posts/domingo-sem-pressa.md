@@ -5,7 +5,6 @@ section: "A Saideira"
 category: "a-saideira"
 date: 2026-10-06
 tags: ["reflexão", "domingo", "cotidiano"]
-featured: false
 opiniao: true
 image: "/images/posts/domingo-sem-pressa.svg"
 imageAlt: "Poltrona confortável perto de uma janela iluminada pelo sol da manhã"

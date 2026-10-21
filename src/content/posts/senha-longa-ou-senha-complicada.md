@@ -5,7 +5,6 @@ section: "Mix de Variedades"
 category: "mix-de-variedades"
 date: 2026-10-13
 tags: ["tecnologia", "segurança", "hábitos", "dicas"]
-featured: false
 image: "/images/posts/senha-longa-ou-senha-complicada.webp"
 imageAlt: "Ilustração conceitual com um cadeado aberto conectado a blocos de texto formando uma palavra longa e segura"
 sources:

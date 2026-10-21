@@ -5,7 +5,6 @@ section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-13
 tags: ["teatro", "cinema", "literatura", "cultura-brasileira"]
-featured: false
 image: "/images/posts/o-auto-da-compadecida.webp"
 imageAlt: "Ilustração conceitual evocando o sertão e a tradição do cordel, com um chapéu de couro e bonecos de teatro popular sobre fundo ensolarado"
 sources:

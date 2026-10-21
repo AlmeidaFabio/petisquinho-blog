@@ -5,7 +5,6 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-12
 tags: ["ciência", "geologia", "curiosidades", "natureza"]
-featured: false
 image: "/images/posts/por-que-o-mar-e-salgado.webp"
 imageAlt: "Ilustração conceitual mostrando rios fluindo de montanhas rochosas em direção a um grande oceano sob o sol"
 sources:

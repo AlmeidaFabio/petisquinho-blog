@@ -5,7 +5,6 @@ section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-02
 tags: ["livros", "cultura", "leitura"]
-featured: false
 image: "/images/posts/livros-cultura.svg"
 imageAlt: "Pilha de livros coloridos com uma pequena planta ao lado"
 sources:

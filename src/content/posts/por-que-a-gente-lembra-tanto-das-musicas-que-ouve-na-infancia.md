@@ -5,7 +5,6 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-05
 tags: ["memória", "música", "psicologia"]
-featured: false
 image: "/images/posts/musica-memoria.svg"
 imageAlt: "Disco de vinil com fones de ouvido e notas musicais"
 sources:

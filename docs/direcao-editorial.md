@@ -136,7 +136,6 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: AAAA-MM-DD
 tags: ["tema principal", "subtema"]
-featured: false
 image: "/images/posts/nome-descritivo.webp"
 imageAlt: "Descrição objetiva da ilustração de capa"
 sources:
@@ -155,7 +154,7 @@ Conclusão que sintetiza a ideia ou mostra por que ela importa.
 
 **O campo `keyword`** registra a palavra-chave primária. Os 26 posts anteriores a esta revisão não têm e não precisam ter — o padrão vale para os novos. Ainda não é consumido pelo build: serve para o autor fixar o termo antes de escrever e para uma checagem automática futura.
 
-**O campo `featured`** coloca o post no carrossel da home, à frente dos recentes. Use em poucos posts; se nenhum estiver marcado, o carrossel mostra os mais recentes.
+**Não existe campo `featured`.** O carrossel da home não é escolhido à mão: ele mostra a **matéria mais recente de cada seção**, uma por categoria, ordenadas por data. Um post marcado como destaque ficava preso na primeira posição para sempre, e destaque permanente vira conteúdo antigo — pior do que não ter destaque. Não há nada a fazer no frontmatter para aparecer no carrossel: publique.
 
 **O campo `opiniao`** é para crônica e reflexão sem afirmação factual externa — o caso da Saideira. Marque `opiniao: true` nesses textos: a regra de duas fontes não se aplica a eles, e o verificador de fontes passa a mostrá-los como informação em vez de problema. Sem a marca, `npm run checar-fontes` acusa o post para sempre.
 

@@ -5,7 +5,6 @@ section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-14
 tags: ["anime", "nostalgia", "anos-90", "pop-culture", "tv-manchete"]
-featured: false
 image: "/images/posts/a-nostalgia-de-yu-yu-hakusho.webp"
 imageAlt: "Ilustração conceitual com uma fita VHS, uma televisão antiga com brilho azulado e uma esfera energética em tom pastel"
 sources:

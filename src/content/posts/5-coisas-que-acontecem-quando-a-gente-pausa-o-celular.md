@@ -5,7 +5,6 @@ section: "Mix de Variedades"
 category: "mix-de-variedades"
 date: 2026-09-30
 tags: ["celular", "bem-estar", "rotina"]
-featured: false
 image: "/images/posts/pausa-celular.svg"
 imageAlt: "Celular com notificações desligadas apoiado sobre uma mesa"
 sources:

@@ -5,7 +5,6 @@ section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-12
 tags: ["música", "mpb", "história", "cultura-brasileira"]
-featured: false
 image: "/images/posts/clube-da-esquina-o-disco-de-1972.webp"
 imageAlt: "Ilustração conceitual com um violão de madeira, discos de vinil e uma placa de esquina de rua sob luz suave"
 sources:

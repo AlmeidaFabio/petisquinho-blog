@@ -5,7 +5,6 @@ section: "A Saideira"
 category: "a-saideira"
 date: 2026-10-10
 tags: ["crônica", "cotidiano", "amizade"]
-featured: false
 opiniao: true
 image: "/images/posts/a-conversa-depois-da-conta.webp"
 imageAlt: "Mesa de bar ao fim da tarde com copos quase vazios, um prato com restos de petisco e a luz dourada entrando pela lateral"

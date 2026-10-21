@@ -5,7 +5,6 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-09
 tags: ["chuva", "ciência cotidiana", "natureza", "curiosidades"]
-featured: false
 image: "/images/posts/cheiro-de-terra-molhada.webp"
 imageAlt: "Gotas de chuva atingindo o solo ao lado de pequenas plantas, com o aroma da terra sugerido por formas suaves que se elevam no ar."
 sources:

@@ -5,7 +5,6 @@ section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-11
 tags: ["livros", "literatura brasileira", "Graciliano Ramos"]
-featured: false
 image: "/images/posts/vidas-secas-graciliano-ramos.webp"
 imageAlt: "Ilustração de uma família pequena e um cachorro magro caminhando por uma estrada de terra seca, com mandacaru e um sol grande e baixo ao fundo"
 sources:

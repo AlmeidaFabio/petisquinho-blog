@@ -5,7 +5,6 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-09
 tags: ["ciência", "atmosfera", "curiosidade"]
-featured: true
 image: "/images/posts/ceu-azul.webp"
 imageAlt: "Ilustração de um sol azul-claro sobre montanhas sob um céu azul"
 sources:

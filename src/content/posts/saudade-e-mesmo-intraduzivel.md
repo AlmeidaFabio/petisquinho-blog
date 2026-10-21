@@ -5,7 +5,6 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-12
 tags: ["linguística", "cultura", "português", "curiosidades"]
-featured: false
 image: "/images/posts/saudade-e-mesmo-intraduzivel.webp"
 imageAlt: "Ilustração conceitual com uma carta aberta antiga, uma xícara de café e elementos abstratos evocando memória e nostalgia"
 sources:

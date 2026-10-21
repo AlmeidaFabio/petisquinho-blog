@@ -5,7 +5,6 @@ section: "Mix de Variedades"
 category: "mix-de-variedades"
 date: 2026-10-10
 tags: ["saúde ocular", "telas", "hábitos"]
-featured: false
 image: "/images/posts/regra-20-20-20-cansaco-visual.webp"
 imageAlt: "Mesa de trabalho com notebook ao lado de uma janela aberta, por onde se vê uma paisagem distante e desfocada"
 sources:
