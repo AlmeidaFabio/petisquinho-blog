@@ -91,9 +91,9 @@ try {
   // Só agora, com o upload concluído, a caixa de entrada é esvaziada — e só do
   // que o prepare-deploy realmente consumiu, listado no manifesto.
   //
-  // Antes esta etapa apagava tudo que estivesse em docs/posts e docs/imgs. Não
-  // serve mais: com a sala de espera em docs/editing, apagar por pasta levaria
-  // junto rascunhos de semanas seguintes e as capas deles.
+  // Não apaga por pasta: a fila esvazia inteira (é o que sai neste deploy), mas
+  // a sala de espera `docs/editing` só perde a capa que foi de fato usada, e
+  // não os rascunhos e capas de semanas seguintes.
   let consumidos = [];
   try {
     consumidos = JSON.parse(await fsPromises.readFile(manifestPath, 'utf8'));

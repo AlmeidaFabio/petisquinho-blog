@@ -14,11 +14,11 @@ const docsDir = path.join(projectRoot, 'docs');
 //
 // `docs/editing` é a sala de espera, onde os posts ficam até a vez, e serve como
 // origem das capas: a imagem pode continuar ao lado do rascunho, porque o
-// script procura o arquivo pelo nome declarado no campo `image`.
-//
-// `docs/imgs` é a pasta de imagens do fluxo antigo e continua valendo.
+// script procura o arquivo pelo nome declarado no campo `image`. A fila
+// (`docs/posts`) também é procurada, porque o autor pode mover o par completo
+// para lá.
 const postInboxes = [path.join(docsDir, 'posts')];
-const imageInboxes = [path.join(docsDir, 'editing'), path.join(docsDir, 'imgs'), path.join(docsDir, 'posts')];
+const imageInboxes = [path.join(docsDir, 'posts'), path.join(docsDir, 'editing')];
 
 const publishedPostsDir = path.join(projectRoot, 'src', 'content', 'posts');
 const publishedImagesDir = path.join(projectRoot, 'public', 'images', 'posts');

@@ -5,12 +5,13 @@
  * cheguem em producao:
  *
  *   1. Imagem raster colocada direto em public/images/posts. Essa pasta e o
- *      destino do pipeline, nao a origem: prepare-deploy.mjs converte o que
- *      esta em docs/imgs para WebP (qualidade 80, largura maxima 1600 px) e
- *      grava o resultado aqui. Um .jpg/.png jogado direto nesta pasta pula a
- *      conversao e vai para o ar em tamanho original. Foi assim que
- *      ceu-azul.jpg (3,0 MB) e cheiro-de-terra-molhada.jpg (997 KB) chegaram
- *      a producao e responderam por 67% do payload do site.
+ *      destino do pipeline, nao a origem: prepare-deploy.mjs converte para WebP
+ *      (qualidade 80, largura maxima 1600 px) o original que estiver em
+ *      docs/posts ou docs/editing, e grava o resultado aqui. Um .jpg/.png
+ *      jogado direto nesta pasta pula a conversao e vai para o ar em tamanho
+ *      original. Foi assim que ceu-azul.jpg (3,0 MB) e
+ *      cheiro-de-terra-molhada.jpg (997 KB) chegaram a producao e responderam
+ *      por 67% do payload do site.
  *
  *   2. Post que referencia uma imagem inexistente. O Astro nao valida o campo
  *      `image:` do frontmatter, entao um caminho errado so aparece como
@@ -105,10 +106,10 @@ if (problemas.length === 0) {
     console.error('\n  public/images/posts e o destino do pipeline, nao a origem.');
     console.error('  Formatos aceitos aqui: ' + [...PERMITIDOS].join(', '));
     console.error('\n  Para publicar estas imagens corretamente:');
-    console.error('    1. mova o arquivo original para docs/imgs/');
+    console.error('    1. mova o arquivo original para a fila (docs/posts/) ou para a sala de espera (docs/editing/)');
     console.error('    2. rode: npm run prepare:deploy');
     console.error('    3. atualize o campo `image:` do post para o .webp gerado');
-    console.error('\n  Converter um arquivo ja publicado, sem passar por docs/imgs:');
+    console.error('\n  Converter um arquivo ja publicado, sem passar pelo pipeline:');
     console.error(
       "    node -e \"import('sharp').then(async({default:s})=>{await s('public/images/posts/ARQUIVO.jpg').resize({width:1600,withoutEnlargement:true}).webp({quality:80}).toFile('public/images/posts/ARQUIVO.webp')})\""
     );
