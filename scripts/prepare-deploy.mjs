@@ -165,7 +165,32 @@ for (const { caixa, arquivo } of rascunhos) {
 }
 
 // ---------------------------------------------------------------------------
-// 3. Manifesto do que o envio pode apagar depois do upload
+// 3. A fila de publicação é esvaziada inteira
+//
+// `docs/posts` é o que sai NESTE deploy, e o autor move para lá o par completo:
+// o `.md` e a capa. Então tudo que está na pasta é consumido, não só o que o
+// script usou — inclusive a capa que já existia como WebP e por isso não passou
+// pela conversão. Sem isso, ela ficaria na fila para sempre.
+//
+// `.gitkeep` fica: é o que mantém a pasta no repositório quando está vazia.
+// ---------------------------------------------------------------------------
+let arquivosDaFila = [];
+try {
+  arquivosDaFila = await fs.readdir(postInboxes[0], { withFileTypes: true });
+} catch {
+  arquivosDaFila = [];
+}
+
+for (const entrada of arquivosDaFila) {
+  if (!entrada.isFile() || entrada.name === '.gitkeep') continue;
+  const caminho = path.join(postInboxes[0], entrada.name);
+  if (!consumidos.includes(caminho)) {
+    consumidos.push(caminho);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Manifesto do que o envio pode apagar depois do upload
 // ---------------------------------------------------------------------------
 if (consumidos.length > 0) {
   await fs.writeFile(manifestPath, JSON.stringify(consumidos, null, 2), 'utf8');
