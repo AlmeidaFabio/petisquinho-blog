@@ -150,6 +150,8 @@ Desenvolvimento com explicação, contexto e exemplos verificáveis.
 Conclusão que sintetiza a ideia ou mostra por que ela importa.
 ```
 
+**O campo `date` não precisa estar certo no rascunho.** Na publicação, o `prepare:deploy` troca o valor pela data do dia do deploy. Use-o para registrar quando o texto ficou pronto; a data que o leitor vê é a da publicação. É o que mantém o carrossel da home coerente — ele escolhe a matéria mais recente de cada seção pela data, e um post parado duas semanas em `docs/editing` não pode sair com data velha.
+
 **Não existe campo `readingTime`.** O tempo de leitura é calculado do corpo no build, com a régua de 200 palavras por minuto. Informar à mão só criava divergência: nos primeiros 25 posts, 24 anunciavam o dobro do tempo real.
 
 **O campo `keyword`** registra a palavra-chave primária. Os 26 posts anteriores a esta revisão não têm e não precisam ter — o padrão vale para os novos. Ainda não é consumido pelo build: serve para o autor fixar o termo antes de escrever e para uma checagem automática futura.

@@ -45,11 +45,17 @@ O guia completo está em [docs/direcao-editorial.md](docs/direcao-editorial.md):
 
 O fluxo, em resumo:
 
-1. Escreva o post em `docs/posts/`, com `.md`
-2. Coloque a capa em `docs/imgs/`
+1. O post fica em `docs/editing/` enquanto espera a vez, com a capa ao lado
+2. No dia de publicar, mova **só o `.md`** para `docs/posts/` — a capa pode ficar onde está
 3. Rode `npm run deploy`
 
-A preparação converte a imagem para WebP, copia o post para `src/content/posts/` e só apaga a caixa de entrada depois que o upload termina com sucesso. Um post com o mesmo nome já publicado e conteúdo diferente interrompe o processo em vez de sobrescrever.
+A data de publicação é definida pelo envio, não pelo rascunho: o `prepare-deploy` troca o campo `date:` pela data do dia do deploy. Um post que esperou duas semanas em `docs/editing` sai com a data em que foi publicado — e, como o carrossel da home escolhe a matéria mais recente de cada seção pela data, isso mantém o destaque coerente. O console mostra a troca:
+
+```
+  meu-post.md -> src/content/posts/  (data: 2026-09-01 -> 2026-10-22)
+```
+
+A preparação também converte a capa para WebP, copia o post para `src/content/posts/` e registra em `.deploy-pendentes.json` o que pode sair da caixa de entrada — a limpeza só acontece depois que o upload termina com sucesso. Um post com o mesmo nome já publicado e conteúdo diferente interrompe o processo em vez de sobrescrever. Capa que não é encontrada em nenhuma das pastas também interrompe, antes de qualquer envio.
 
 ### O que a build recusa
 

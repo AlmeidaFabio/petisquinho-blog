@@ -35,3 +35,6 @@ Desktop.ini
 # Logs
 *.log
 npm-debug.log*
+
+# Lista de arquivos da caixa de entrada consumidos pelo prepare-deploy.
+.deploy-pendentes.json

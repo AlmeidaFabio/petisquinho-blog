@@ -3,14 +3,14 @@ import fsPromises from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Client } from 'basic-ftp';
-import { isSupportedImageFile } from './image-formats.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
 const distDir = path.join(projectRoot, 'dist');
-const draftPostsDir = path.join(projectRoot, 'docs', 'posts');
-const draftImagesDir = path.join(projectRoot, 'docs', 'imgs');
+// Lista escrita pelo prepare-deploy com os arquivos da caixa de entrada que
+// podem ser apagados depois de um upload bem-sucedido.
+const manifestPath = path.join(projectRoot, '.deploy-pendentes.json');
 
 const host = process.env.HOSTGATOR_HOST;
 const tlsServername = process.env.HOSTGATOR_TLS_SERVERNAME;
@@ -46,11 +46,6 @@ try {
 
   console.log(`Entrando em ${remotePath}...`);
   await client.ensureDir(remotePath);
-
-  const postEntries = await fsPromises.readdir(draftPostsDir, { withFileTypes: true });
-  const originalPosts = postEntries.filter(
-    (entry) => entry.isFile() && path.extname(entry.name).toLowerCase() === '.md'
-  );
 
   console.log(`Enviando a build do site para ${host}...`);
 
@@ -93,25 +88,33 @@ try {
 
   console.log('  HTML, feeds e .htaccess enviados');
 
-  for (const post of originalPosts) {
-    await fsPromises.unlink(path.join(draftPostsDir, post.name));
+  // Só agora, com o upload concluído, a caixa de entrada é esvaziada — e só do
+  // que o prepare-deploy realmente consumiu, listado no manifesto.
+  //
+  // Antes esta etapa apagava tudo que estivesse em docs/posts e docs/imgs. Não
+  // serve mais: com a sala de espera em docs/editing, apagar por pasta levaria
+  // junto rascunhos de semanas seguintes e as capas deles.
+  let consumidos = [];
+  try {
+    consumidos = JSON.parse(await fsPromises.readFile(manifestPath, 'utf8'));
+  } catch {
+    consumidos = [];
   }
 
-  if (originalPosts.length > 0) {
-    console.log(`Removidos ${originalPosts.length} post(s) original(is) após o deploy.`);
+  let apagados = 0;
+  for (const arquivo of consumidos) {
+    try {
+      await fsPromises.unlink(arquivo);
+      apagados += 1;
+    } catch (erro) {
+      console.warn(`  aviso: não consegui apagar ${arquivo} (${erro.code})`);
+    }
   }
 
-  const imageEntries = await fsPromises.readdir(draftImagesDir, { withFileTypes: true });
-  const originalImages = imageEntries.filter(
-    (entry) => entry.isFile() && isSupportedImageFile(entry.name)
-  );
+  await fsPromises.rm(manifestPath, { force: true });
 
-  for (const image of originalImages) {
-    await fsPromises.unlink(path.join(draftImagesDir, image.name));
-  }
-
-  if (originalImages.length > 0) {
-    console.log(`Removidas ${originalImages.length} imagem(ns) original(is) após o deploy.`);
+  if (apagados > 0) {
+    console.log(`Esvaziada a caixa de entrada: ${apagados} arquivo(s) removido(s) após o deploy.`);
   }
 
   console.log('Deploy concluído com sucesso.');
