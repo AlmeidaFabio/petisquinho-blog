@@ -127,8 +127,8 @@ A pasta `docs/` **não vai para o site publicado**. Ela reúne a documentação,
 ## Documentação
 
 - [Direção editorial](docs/direcao-editorial.md) — como escolher, escrever e revisar um post
+- [Instagram](docs/instagram.md) — como o blog vira carrossel, com que frequência e o que medir
 - [PRD](docs/PRD%20-%20Blog%20Petisquinho.md) — escopo e requisitos do projeto
-- [Segurança](docs/seguranca.md) — o que foi verificado e o que segue em aberto
 
 ## Qualidade
 
