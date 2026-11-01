@@ -57,7 +57,7 @@ export const siteConfig = {
    * montagem no atributo evita uma superfÃ­cie de injeÃ§Ã£o se um dia ele vier de
    * outro lugar.
    */
-  googleAnalyticsId: '',
+  googleAnalyticsId: 'G-B5MR3FDE05',
 
   /**
    * Blocos "Publicidade" reservados para o AdSense. Ficam ocultos enquanto
