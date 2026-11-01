@@ -1,0 +1,140 @@
+---
+/**
+ * Banner de consentimento para o Google Analytics.
+ *
+ * Regra: nada de terceiro é baixado antes da escolha. O gtag só é inserido
+ * depois que o visitante aceita, e a recusa é guardada para não perguntar de
+ * novo. Os dois botões têm o mesmo peso visual e o mesmo alcance de teclado —
+ * recusar precisa ser tão fácil quanto aceitar.
+ *
+ * A escolha fica em localStorage, não em cookie: guardar a própria recusa não
+ * depende de consentimento, e assim o site não grava nada no navegador de quem
+ * disse não.
+ */
+import { siteConfig } from '../config/site';
+
+const idDoGa = siteConfig.googleAnalyticsId;
+const ativo = idDoGa.trim().length > 0;
+---
+
+{ativo && (
+  <div
+    data-consentimento
+    data-ga-id={idDoGa}
+    hidden
+    role="dialog"
+    aria-modal="false"
+    aria-labelledby="consentimento-titulo"
+    aria-describedby="consentimento-texto"
+    class="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 shadow-[0_-8px_30px_rgba(15,35,52,0.12)] backdrop-blur-md"
+  >
+    <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 sm:px-6 md:flex-row md:items-center md:justify-between">
+      <div class="max-w-2xl">
+        <h2 id="consentimento-titulo" class="text-sm font-bold text-marine">Cookies de análise</h2>
+        <p id="consentimento-texto" class="mt-1 text-sm leading-6 text-slate-600">
+          Uso o Google Analytics para saber quais matérias são lidas. Ele grava cookies no seu navegador e nada é enviado antes da sua escolha. Detalhes na
+          <a href="/privacidade/" class="text-[#A8432F] underline">política de privacidade</a>.
+        </p>
+      </div>
+
+      {/* Os dois botões têm a mesma aparência e o mesmo tamanho de propósito.
+          Aceitar e recusar precisam custar o mesmo: um botão preenchido e outro
+          vazado empurra a escolha, e consentimento empurrado não é livre. */}
+      <div class="flex shrink-0 gap-3">
+        <button
+          type="button"
+          data-consentimento-recusar
+          class="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-bold text-marine transition hover:border-marine hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2"
+        >
+          Recusar
+        </button>
+        <button
+          type="button"
+          data-consentimento-aceitar
+          class="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-bold text-marine transition hover:border-marine hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2"
+        >
+          Aceitar
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+{ativo && (
+  <script>
+    const CHAVE = 'consentimento-analytics';
+    const banner = document.querySelector<HTMLElement>('[data-consentimento]');
+    const idDoGa = banner?.dataset.gaId ?? '';
+
+    // O gtag não existe no TypeScript do projeto, então declaramos o formato
+    // mínimo que usamos — em vez de espalhar `any` pelo arquivo.
+    const janela = window as unknown as {
+      dataLayer: unknown[];
+      gtag: (...args: unknown[]) => void;
+    };
+
+    function carregarAnalytics(id: string) {
+      if (!id || document.querySelector('script[data-ga]')) return;
+
+      const script = document.createElement('script');
+      script.async = true;
+      script.dataset.ga = 'true';
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
+      document.head.append(script);
+
+      janela.dataLayer = janela.dataLayer || [];
+      janela.gtag = function gtag() {
+        janela.dataLayer.push(arguments);
+      };
+      janela.gtag('js', new Date());
+      janela.gtag('config', id);
+    }
+
+    function escolhaGuardada() {
+      try {
+        return localStorage.getItem(CHAVE);
+      } catch {
+        // Navegação privada ou storage bloqueado: trata como não decidido.
+        return null;
+      }
+    }
+
+    function guardarEscolha(valor: string) {
+      try {
+        localStorage.setItem(CHAVE, valor);
+      } catch {
+        // Sem storage, a escolha vale só nesta visita. O banner volta na
+        // próxima, o que é melhor do que presumir consentimento.
+      }
+    }
+
+    const escolha = escolhaGuardada();
+
+    if (escolha === 'aceito') {
+      carregarAnalytics(idDoGa);
+    } else if (escolha !== 'recusado' && banner) {
+      banner.removeAttribute('hidden');
+    }
+
+    banner?.addEventListener('click', (evento) => {
+      const botao = (evento.target as HTMLElement).closest(
+        '[data-consentimento-aceitar], [data-consentimento-recusar]'
+      );
+      if (!botao) return;
+
+      const aceitou = botao.hasAttribute('data-consentimento-aceitar');
+      guardarEscolha(aceitou ? 'aceito' : 'recusado');
+      banner.setAttribute('hidden', '');
+      if (aceitou) carregarAnalytics(idDoGa);
+    });
+
+    // O link "Preferências de cookies" do rodapé reabre o banner, para quem
+    // quiser mudar de ideia depois.
+    document.addEventListener('click', (evento) => {
+      const abrir = (evento.target as HTMLElement).closest('[data-consentimento-abrir]');
+      if (!abrir || !banner) return;
+      evento.preventDefault();
+      banner.removeAttribute('hidden');
+    });
+  </script>
+)}

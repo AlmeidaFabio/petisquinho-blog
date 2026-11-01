@@ -27,11 +27,20 @@
 
   # CSP: tudo restrito à própria origem, exceto 'unsafe-inline' em script e
   # style. Essa exceção é necessária porque todos os scripts do site são
-  # inline (carrossel da home, busca, copiar link) — não há /_astro/*.js.
-  # O domínio cloudflareinsights.com está previsto para o analytics sem
-  # cookies ainda não instalado, para a CSP não quebrar o site quando entrar.
+  # inline (carrossel da home, busca, consentimento) — não há /_astro/*.js.
+  #
+  # cloudflareinsights.com está previsto para o analytics sem cookies da
+  # Cloudflare, que ainda não está instalado, para a CSP não quebrar o site
+  # quando entrar.
+  #
+  # googletagmanager.com e google-analytics.com estão aqui pelo Google
+  # Analytics 4, que só é carregado depois do aceite no banner. Sem estas
+  # origens a tag baixaria e não conseguiria enviar nada — falha silenciosa,
+  # pior do que não instalar. O GA4 coleta em region1.google-analytics.com e
+  # *.analytics.google.com, daí os curingas.
+  #
   # frame-ancestors só funciona em cabeçalho HTTP, não em <meta>.
-  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; manifest-src 'self'; upgrade-insecure-requests"
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://cloudflareinsights.com https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; manifest-src 'self'; upgrade-insecure-requests"
 </IfModule>
 
 # ------------------------------------------------------------

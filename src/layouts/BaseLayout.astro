@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { siteConfig } from '../config/site';
+import Consentimento from '../components/Consentimento.astro';
 
 interface Props {
   title?: string;
@@ -147,10 +148,23 @@ const socialImageUrl = new URL(ogImage, siteUrl).toString();
               <li><a href="/privacidade/" class="transition hover:text-mustard">Privacidade</a></li>
               <li><a href="/termos-de-uso/" class="transition hover:text-mustard">Termos de Uso</a></li>
               <li><a href="/rss.xml" class="transition hover:text-mustard">RSS</a></li>
+              {siteConfig.googleAnalyticsId.trim().length > 0 && (
+                <li>
+                  <button
+                    type="button"
+                    data-consentimento-abrir
+                    class="text-left transition hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard"
+                  >
+                    Preferências de cookies
+                  </button>
+                </li>
+              )}
             </ul>
           </nav>
         </div>
       </div>
     </footer>
+
+    <Consentimento />
   </body>
 </html>
