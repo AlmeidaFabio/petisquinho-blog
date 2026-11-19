@@ -9,12 +9,12 @@ tags: ["O Pagador de Promessas", "Anselmo Duarte", "cinema brasileiro", "Palma d
 image: "/images/posts/o-pagador-de-promessas-palma-de-ouro.webp"
 imageAlt: "Ilustração de uma cruz carregada por uma figura em uma escadaria de igreja, remetendo ao filme O Pagador de Promessas."
 sources:
-  - label: "Festival de Cannes - Palmarès 1962"
-    url: "https://www.festival-cannes.com/en/f/1962/"
+  - label: "Folha de S.Paulo - Há 50 anos, O Pagador de Promessas dava ao país única Palma até hoje"
+    url: "https://m.folha.uol.com.br/ilustrada/2012/05/1094850-ha-50-anos-o-pagador-de-promessas-dava-ao-pais-unica-palma-ate-hoje.shtml"
   - label: "Enciclopédia Itaú Cultural - Anselmo Duarte"
     url: "https://enciclopedia.itaucultural.org.br/pessoas/1467-anselmo-duarte"
-  - label: "Enciclopédia Itaú Cultural - O Pagador de Promessas"
-    url: "https://enciclopedia.itaucultural.org.br/obras/126149/o-pagador-de-promessas"
+  - label: "Enciclopédia Itaú Cultural - Obras de Anselmo Duarte"
+    url: "https://enciclopedia.itaucultural.org.br/pessoas/32202-anselmo-duarte/obras"
 ---
 
 O Pagador de Promessas, dirigido por Anselmo Duarte, ganhou a Palma de Ouro no Festival de Cannes de 1962. É o único filme brasileiro a receber o prêmio máximo do festival até hoje. O longa é uma adaptação da peça homônima de Dias Gomes, escrita em 1960, e foi lançado nos cinemas brasileiros no mesmo ano da premiação.

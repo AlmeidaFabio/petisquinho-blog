@@ -6,14 +6,13 @@ section: "Mix de Variedades"
 category: "mix-de-variedades"
 date: 2026-10-26
 tags: ["Técnica Pomodoro", "produtividade", "foco", "pausas"]
-featured: false
 image: "/images/posts/tecnica-pomodoro-origem-e-evidencias.webp"
 imageAlt: "Ilustração de um timer de cozinha em forma de tomate ao lado de blocos de tempo, representando a Técnica Pomodoro."
 sources:
   - label: "Francesco Cirillo - The Pomodoro Technique (site oficial)"
     url: "https://francescocirillo.com/pages/pomodoro-technique"
   - label: "Ariga e Lleras (2011) - Brief and rare mental \"breaks\" keep you focused (Cognition)"
-    url: "https://www.sciencedirect.com/science/article/abs/pii/S0010027710002593"
+    url: "https://doi.org/10.1016/j.cognition.2010.12.007"
 ---
 
 A Técnica Pomodoro foi criada no fim dos anos 1980 pelo italiano Francesco Cirillo, então estudante universitário. Ele usava um timer de cozinha em forma de tomate, *pomodoro*, em italiano, para dividir o estudo em blocos de 25 minutos, seguidos de pausas curtas. A partir dessa experiência pessoal, desenvolveu um método e o publicou em um livro em 2006.

@@ -6,7 +6,6 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-24
 tags: ["gelo flutua", "densidade da água", "ligações de hidrogênio", "física do cotidiano"]
-featured: false
 image: "/images/posts/por-que-o-gelo-flutua.webp"
 imageAlt: "Cubo de gelo flutuando em um copo de água, com a estrutura molecular abaixo da superfície, ilustrando por que o gelo flutua."
 sources:

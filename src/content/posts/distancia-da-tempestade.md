@@ -6,7 +6,6 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-23
 tags: ["ciência", "fisica", "curiosidades", "meteorologia"]
-featured: false
 image: "/images/posts/distancia-da-tempestade.webp"
 imageAlt: "Ilustração conceitual de um relâmpago no horizonte com um cronômetro indicando como calcular a distância de uma tempestade"
 sources:

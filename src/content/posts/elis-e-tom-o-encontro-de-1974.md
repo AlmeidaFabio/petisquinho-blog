@@ -6,12 +6,9 @@ section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-31
 tags: ["Elis & Tom", "Elis Regina", "Tom Jobim", "MPB", "disco de 1974"]
-featured: false
 image: "/images/posts/elis-e-tom-o-encontro-de-1974.webp"
 imageAlt: "Ilustração de um microfone antigo ao lado de uma partitura e de uma janela com luz quente, evocando o disco Elis & Tom."
 sources:
-  - label: "Instituto Antônio Carlos Jobim"
-    url: "https://www.jobim.org/"
   - label: "Enciclopédia Itaú Cultural - Elis Regina"
     url: "https://enciclopedia.itaucultural.org.br/pessoas/1687-elis-regina"
   - label: "Enciclopédia Itaú Cultural - Tom Jobim"

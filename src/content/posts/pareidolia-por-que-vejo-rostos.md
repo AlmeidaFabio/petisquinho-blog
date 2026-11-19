@@ -6,7 +6,6 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-11-01
 tags: ["pareidolia", "psicologia", "percepção de rostos", "ilusão visual"]
-featured: false
 image: "/images/posts/pareidolia-por-que-vejo-rostos.webp"
 imageAlt: "Ilustração de uma tomada elétrica e de uma nuvem com traços simples que lembram um rosto, representando a pareidolia."
 sources:

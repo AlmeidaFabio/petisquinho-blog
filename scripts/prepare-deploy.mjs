@@ -27,6 +27,18 @@ const publishedImagesDir = path.join(projectRoot, 'public', 'images', 'posts');
 // depois que o upload termina com sucesso. Fica fora do git.
 const manifestPath = path.join(projectRoot, '.deploy-pendentes.json');
 
+// Se a preparação ou a build falhar antes do envio, a próxima tentativa pode
+// acontecer em outro dia. Guardamos a fila anterior para atualizar a data de
+// publicação do conteúdo que ainda aguarda upload, sem liberar sobrescritas de
+// posts já publicados.
+let pendentesAnteriores = new Set();
+try {
+  const anteriores = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
+  if (Array.isArray(anteriores)) pendentesAnteriores = new Set(anteriores);
+} catch {
+  // Primeira preparação: ainda não há manifesto pendente.
+}
+
 const EXTENSOES_DE_IMAGEM = ['jpg', 'jpeg', 'png', 'webp', 'avif', 'gif', 'tif', 'tiff', 'bmp'];
 
 // Data de publicação: o dia do deploy, no fuso de quem roda.
@@ -54,6 +66,23 @@ function relativo(caminho) {
 // 1. Reúne os posts em espera
 // ---------------------------------------------------------------------------
 const rascunhos = [];
+
+// Um post salvo por engano diretamente em docs/ não entra na fila e, sem esta
+// checagem, o deploy poderia terminar com sucesso publicando a build anterior.
+const arquivosNaRaizDeDocs = await fs.readdir(docsDir, { withFileTypes: true });
+for (const entrada of arquivosNaRaizDeDocs) {
+  if (!entrada.isFile() || path.extname(entrada.name).toLowerCase() !== '.md') continue;
+
+  const caminho = path.join(docsDir, entrada.name);
+  const conteudo = await fs.readFile(caminho, 'utf8');
+  const frontmatter = conteudo.match(/^---\s*\r?\n([\s\S]*?)\r?\n---/);
+  if (frontmatter && /^title:\s*.+$/m.test(frontmatter[1]) && /^image:\s*.+$/m.test(frontmatter[1])) {
+    throw new Error(
+      `Encontrei um possível post em ${relativo(caminho)}. ` +
+      'Posts publicados precisam estar em docs/posts/. Mova o arquivo para essa pasta antes do deploy.'
+    );
+  }
+}
 
 for (const caixa of postInboxes) {
   let entradas;
@@ -149,12 +178,22 @@ for (const { caixa, arquivo } of rascunhos) {
   if (await existe(destinoPost)) {
     const atual = await fs.readFile(destinoPost, 'utf8');
     if (atual !== conteudo) {
-      throw new Error(
-        `O post ${arquivo} já existe em src/content/posts e está diferente. ` +
-        'Resolva a divergência antes de publicar para evitar sobrescrever conteúdo.'
-      );
+      const semDataDePublicacao = (texto) => texto.replace(/^date:\s*.+$/m, 'date: <data-publicacao>');
+      const podeAtualizarData = pendentesAnteriores.has(origemPost) &&
+        semDataDePublicacao(atual) === semDataDePublicacao(conteudo);
+
+      if (!podeAtualizarData) {
+        throw new Error(
+          `O post ${arquivo} já existe em src/content/posts e está diferente. ` +
+          'Resolva a divergência antes de publicar para evitar sobrescrever conteúdo.'
+        );
+      }
+
+      await fs.writeFile(destinoPost, conteudo, 'utf8');
+      console.log(`  ${arquivo}: data de publicação atualizada para ${hoje} enquanto aguarda o envio`);
+    } else {
+      console.log(`  ${arquivo}: já publicado com este conteúdo, nada a fazer`);
     }
-    console.log(`  ${arquivo}: já publicado com este conteúdo, nada a fazer`);
   } else {
     await fs.writeFile(destinoPost, conteudo, 'utf8');
     const de = dataAnterior.replace(/["']/g, '');

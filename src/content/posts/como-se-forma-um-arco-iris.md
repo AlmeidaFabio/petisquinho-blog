@@ -6,14 +6,13 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-28
 tags: ["arco-íris", "refração da luz", "dispersão de Rayleigh", "óptica"]
-featured: false
 image: "/images/posts/como-se-forma-um-arco-iris.webp"
 imageAlt: "Ilustração de gotas de chuva com um feixe de luz branca se abrindo em cores, formando um arco-íris no céu."
 sources:
-  - label: "NOAA SciJinks - How Is a Rainbow Formed?"
-    url: "https://scijinks.gov/rainbow/"
-  - label: "NASA Science - Rainbows"
-    url: "https://science.nasa.gov/earth/rainbows/"
+  - label: "NOAA NESDIS - Rainbow Simulator (K-12 education, optical phenomena)"
+    url: "https://www.nesdis.noaa.gov/about/k-12-education/optical-phenomena/rainbow-simulator"
+  - label: "Met Office (Reino Unido) - Rainbows"
+    url: "https://www.metoffice.gov.uk/weather/learn-about/weather/optical-effects/rainbows"
 ---
 
 Um arco-íris se forma quando a luz do sol atravessa gotas de chuva e é refratada, refletida e dispersada. Cada gota funciona como um pequeno prisma: a luz branca entra, se separa nas cores do espectro e sai pelo outro lado em um ângulo específico. O resultado, visto por um observador em posição adequada, é o arco colorido.

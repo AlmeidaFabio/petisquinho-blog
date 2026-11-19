@@ -91,13 +91,7 @@ async function fechar() {
 /** Lista recursivamente os arquivos, em ordem estável, com o destino remoto. */
 async function listarArquivos(dirLocal, dirRemoto) {
   const arquivos = [];
-  let entradas;
-
-  try {
-    entradas = await fsPromises.readdir(dirLocal, { withFileTypes: true });
-  } catch {
-    return arquivos;
-  }
+  const entradas = await fsPromises.readdir(dirLocal, { withFileTypes: true });
 
   entradas.sort((a, b) => a.name.localeCompare(b.name));
 
@@ -179,7 +173,16 @@ async function esvaziarCaixaDeEntrada() {
 
 try {
   const plano = await montarPlano();
-  console.log(`${plano.length} arquivo(s) para enviar.`);
+  if (plano.length === 0) {
+    throw new Error(`A pasta dist não contém arquivos para enviar: ${distDir}`);
+  }
+
+  const caminhoIndex = path.join(distDir, 'index.html');
+  if (!plano.some(({ local }) => local === caminhoIndex)) {
+    throw new Error(`A página inicial não está na build: ${caminhoIndex}`);
+  }
+
+  console.log(`${plano.length} arquivo(s) para enviar para ${remotePath}.`);
 
   const pastasCriadas = new Set([remotePath]);
   let enviados = 0;
@@ -200,6 +203,17 @@ try {
       }
 
       await cliente.uploadFrom(local, remoto);
+
+      const [arquivoLocal, tamanhoRemoto] = await Promise.all([
+        fsPromises.stat(local),
+        cliente.size(remoto)
+      ]);
+      if (arquivoLocal.size !== tamanhoRemoto) {
+        throw new Error(
+          `Tamanho divergente após o envio de ${remoto}: ` +
+          `${tamanhoRemoto} bytes no servidor, ${arquivoLocal.size} bytes locais.`
+        );
+      }
 
       enviados += 1;
       nestaSessao += 1;
@@ -238,7 +252,7 @@ try {
 
   await fechar();
 
-  console.log('  HTML, feeds e .htaccess enviados');
+  console.log('  HTML, feeds e .htaccess enviados e verificados');
 
   await esvaziarCaixaDeEntrada();
 

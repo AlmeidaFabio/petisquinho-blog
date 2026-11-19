@@ -39,10 +39,10 @@ const recentPosts = posts
 
 <BaseLayout title="Petisquinho - Uma porção de curiosidade pro seu dia" description="Blog brasileiro sobre cultura, curiosidades e variedades.">
   <Fragment slot="head">
-    <!-- O primeiro slide do carrossel é o elemento de LCP desta página. O
+    {/* O primeiro slide do carrossel é o elemento de LCP desta página. O
          preload antecipa o download para antes de o HTML terminar de ser
          processado, e o imagesrcset garante que o navegador baixe a variante
-         que vai usar de fato, não a maior. -->
+         que vai usar de fato, não a maior. */}
     {carouselPosts[0]?.data.image && (
       <link
         rel="preload"
@@ -53,9 +53,9 @@ const recentPosts = posts
         fetchpriority="high"
       />
     )}
-    <!-- WebSite com SearchAction habilita a caixa de pesquisa do site direto
+    {/* WebSite com SearchAction habilita a caixa de pesquisa do site direto
          no resultado do Google; Organization liga a marca a uma entidade. A
-         home não tinha nenhum JSON-LD. -->
+         home não tinha nenhum JSON-LD. */}
     <script type="application/ld+json" set:html={JSON.stringify(schemaWebSite(siteUrl))} />
     <script type="application/ld+json" set:html={JSON.stringify(schemaOrganizacao(siteUrl))} />
   </Fragment>
@@ -175,9 +175,9 @@ const recentPosts = posts
     <aside class="order-3 relative isolate flex flex-col overflow-hidden rounded-[30px] border border-[#b9cfbb] bg-[#dcebdd] p-7 shadow-soft sm:p-8 lg:order-none lg:col-start-2 lg:row-start-1">
       <div aria-hidden="true" class="absolute inset-x-0 top-0 -z-10 h-2 bg-gradient-to-r from-terracotta via-mustard to-terracotta"></div>
       <div aria-hidden="true" class="absolute -right-12 -top-14 -z-10 h-40 w-40 rounded-full border-[24px] border-cream"></div>
-      <!-- h1 da home. Antes a página não tinha nenhum h1: o título do carrossel
+      {/* h1 da home. Antes a página não tinha nenhum h1: o título do carrossel
            é um <a> e o primeiro heading do DOM era este h2. Ele já usa
-           font-serif, então promover para h1 não muda nada visualmente. -->
+           font-serif, então promover para h1 não muda nada visualmente. */}
       <h1 class="mt-4 max-w-xs font-serif text-3xl font-bold leading-tight text-marine">Uma boa ideia cabe em poucos minutos.</h1>
       <p class="mt-4 text-sm leading-7 text-slate-600">
         Conteúdo curto, confiável e útil para quem quer aprender algo sem perder tempo.

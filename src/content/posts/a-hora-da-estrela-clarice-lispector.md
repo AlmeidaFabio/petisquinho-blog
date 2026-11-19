@@ -6,14 +6,13 @@ section: "Petisco Cultural"
 category: "petisco-cultural"
 date: 2026-10-27
 tags: ["A Hora da Estrela", "Clarice Lispector", "literatura brasileira", "Macabéa"]
-featured: false
 image: "/images/posts/a-hora-da-estrela-clarice-lispector.webp"
 imageAlt: "Ilustração de uma janela estreita com luz fraca e uma máquina de escrever sobre uma mesa, evocando A Hora da Estrela, de Clarice Lispector."
 sources:
   - label: "Enciclopédia Itaú Cultural - Clarice Lispector"
     url: "https://enciclopedia.itaucultural.org.br/pessoas/1640-clarice-lispector"
-  - label: "Fundação Casa de Rui Barbosa - Clarice Lispector"
-    url: "https://www.casaruibarbosa.gov.br/"
+  - label: "Enciclopédia Itaú Cultural - A Hora da Estrela, de Clarice Lispector"
+    url: "https://enciclopedia.itaucultural.org.br/eventos/175669-a-hora-da-estrela-clarice-lispector"
 ---
 
 A Hora da Estrela é o último romance publicado por Clarice Lispector em vida, em 1977, poucos meses antes de sua morte. O livro acompanha Macabéa, uma jovem nordestina que migra para o Rio de Janeiro e vive uma rotina de pobreza e invisibilidade. Mas o romance não se resume à história da personagem: ele é narrado por Rodrigo S.M., um escritor que se apresenta como autor da história e interfere constantemente nela.

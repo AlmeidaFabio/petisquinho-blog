@@ -6,7 +6,6 @@ section: "Papo de Boteco"
 category: "curiosidades-de-boteco"
 date: 2026-10-30
 tags: ["ronronar do gato", "comportamento felino", "ciência animal", "gatos"]
-featured: false
 image: "/images/posts/por-que-o-gato-ronrona.webp"
 imageAlt: "Ilustração de um gato de olhos fechados e corpo relaxado, com linhas curtas saindo do peito, representando o ronronar."
 sources:

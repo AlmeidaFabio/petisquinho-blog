@@ -10,8 +10,8 @@ imageAlt: "Ilustração conceitual com uma fita VHS, uma televisão antiga com b
 sources:
   - label: "Anime News Network (ANN Encyclopedia) - Yu Yu Hakusho: Ghost Files (TV)"
     url: "https://www.animenewsnetwork.com/encyclopedia/anime.php?id=311"
-  - label: "BDTD/IBICT - dissertação de mestrado (USP/FFLCH) sobre traduções de Yu Yu Hakusho no Brasil"
-    url: "https://bdtd.ibict.br/vufind/Record/USP_d5456ee57f2eca15c32460b0982006bf"
+  - label: "IGN Brasil - Yu Yu Hakusho: as frases mais brasileiras do anime"
+    url: "https://br.ign.com/yu-yu-hakusho/84220/news/yu-yu-hakusho-as-frases-mais-brasileiras-do-anime"
 ---
 
 Quem viveu a era de ouro dos desenhos animados nos anos 1990 certamente guarda uma memória afetiva com as tardes da TV Manchete. Entre robôs gigantes e cavaleiros, um título em particular se destacou pela atitude, pelo humor afiado e por uma identidade inconfundível: *Yu Yu Hakusho*.

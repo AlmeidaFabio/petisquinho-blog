@@ -6,7 +6,6 @@ section: "Mix de Variedades"
 category: "mix-de-variedades"
 date: 2026-10-17
 tags: ["IPv6", "endereço IP", "IPv4", "internet"]
-featured: false
 image: "/images/posts/por-que-a-internet-precisou-do-ipv6.webp"
 imageAlt: "Ilustração de um pequeno bloco de pontos ao lado de um campo muito maior e mais denso de pontos, representando a diferença de endereços entre IPv4 e IPv6."
 sources:
@@ -14,8 +13,8 @@ sources:
     url: "https://www.rfc-editor.org/rfc/rfc8200"
   - label: "IANA - IPv4 Address Space Registry"
     url: "https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml"
-  - label: "NIC.br - Núcleo de Informação e Coordenação do Ponto BR"
-    url: "https://www.nic.br/"
+  - label: "NIC.br - IPv6 parou no comércio eletrônico, bancos e governo"
+    url: "https://www.nic.br/noticia/na-midia/nic-br-ipv6-parou-no-comercio-eletronico-bancos-e-governo/"
 ---
 
 A internet precisou do IPv6 porque os endereços do padrão anterior, o IPv4, acabaram. Todo aparelho conectado precisa de um endereço IP para enviar e receber dados, e o IPv4 tem um espaço limitado: são 32 bits, o que dá cerca de 4,3 bilhões de combinações possíveis. Parece muito, mas não foi suficiente para a quantidade de celulares, computadores, servidores e sensores que existem hoje.

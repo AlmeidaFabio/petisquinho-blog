@@ -4,13 +4,14 @@ excerpt: "Três cópias, duas mídias diferentes e uma fora de casa: entenda a e
 section: "Mix de Variedades"
 category: "mix-de-variedades"
 date: 2026-10-13
-readingTime: "3 min de leitura"
 tags: ["tecnologia", "segurança", "hábitos", "organização"]
 image: "/images/posts/backup-3-2-1-regra-simples.webp"
 imageAlt: "Ilustração conceitual com três ícones geométricos representando computadores, discos e nuvem em perfeita sincronia"
 sources:
-  - label: "U.S. Cybersecurity and Infrastructure Security Agency (CISA) - Data Backup Options"
-    url: "https://www.cisa.gov/news-events/news/data-backup-options"
+  - label: "U.S. Cybersecurity and Infrastructure Security Agency (CISA) - Back Up Business Data"
+    url: "https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/back-up-business-data"
+  - label: "ComputerWeekly - The 3-2-1 backup rule: has cloud made it obsolete?"
+    url: "https://www.computerweekly.com/feature/The-3-2-1-backup-rule-Has-cloud-made-it-obsolete"
 ---
 
 Perder fotos de família, documentos importantes ou arquivos de trabalho é uma das experiências mais frustrantes do mundo digital. Para evitar que falhas em hard drives, roubos ou acidentes domésticos destruam memórias e projetos, especialistas em segurança da informação recomendam uma estratégia consagrada: a regra de backup 3-2-1.
